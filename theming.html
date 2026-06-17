@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Glyphary theming reference: CSS snippets, stable variables, selectors, Obsidian compatibility, and examples."
-    />
+    <meta name="description" content="Glyphary theming reference." />
     <title>Glyphary Theming Reference</title>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
@@ -22,7 +19,7 @@
         <a href="./index.html">User manual</a>
         <a class="current" href="./theming.html">Theming reference</a>
         <a href="./plugins.html">Plugin authoring</a>
-        <a href="../docs-site/glyphary.html">Product page</a>
+        <a href="https://github.com/glyphary/glyphary">Product page</a>
       </nav>
     </header>
 
@@ -43,187 +40,81 @@
         <section id="overview" class="doc-section hero-section" data-search-text="theme snippets css variables obsidian appearance builder">
           <p class="section-kicker">Theming reference</p>
           <h1>Customize Glyphary with approved CSS snippets and stable theme variables.</h1>
-          <p class="lead">
-            This page is the public styling contract for snippets and theme work. Prefer the variables
-            listed here before targeting app structure directly. Unlisted app chrome classes are internal
-            and may change without notice.
-          </p>
+          <p class="lead">This page is the public styling contract for snippets and theme work.</p>
         </section>
 
         <section id="loading" class="doc-section" data-search-text="loading snippets _snippets_ settings appearance enable approve">
           <h2>Loading Snippets</h2>
           <ol class="task-list">
-            <li>Create a <code>.css</code> file in the vault snippets directory, usually <code>&lt;vault root&gt;/_snippets_/my-theme.css</code>.</li>
+            <li>Create a <code>.css</code> file in <code>&lt;vault root&gt;/_snippets_/my-theme.css</code>.</li>
             <li>Open Settings, go to Appearance, and enable the snippet.</li>
-            <li>Glyphary injects approved snippets after built-in styles, so normal CSS cascade rules apply.</li>
+            <li>Snippets are injected after Glyphary's built-in styles.</li>
           </ol>
-          <p>Use <code>:root</code> for global variables:</p>
           <pre><code>:root {
   --glyphary-accent: #6f7cff;
   --glyphary-heading: #f0f4ff;
   --glyphary-editor-max-width: 760px;
 }</code></pre>
-          <p>Use the resolved theme attributes when a snippet needs separate light and dark values:</p>
-          <pre><code>:root[data-resolved-theme="light"] {
-  --glyphary-app-bg: #f7f4ed;
-}
-
-:root[data-resolved-theme="dark"] {
-  --glyphary-app-bg: #101214;
-}</code></pre>
         </section>
 
         <section id="variables" class="doc-section" data-search-text="stable variables glyphary tokens canvas text accent borders blocks callouts syntax typography spacing">
           <h2>Stable Glyphary Variables</h2>
-          <p>These variables are the safest customization points. They are also used by the Theme Builder.</p>
-
+          <p>These variables are the safest customization points and are used by the Theme Builder.</p>
           <h3>Canvas</h3>
           <table class="reference-table">
             <tbody>
               <tr><th>--glyphary-app-bg</th><td>Main app background.</td></tr>
-              <tr><th>--glyphary-surface</th><td>Primary panels, cards, and editor-adjacent surfaces.</td></tr>
+              <tr><th>--glyphary-surface</th><td>Primary panels and editor-adjacent surfaces.</td></tr>
               <tr><th>--glyphary-surface-muted</th><td>Muted panels, previews, and secondary surfaces.</td></tr>
               <tr><th>--glyphary-hover</th><td>Hover backgrounds.</td></tr>
               <tr><th>--glyphary-selection</th><td>Selection and selected-node highlights.</td></tr>
             </tbody>
           </table>
-
           <h3>Text</h3>
-          <table class="reference-table">
-            <tbody>
-              <tr><th>--glyphary-text</th><td>General interface text.</td></tr>
-              <tr><th>--glyphary-text-soft</th><td>Lower-emphasis body text.</td></tr>
-              <tr><th>--glyphary-editor-text</th><td>Main editor body text.</td></tr>
-              <tr><th>--glyphary-heading</th><td>Editor headings and strong titles.</td></tr>
-              <tr><th>--glyphary-muted</th><td>Muted labels and secondary metadata.</td></tr>
-              <tr><th>--glyphary-muted-strong</th><td>Stronger muted text.</td></tr>
-              <tr><th>--glyphary-mono-text</th><td>Inline monospace text outside code blocks.</td></tr>
-            </tbody>
-          </table>
-
-          <h3>Accent And Borders</h3>
-          <table class="reference-table">
-            <tbody>
-              <tr><th>--glyphary-accent</th><td>Primary accent color.</td></tr>
-              <tr><th>--glyphary-accent-text</th><td>Text shown on accent backgrounds.</td></tr>
-              <tr><th>--glyphary-focus</th><td>Focus rings and selected-node borders.</td></tr>
-              <tr><th>--glyphary-border</th><td>Default border color.</td></tr>
-              <tr><th>--glyphary-border-soft</th><td>Low-emphasis borders.</td></tr>
-              <tr><th>--glyphary-border-strong</th><td>Stronger borders and hover borders.</td></tr>
-              <tr><th>--glyphary-table-border</th><td>Table grid borders.</td></tr>
-            </tbody>
-          </table>
-
-          <h3>Blocks</h3>
-          <table class="reference-table">
-            <tbody>
-              <tr><th>--glyphary-code-bg</th><td>Code block background.</td></tr>
-              <tr><th>--glyphary-code-text</th><td>Code block text.</td></tr>
-              <tr><th>--glyphary-quote-border</th><td>Blockquote left border.</td></tr>
-              <tr><th>--glyphary-quote-text</th><td>Blockquote text.</td></tr>
-            </tbody>
-          </table>
-
-          <h3>Callouts</h3>
-          <table class="reference-table">
-            <tbody>
-              <tr><th>--glyphary-callout-background</th><td>Base callout background.</td></tr>
-              <tr><th>--glyphary-callout-note-color</th><td>Accent for <code>note</code> callouts.</td></tr>
-              <tr><th>--glyphary-callout-info-color</th><td>Accent for <code>info</code> callouts.</td></tr>
-              <tr><th>--glyphary-callout-tip-color</th><td>Accent for <code>tip</code> callouts.</td></tr>
-              <tr><th>--glyphary-callout-warning-color</th><td>Accent for <code>warning</code> callouts.</td></tr>
-              <tr><th>--glyphary-callout-padding</th><td>Callout internal spacing.</td></tr>
-              <tr><th>--glyphary-callout-radius</th><td>Callout corner radius.</td></tr>
-              <tr><th>--glyphary-callout-border-width</th><td>Base callout border width.</td></tr>
-              <tr><th>--glyphary-callout-icon-size</th><td>Rich callout icon size.</td></tr>
-              <tr><th>--glyphary-callout-title-transform</th><td>Callout title text transform.</td></tr>
-            </tbody>
-          </table>
-          <p>Glyphary also sets callout icon variables from Settings. They are CSS <code>content</code> values, so include quotes if you override them.</p>
-          <pre><code>:root {
-  --glyphary-callout-warning-icon: "!";
-}</code></pre>
-
-          <h3>Syntax</h3>
-          <table class="reference-table">
-            <tbody>
-              <tr><th>--syntax-blue</th><td>Blue syntax and heading accent.</td></tr>
-              <tr><th>--syntax-green</th><td>Green syntax and heading accent.</td></tr>
-              <tr><th>--syntax-yellow</th><td>Yellow syntax and warning accent.</td></tr>
-              <tr><th>--syntax-red</th><td>Red syntax and heading accent.</td></tr>
-              <tr><th>--syntax-purple</th><td>Purple syntax and heading accent.</td></tr>
-              <tr><th>--syntax-orange</th><td>Orange syntax and ambiguous link accent.</td></tr>
-              <tr><th>--syntax-muted</th><td>Muted syntax text.</td></tr>
-            </tbody>
-          </table>
-
-          <h3>Typography</h3>
-          <table class="reference-table">
-            <tbody>
-              <tr><th>--glyphary-font-ui</th><td>Interface font stack.</td></tr>
-              <tr><th>--glyphary-font-editor</th><td>Editor font stack.</td></tr>
-              <tr><th>--glyphary-font-mono</th><td>Code and monospace font stack.</td></tr>
-              <tr><th>--glyphary-editor-font-size</th><td>Main editor font size.</td></tr>
-              <tr><th>--glyphary-editor-line-height</th><td>Main editor line height.</td></tr>
-              <tr><th>--glyphary-heading-h1-size</th><td>H1 font size.</td></tr>
-              <tr><th>--glyphary-heading-h2-size</th><td>H2 font size.</td></tr>
-              <tr><th>--glyphary-code-font-size</th><td>Inline and block code font size.</td></tr>
-            </tbody>
-          </table>
-
-          <h3>Spacing And Shape</h3>
-          <table class="reference-table">
-            <tbody>
-              <tr><th>--glyphary-editor-max-width</th><td>Maximum width of editor content. Use <code>none</code> for full width.</td></tr>
-              <tr><th>--glyphary-editor-padding-y</th><td>Editor vertical padding.</td></tr>
-              <tr><th>--glyphary-editor-padding-x</th><td>Editor horizontal padding.</td></tr>
-              <tr><th>--glyphary-block-gap</th><td>Default vertical rhythm between top-level editor blocks.</td></tr>
-              <tr><th>--glyphary-column-gap</th><td>Gap between Markdown columns.</td></tr>
-              <tr><th>--glyphary-radius-sm</th><td>Small radius.</td></tr>
-              <tr><th>--glyphary-radius-md</th><td>Medium radius.</td></tr>
-              <tr><th>--glyphary-radius-lg</th><td>Large radius.</td></tr>
-              <tr><th>--glyphary-border-width</th><td>Default border width.</td></tr>
-              <tr><th>--glyphary-code-tab-size</th><td>Visual tab size in code blocks.</td></tr>
-            </tbody>
-          </table>
-
-          <h3>Motion</h3>
-          <pre><code>--glyphary-motion-duration-fast
---glyphary-motion-duration-base
---glyphary-motion-duration-slow
---glyphary-motion-ease</code></pre>
+          <pre><code>--glyphary-text
+--glyphary-text-soft
+--glyphary-editor-text
+--glyphary-heading
+--glyphary-muted
+--glyphary-muted-strong
+--glyphary-mono-text</code></pre>
+          <h3>Accent, Blocks, Callouts, Syntax, Typography, Spacing And Shape</h3>
+          <pre><code>--glyphary-accent
+--glyphary-border
+--glyphary-table-border
+--glyphary-code-bg
+--glyphary-code-text
+--glyphary-callout-background
+--glyphary-callout-note-color
+--glyphary-callout-info-color
+--glyphary-callout-tip-color
+--glyphary-callout-warning-color
+--syntax-blue
+--syntax-green
+--syntax-yellow
+--syntax-red
+--syntax-purple
+--syntax-orange
+--syntax-muted
+--glyphary-font-editor
+--glyphary-editor-font-size
+--glyphary-editor-max-width
+--glyphary-code-tab-size</code></pre>
         </section>
 
         <section id="obsidian" class="doc-section" data-search-text="obsidian compatibility variables background text interactive code table">
           <h2>Obsidian Compatibility Variables</h2>
-          <p>
-            Glyphary maps its tokens onto a first-pass Obsidian-style variable surface. These are useful
-            when adapting small Obsidian snippets, but Glyphary does not emulate Obsidian's full DOM.
-          </p>
+          <p>Glyphary maps its tokens onto a first-pass Obsidian-style variable surface.</p>
           <pre><code>--background-primary
---background-primary-alt
 --background-secondary
---background-secondary-alt
 --background-modifier-border
---background-modifier-border-hover
---background-modifier-hover
---background-modifier-active-hover
 --blockquote-border-color
---blockquote-color
 --code-background
---code-normal
 --interactive-accent
---interactive-accent-hover
---interactive-normal
---interactive-hover
---shadow-s
---shadow-l
 --table-border-color
 --text-accent
---text-faint
 --text-muted
 --text-normal
---text-on-accent
 --text-selection
 --text-title-h1
 --text-title-h2</code></pre>
@@ -231,79 +122,22 @@
 
         <section id="selectors" class="doc-section" data-search-text="selectors editor wikilinks tasks tables code columns callouts collapse rich links excalidraw toc">
           <h2>Supported Editor Selectors</h2>
-          <p>Use these selectors when variables are not enough. Scope snippets under <code>.editor-surface</code> unless you explicitly intend to affect the whole app.</p>
-
-          <h3>Editor Body</h3>
+          <p>Use these selectors when variables are not enough. Scope snippets under <code>.editor-surface</code>.</p>
           <pre><code>.editor-surface .ProseMirror
-.editor-surface .ProseMirror &gt; * + *
 .editor-surface h1
-.editor-surface h2
-.editor-surface h3
-.editor-surface h4
-.editor-surface h5
-.editor-surface h6
-.editor-surface p
-.editor-surface blockquote
-.editor-surface ul
-.editor-surface ol</code></pre>
-
-          <h3>Wikilinks</h3>
-          <pre><code>.editor-surface .wikilink
+.editor-surface .wikilink
 .editor-surface .wikilink-ambiguous
-.editor-surface .wikilink-missing</code></pre>
-
-          <h3>Tasks</h3>
-          <pre><code>.editor-surface ul[data-type="taskList"]
-.editor-surface li[data-type="taskItem"]
-.editor-surface li[data-type="taskItem"] input[type="checkbox"]</code></pre>
-
-          <h3>Tables And Code</h3>
-          <pre><code>.editor-surface .tableWrapper
-.editor-surface table
-.editor-surface th
-.editor-surface td
-.editor-surface .selectedCell
-.editor-surface .column-resize-handle
-.editor-surface code
-.editor-surface pre
+.editor-surface .wikilink-missing
+.editor-surface ul[data-type="taskList"]
+.editor-surface .tableWrapper
 .editor-surface .code-block-node
-.editor-surface .code-block-node.active
-.code-block-language-control</code></pre>
-
-          <h3>Rich Blocks</h3>
-          <pre><code>.editor-surface .markdown-columns
-.editor-surface .markdown-column
+.editor-surface .markdown-columns
 .editor-surface .markdown-callout
-.editor-surface .markdown-callout-note
-.editor-surface .markdown-callout-info
-.editor-surface .markdown-callout-tip
-.editor-surface .markdown-callout-warning
 .editor-surface .markdown-collapse
-.editor-surface .markdown-collapse.open
-.editor-surface .markdown-collapse.closed
 .editor-surface .rich-link-card
-.editor-surface .rich-link-card-no-image
-.editor-surface .rich-link-image
 .editor-surface .excalidraw-embed
-.editor-surface .excalidraw-embed-preview
-.editor-surface .excalidraw-embed-empty</code></pre>
-
-          <h3>Theme Option Classes</h3>
-          <pre><code>.app-shell.theme-colorful-headings
-.app-shell.theme-heading-underlines
-.app-shell.theme-heading-anchors
-.app-shell.theme-rich-callouts
-.app-shell.callout-style-card
-.app-shell.callout-style-striped
-.app-shell.callout-style-compact
-.app-shell.callout-style-obsidian</code></pre>
-
-          <h3>Drawer Table Of Contents</h3>
-          <pre><code>.toc-list
-.toc-entry
-.toc-entry.level-1
-.toc-entry.level-2
-.toc-entry.level-3</code></pre>
+.toc-list
+.toc-entry</code></pre>
         </section>
 
         <section id="examples" class="doc-section" data-search-text="examples narrow editorial code blocks callouts columns rich links css">
@@ -314,31 +148,6 @@
   --glyphary-editor-padding-y: 48px;
   --glyphary-editor-line-height: 1.82;
 }</code></pre>
-
-          <h3>Softer Code Blocks</h3>
-          <pre><code>:root {
-  --glyphary-code-bg: #18202a;
-  --glyphary-code-text: #eef4fb;
-  --glyphary-code-font-size: 0.9em;
-}
-
-.editor-surface .code-block-node {
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glyphary-code-text) 10%, transparent);
-}</code></pre>
-
-          <h3>Callout Variants</h3>
-          <pre><code>:root {
-  --glyphary-callout-radius: 6px;
-  --glyphary-callout-padding: 0.75rem 0.95rem;
-  --glyphary-callout-title-transform: none;
-  --glyphary-callout-info-color: #4aa3ff;
-  --glyphary-callout-warning-color: #f2b84b;
-}
-
-.editor-surface .markdown-callout {
-  background: color-mix(in srgb, var(--callout-accent) 8%, transparent);
-}</code></pre>
-
           <h3>Minimal Columns</h3>
           <pre><code>:root {
   --glyphary-column-gap: 24px;
@@ -348,16 +157,6 @@
   border-color: transparent;
   padding: 0;
 }</code></pre>
-
-          <h3>Rich Link Cards</h3>
-          <pre><code>.editor-surface .rich-link-card {
-  border-radius: var(--glyphary-radius-md);
-  background: var(--glyphary-surface-muted);
-}
-
-.editor-surface .rich-link-content strong {
-  color: var(--glyphary-accent);
-}</code></pre>
         </section>
 
         <section id="stability" class="doc-section" data-search-text="stability rules public api snippets selectors variables">
@@ -365,9 +164,7 @@
           <ul>
             <li>Prefer <code>--glyphary-*</code> variables for durable theme work.</li>
             <li>Prefer listed <code>.editor-surface ...</code> selectors for snippets that need structural styling.</li>
-            <li>Avoid styling toolbar, drawer, dialog, and settings classes unless a selector is documented here.</li>
-            <li>Avoid depending on generated ProseMirror selection classes except <code>ProseMirror-selectednode</code>, which is useful for selected embedded blocks.</li>
-            <li>If a snippet needs a selector that is not listed here, promote that selector into this document before treating it as public API.</li>
+            <li>Avoid styling internal app chrome unless a selector is documented here.</li>
           </ul>
         </section>
       </main>
@@ -376,4 +173,3 @@
     <script src="./script.js"></script>
   </body>
 </html>
-
