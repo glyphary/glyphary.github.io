@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Glyphary user manual: learn vaults, editing, drawers, markdown blocks, images, tidbits, themes, plugins, and shortcuts."
+    />
+    <title>Glyphary User Manual</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="manual-topbar">
+      <a class="manual-brand" href="#start">Glyphary Manual</a>
+      <label class="manual-search">
+        <span>Search docs</span>
+        <input id="manual-search" type="search" placeholder="Search features, shortcuts, syntax..." />
+      </label>
+      <nav class="manual-toplinks" aria-label="Related documentation">
+        <a href="../docs-site/glyphary.html">Product page</a>
+        <a href="./theming.html">Theming reference</a>
+        <a href="./plugins.html">Plugin authoring</a>
+      </nav>
+    </header>
+
+    <div class="manual-shell">
+      <aside class="manual-sidebar" aria-label="Manual table of contents">
+        <nav>
+          <a href="#start">Start Here</a>
+          <a href="#core-concepts">Core Concepts</a>
+          <a href="#open-vault">Open A Vault</a>
+          <a href="#workspace">Workspace Tour</a>
+          <a href="#vault-drawer">Files Drawer</a>
+          <a href="#file-actions">File And Folder Actions</a>
+          <a href="#editor-basics">Editor Basics</a>
+          <a href="#command-palette">Command Palette</a>
+          <a href="#metadata">Metadata And Frontmatter</a>
+          <a href="#tabs-splits">Tabs And Splits</a>
+          <a href="#drawers">Right Drawer</a>
+          <a href="#search-links">Search And Wikilinks</a>
+          <a href="#markdown">Markdown Features</a>
+          <a href="#assets">Images And Assets</a>
+          <a href="#calendar">Calendar Notes</a>
+          <a href="#tidbits">Tidbits</a>
+          <a href="#settings">Settings Reference</a>
+          <a href="#appearance">Appearance</a>
+          <a href="#plugins">Plugins</a>
+          <a href="#vim">Vim Mode</a>
+          <a href="#shortcuts">Shortcuts</a>
+          <a href="#about-debug">About And Debug</a>
+          <a href="#troubleshooting">Troubleshooting</a>
+        </nav>
+      </aside>
+
+      <main class="manual-content">
+        <section id="start" class="doc-section hero-section" data-search-text="start quick start onboarding first run">
+          <p class="section-kicker">Start here</p>
+          <h1>Learn Glyphary by opening a real vault and editing one note.</h1>
+          <p class="lead">
+            This manual is written for hands-on use: it helps new users get productive and gives
+            evaluators a concrete tour of Glyphary's real workflows. Work through the sections in
+            order once, then use the sidebar as a reference.
+          </p>
+
+          <div class="quickstart-grid">
+            <article>
+              <h2>Five-minute path</h2>
+          <ol>
+                <li>Open Glyphary.</li>
+                <li>Choose <strong>File -> Open Vault...</strong> and select a folder of Markdown files.</li>
+                <li>Double-click a file in the left drawer.</li>
+                <li>Type in the editor, then press <strong>Cmd+S</strong>.</li>
+                <li>Press <strong>Cmd+P</strong> and run <strong>Insert callout</strong>.</li>
+              </ol>
+            </article>
+            <article>
+              <h2>What to learn first</h2>
+              <ul>
+                <li>Vaults are folders on disk; Glyphary does not import notes.</li>
+                <li>The left drawer is for navigation. The right drawer is for context.</li>
+                <li>Everything important saves as Markdown, JSON settings, or asset files in the vault.</li>
+                <li>Settings are per vault and live in <code>.glyphary/config.json</code>.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="core-concepts" class="doc-section" data-search-text="concepts vault markdown local first panes drawers settings assets">
+          <h2>Core Concepts</h2>
+          <dl class="definition-list">
+            <div>
+              <dt>Vault</dt>
+              <dd>A folder on disk that contains your Markdown files, assets, settings, snippets, plugins, and calendar notes.</dd>
+            </div>
+            <div>
+              <dt>Note</dt>
+              <dd>A Markdown file opened in an editor tab. Glyphary can render rich blocks, but the saved file remains readable Markdown.</dd>
+            </div>
+            <div>
+              <dt>Left drawer</dt>
+              <dd>The vault drawer. It contains Files, Search, and Recent views.</dd>
+            </div>
+            <div>
+              <dt>Right drawer</dt>
+              <dd>The inspector drawer. It contains Source/Export, Table of Contents, and Calendar views.</dd>
+            </div>
+            <div>
+              <dt>Tidbit</dt>
+              <dd>A fast note created from a configurable path pattern, useful for capture before organization.</dd>
+            </div>
+          </dl>
+
+          <div class="note-box">
+            <strong>Important:</strong> Glyphary remembers your last vault, active file, and recent files.
+            It does not currently persist left/right drawer open state.
+          </div>
+        </section>
+
+        <section id="open-vault" class="doc-section" data-search-text="open vault file menu restore last vault root directory">
+          <h2>Open A Vault</h2>
+          <p>
+            Use <strong>File -> Open Vault...</strong> from the native menu. Choose the folder that
+            should be treated as the vault root. Glyphary opens the left drawer and lists the files
+            and directories at that root.
+          </p>
+          <ol class="task-list">
+            <li>Open the File menu.</li>
+            <li>Select <strong>Open Vault...</strong>.</li>
+            <li>Choose a folder that contains Markdown notes.</li>
+            <li>Wait for the status bar to finish showing <strong>Indexing...</strong>.</li>
+            <li>Double-click a Markdown file to open it.</li>
+          </ol>
+          <figure>
+            <img src="./assets/screenshots/main-workspace.png" alt="Glyphary workspace with an open vault" />
+            <figcaption>Main workspace after a vault is open.</figcaption>
+          </figure>
+        </section>
+
+        <section id="workspace" class="doc-section" data-search-text="workspace toolbar panes title save split theme status bar drawers layout resizing">
+          <h2>Workspace Tour</h2>
+          <p>The app window is split into stable regions so scrolling one area does not move the rest.</p>
+          <div class="feature-table">
+            <div><strong>Top controls</strong><span>Save, split/unsplit, theme mode, tabs, and active document title.</span></div>
+            <div><strong>Left drawer</strong><span>Vault files, search, and recent files.</span></div>
+            <div><strong>Center editor</strong><span>The active tab group or split pane. Each editor scrolls independently.</span></div>
+            <div><strong>Right drawer</strong><span>Source/Export, document table of contents, and Calendar.</span></div>
+            <div><strong>Status bar</strong><span>Save status, index status, Vim mode transitions, and diagnostic messages.</span></div>
+          </div>
+          <p>
+            The left and right drawers have drag bars. Drag a bar to resize the drawer. In Settings
+            you can choose whether the status bar is visible, whether section corners are rounded,
+            and how much margin surrounds the workspace.
+          </p>
+          <h3>Native menus</h3>
+          <p>
+            On macOS, use the system menu bar for File, Settings, About, and theme commands. Glyphary
+            hides redundant in-window File/New controls on macOS, but the menu actions remain available.
+            Save also works from the menu and through <strong>Cmd+S</strong>.
+          </p>
+        </section>
+
+        <section id="vault-drawer" class="doc-section" data-search-text="left drawer files search recent folders back current top level collapse resize">
+          <h2>Use The Left Drawer</h2>
+          <p>The left drawer opens expanded by default and has three views.</p>
+          <h3>Files</h3>
+          <ul>
+            <li>Single-click a directory to enter it as the current top-level view.</li>
+            <li>Use the Back button to move up until you reach the vault root.</li>
+            <li>Double-click a file to open it in the active editor pane.</li>
+            <li>Double-click a directory to open its shadow note.</li>
+            <li>The path shown under <strong>Files</strong> is relative to the vault root and omits the Markdown extension.</li>
+            <li>Dotfiles and dot folders are hidden by default. Enable them in Settings -> Main.</li>
+          </ul>
+          <h3>Search</h3>
+          <p>Search by name or content. Content search uses <code>rg</code> when available, with a fallback path otherwise.</p>
+          <h3>Recent</h3>
+          <p>
+            Recent shows opened files newest first and restores across app restarts. Use it when you
+            know you opened a note recently but do not remember its folder.
+          </p>
+        </section>
+
+        <section id="file-actions" class="doc-section" data-search-text="create note create folder rename move delete shadow note context menu right click folder tree">
+          <h2>File And Folder Actions</h2>
+          <p>Right-click entries in the Files view to manage vault content.</p>
+          <div class="feature-table">
+            <div><strong>Create note</strong><span>Right-click a folder and create a Markdown file inside it. The new note opens in the active pane.</span></div>
+            <div><strong>Create folder</strong><span>Right-click a folder, choose Create folder, enter a name, and Glyphary creates the child directory.</span></div>
+            <div><strong>Rename folder</strong><span>Renames the folder and a matching shadow note from <code>old/old.md</code> to <code>new/new.md</code> when present.</span></div>
+            <div><strong>Move file or folder</strong><span>Choose a destination from the folder tree rooted at the vault.</span></div>
+            <div><strong>Delete file</strong><span>Requires confirmation. Deletion is destructive.</span></div>
+          </div>
+          <p>
+            Rename saves immediately. If you rename the active page title in the editor, the file is
+            also renamed and saved immediately.
+          </p>
+        </section>
+
+        <section id="editor-basics" class="doc-section" data-search-text="editor toolbar save autosave title rename code block language table tasks source">
+          <h2>Editor Basics</h2>
+          <p>
+            The editor is WYSIWYG, but it serializes back to Markdown. Use the toolbar for formatting
+            and <strong>Cmd+P</strong> for commands that do not belong permanently in the toolbar.
+          </p>
+          <h3>Save and autosave</h3>
+          <ul>
+            <li>Press <strong>Cmd+S</strong> to save the active document.</li>
+            <li>Autosave is enabled by default and saves the active page once per minute.</li>
+            <li>Glyphary only saves when the active file has been modified.</li>
+            <li>The page title can be renamed by double-clicking the displayed title.</li>
+          </ul>
+          <h3>Formatting toolbar</h3>
+          <p>
+            Toolbar buttons are icon-based. Common actions include headings, bold, italic, unordered
+            lists, ordered lists, tasks, quotes, code, tables, columns, callouts, split, save, and theme mode.
+          </p>
+          <h3>Code blocks</h3>
+          <p>
+            When the cursor is inside a code block, the language selector appears inside that block.
+            Choosing <code>python</code>, <code>sh</code>, <code>html</code>, or another available language
+            writes a matching Markdown fence such as <code>```python</code>. Tab inside code blocks inserts
+            indentation instead of moving focus.
+          </p>
+          <p>
+            Supported highlighted languages are Plain text, Python, Shell, JavaScript, TypeScript,
+            JSON, Rust, SQL, HTML, CSS, and Markdown. Common aliases such as <code>bash</code>,
+            <code>js</code>, <code>ts</code>, <code>rs</code>, and <code>md</code> are also recognized
+            when reopening existing Markdown.
+          </p>
+        </section>
+
+        <section id="command-palette" class="doc-section" data-search-text="command palette cmd p commands table contextual plugin arrows enter escape">
+          <h2>Command Palette</h2>
+          <p>
+            Press <strong>Cmd+P</strong> to open the command palette. Type to filter commands, use
+            Arrow Up and Arrow Down to move through the list, press Enter to run the selected command,
+            or press Esc to close the palette.
+          </p>
+          <div class="feature-table">
+            <div><strong>Create Tidbit</strong><span>Create a note from the current vault's tidbit path pattern.</span></div>
+            <div><strong>Insert rich link</strong><span>Fetch URL metadata and insert a rich link block at the cursor.</span></div>
+            <div><strong>Insert Excalidraw drawing</strong><span>Create an editable drawing file and embed it in the current note.</span></div>
+            <div><strong>Insert columns</strong><span>Insert a two-column Markdown container.</span></div>
+            <div><strong>Gallery layout</strong><span>Wrap selected image embeds in a gallery container.</span></div>
+            <div><strong>Insert callout</strong><span>Insert a note callout block.</span></div>
+            <div><strong>Insert collapse</strong><span>Insert a collapsed details block.</span></div>
+            <div><strong>Insert table of contents</strong><span>Insert a rendered <code>```toc</code> block at the cursor.</span></div>
+          </div>
+          <h3>Contextual table commands</h3>
+          <p>
+            When the cursor is inside a table, table editing commands appear at the top of the palette:
+            Add row after, Delete row, Add column after, Delete column, and Delete table.
+          </p>
+          <h3>Plugin commands</h3>
+          <p>
+            Enabled vault plugins can add their own command palette actions. These actions appear after
+            Glyphary's built-in commands and run through the plugin manifest declared in Settings.
+          </p>
+        </section>
+
+        <section id="metadata" class="doc-section" data-search-text="frontmatter metadata yaml toml pills tags rename page title collapsed">
+          <h2>Metadata And Frontmatter</h2>
+          <p>
+            Frontmatter at the top of a file is not shown in the WYSIWYG body. It is preserved on save
+            and can be edited from a collapsed plain-text metadata area above the editor.
+          </p>
+          <pre><code>---
+tags:
+  - databases
+  - devops
+feature: _assets_/Pasted image 20230102173741.png
+---</code></pre>
+          <p>
+            By default, Glyphary reads the <code>tags</code> header and shows simple list values as
+            pills beside the Frontmatter expander. Both inline and block YAML list forms are supported:
+          </p>
+          <pre><code>tags: [draft, project]</code></pre>
+          <pre><code>tags:
+  - draft
+  - project</code></pre>
+          <p>
+            Change the pill behavior in <strong>Settings -> Main -> Metadata</strong>. You can disable
+            pills or use a different header name such as <code>topics</code>.
+          </p>
+        </section>
+
+        <section id="tabs-splits" class="doc-section" data-search-text="tabs split pane close final tab active pane dirty state independent scrolling">
+          <h2>Tabs And Split Editing</h2>
+          <p>Glyphary can keep multiple documents open and can split the editor into two independent tab groups.</p>
+          <ul>
+            <li>Opening a file that is already open switches to the existing tab.</li>
+            <li>Each tab tracks its own dirty state.</li>
+            <li>The active pane controls toolbar state, drawer content, and file highlighting.</li>
+            <li>Closing the final tab in a split pane closes that pane and returns to one pane.</li>
+            <li>Each pane scrolls independently; the formatting toolbar does not scroll with the document.</li>
+          </ul>
+          <figure>
+            <img src="./assets/screenshots/split-editing.png" alt="Split editor with two panes" />
+            <figcaption>Split editing with independent tab groups.</figcaption>
+          </figure>
+        </section>
+
+        <section id="drawers" class="doc-section" data-search-text="right drawer source export table of contents calendar drawer closed default resize">
+          <h2>Use The Right Drawer</h2>
+          <p>The right drawer is closed by default. Open it from the icon rail and resize it with its drag bar.</p>
+          <h3>Source and Export</h3>
+          <p>View or edit Markdown source and inspect export/stat information for the active document.</p>
+          <h3>Table of Contents</h3>
+          <p>
+            The TOC view is built from headings in the active page. It ignores headings inside fenced
+            code blocks. Click an entry to jump to the matching heading. Duplicate headings are tracked
+            by occurrence so repeated names still jump to the right place.
+          </p>
+          <h3>Calendar</h3>
+          <p>The Calendar view opens or creates daily notes under <code>Calendar/</code> and marks days that already have matching files.</p>
+        </section>
+
+        <section id="search-links" class="doc-section" data-search-text="search rg wikilink index page name chooser duplicate filenames internal links">
+          <h2>Search And Wikilinks</h2>
+          <h3>Vault search</h3>
+          <p>
+            Open the left drawer Search view. Choose <strong>Names</strong> to search file names and
+            paths, or <strong>Content</strong> to search inside files. Content search uses <code>rg</code>
+            when available.
+          </p>
+          <figure>
+            <img src="./assets/screenshots/vault-search.png" alt="Vault search view" />
+            <figcaption>Vault search with results in the left drawer.</figcaption>
+          </figure>
+          <h3>Wikilinks</h3>
+          <p>
+            When a vault opens, Glyphary builds an in-memory index of Markdown filenames and shows
+            <strong>Indexing...</strong> in the status bar during the scan.
+          </p>
+          <pre><code>[[Dad Jokes]]
+[[Calendar/Mon, Dec 22nd 2025]]</code></pre>
+          <ul>
+            <li>Exact vault-relative path matches win first.</li>
+            <li>Otherwise, Glyphary matches by note basename.</li>
+            <li>If one candidate exists, clicking opens it.</li>
+            <li>If multiple candidates exist, Glyphary shows a chooser.</li>
+            <li>If no candidate exists, the status bar reports that the target was not found.</li>
+            <li>Typing <code>[[</code> opens page search. Use arrow keys and Enter to select.</li>
+          </ul>
+        </section>
+
+        <section id="markdown" class="doc-section" data-search-text="markdown tables tasks callouts columns collapse toc rich links code syntax highlighting html">
+          <h2>Markdown Features</h2>
+          <p>This section lists the Markdown structures Glyphary understands and how to create them.</p>
+
+          <h3>Tables</h3>
+          <p>Use the toolbar table icon to insert a table. When the cursor is inside a table, press <strong>Cmd+P</strong> to access table commands first.</p>
+          <ul>
+            <li>Add row after</li>
+            <li>Delete row</li>
+            <li>Add column after</li>
+            <li>Delete column</li>
+            <li>Delete table</li>
+          </ul>
+
+          <h3>Task lists</h3>
+          <pre><code>- [ ] Collect screenshots
+- [x] Open the vault</code></pre>
+          <p>
+            Task items render with inline checkboxes. Toggle the checkbox in the editor or edit the
+            saved Markdown directly with <code>[ ]</code> and <code>[x]</code>.
+          </p>
+
+          <h3>Inline table of contents block</h3>
+          <pre><code>```toc
+```</code></pre>
+          <p>
+            Insert this from the command palette or type it manually. When the cursor is outside the
+            block, Glyphary renders it as a table of contents based on the page headings. When the
+            cursor is inside it, the block behaves like editable Markdown source. It is intentionally
+            not shown as a selectable code language because <code>toc</code> is a Glyphary display mode.
+          </p>
+
+          <h3>Columns</h3>
+          <pre><code>::: columns
+::: column
+Left content
+:::
+
+::: column
+Right content
+:::
+:::</code></pre>
+          <figure>
+            <img src="./assets/screenshots/columns.png" alt="Glyphary rendering a Markdown columns block as side-by-side editable columns" />
+            <figcaption>Columns render side by side when there is enough horizontal room, and stack on narrower screens.</figcaption>
+          </figure>
+
+          <h3>Callouts</h3>
+          <pre><code>::: callout warning "Database Migration"
+Back up the database first.
+:::</code></pre>
+          <p>Supported visual types include <code>note</code>, <code>info</code>, <code>tip</code>, and <code>warning</code>.</p>
+          <p>
+            Unknown callout types remain editable, but they fall back to the base callout styling.
+            Appearance settings can change the callout layout to Plain, Striped, Card, Compact, or
+            Obsidian, and can choose per-type icons.
+          </p>
+          <figure>
+            <img src="./assets/screenshots/callouts.png" alt="Glyphary rendering note, info, tip, and warning callouts" />
+            <figcaption>Callout type controls the visual treatment while the block remains editable Markdown.</figcaption>
+          </figure>
+
+          <h3>Collapse blocks</h3>
+          <pre><code>::: collapse "More details"
+Hidden content starts collapsed.
+:::
+
+::: collapse "Already open" open
+This starts expanded.
+:::</code></pre>
+          <figure>
+            <img src="./assets/screenshots/collapse.png" alt="Glyphary rendering collapsed and expanded disclosure blocks" />
+            <figcaption>Collapse blocks default closed; add <code>open</code> when the block should start expanded.</figcaption>
+          </figure>
+
+          <h3>Rich links</h3>
+          <p>
+            Run <strong>Insert rich link</strong>, paste a URL, and Glyphary fetches metadata. If no
+            metadata image exists, it tries an early page image as a best-effort fallback.
+          </p>
+          <pre><code>::: rich-link
+url: https://example.com/article
+title: Example Article
+description: Short summary
+image: https://example.com/card.png
+siteName: Example
+:::</code></pre>
+          <figure>
+            <img src="./assets/screenshots/rich-links.png" alt="Glyphary rendering rich link cards with metadata and preview images" />
+            <figcaption>Rich link cards render fetched metadata while storing a readable <code>::: rich-link</code> container.</figcaption>
+          </figure>
+
+          <h3>Excalidraw drawings</h3>
+          <p>
+            Run <strong>Insert Excalidraw drawing</strong> from the command palette, enter a drawing
+            name, and Glyphary creates a drawing JSON file under <code>_assets_/drawings</code>.
+            The note receives a wiki-style embed:
+          </p>
+          <pre><code>![[_assets_/drawings/System sketch 20230102173741.excalidraw]]</code></pre>
+          <p>
+            Double-click the drawing embed to reopen the Excalidraw editor. Saving the drawing updates
+            the underlying <code>.excalidraw</code> file and refreshes the preview in the note.
+          </p>
+
+          <h3>HTML code blocks</h3>
+          <p>
+            HTML is available as a code-block language for syntax highlighting. Use the in-block
+            language selector and choose <strong>HTML</strong>. This is for displaying HTML source
+            code, not for rendering live embedded HTML inside the note.
+          </p>
+        </section>
+
+        <section id="assets" class="doc-section" data-search-text="images assets paste drag drop gallery preview attachments _assets_ images pasted image markdown wiki image">
+          <h2>Images And Assets</h2>
+          <p>
+            Glyphary-managed images live in <code>_assets_/images</code> under the vault root. Dragging
+            or pasting an image into the editor saves the file there and inserts a reference.
+          </p>
+          <h3>Supported image references</h3>
+          <pre><code>![[Pasted image 20260613133301.png]]
+![[folder/image.png]]
+![[image.png|alias]]
+![Local image](folder/Pasted%20image%2020220413143858.png)
+![Pasted image 20220413143858.png](Pasted%20image%2020220413143858.png)</code></pre>
+          <p>
+            Local wiki image names resolve under <code>_assets_/images</code>. Standard Markdown image
+            URLs that are not external URLs are decoded and treated as local vault asset references.
+            External <code>http</code> and <code>https</code> image URLs remain external.
+          </p>
+          <h3>Naming pasted images</h3>
+          <ul>
+            <li>Default names use <code>Pasted image YYYYMMDDHHmmss.png</code>.</li>
+            <li>If the source has a useful name, Glyphary sanitizes it and appends the timestamp.</li>
+            <li>Existing files are not overwritten; numeric suffixes are added as needed.</li>
+          </ul>
+          <h3>Gallery layout</h3>
+          <p>Select multiple image embeds, press <strong>Cmd+P</strong>, and run <strong>Gallery layout</strong>.</p>
+          <pre><code>::: gallery
+![[image-a.png]]
+
+![[image-b.png]]
+:::</code></pre>
+          <h3>Full-size preview</h3>
+          <p>Double-click an embedded image to open the full-size preview. Press <strong>Esc</strong> to close it.</p>
+        </section>
+
+        <section id="calendar" class="doc-section" data-search-text="calendar daily notes month drawer dots filename date Calendar folder">
+          <h2>Calendar Notes</h2>
+          <p>Open the right drawer Calendar view to navigate monthly notes.</p>
+          <ul>
+            <li>Calendar notes live under <code>Calendar/</code> at the vault root.</li>
+            <li>Use the month navigation controls to move backward or forward.</li>
+            <li>Double-click a day to open or create that day's file.</li>
+            <li>Newly created day notes are empty.</li>
+            <li>Days with existing files display a dot.</li>
+            <li>Dots refresh when you change month.</li>
+          </ul>
+          <pre><code>Calendar/Sun, Jun 14th 2026.md</code></pre>
+        </section>
+
+        <section id="tidbits" class="doc-section" data-search-text="tidbits create tidbit global capture shortcut path pattern date template">
+          <h2>Tidbits</h2>
+          <p>
+            A tidbit is a quickly created note whose path comes from the vault's tidbit pattern.
+            Run <strong>Create Tidbit</strong> from the command palette.
+          </p>
+          <pre><code>__transit__/Objects/tidbit-{{date:YYYY-mm-DD-hh-mm-ss}}.md</code></pre>
+          <p>
+            Glyphary expands date tokens, creates missing directories, creates the file, and opens it
+            in the active pane. Supported date tokens include <code>YYYY</code>, <code>YY</code>,
+            <code>MM</code>, <code>DD</code>, <code>HH</code>, <code>hh</code>, <code>mm</code>, and <code>ss</code>.
+          </p>
+          <h3>Global tidbit capture</h3>
+          <p>
+            Enable <strong>Settings -> Main -> Enable global tidbit capture shortcut</strong>, focus the
+            shortcut field, press the desired shortcut, and save settings. On macOS, Glyphary requests
+            the required system permission only when you enable this feature.
+          </p>
+          <p>
+            The capture window is a small editor window. It uses the same creation rules as normal
+            tidbits and lets you rename the tidbit title before saving.
+          </p>
+          <p>
+            The default global shortcut is <code>CommandOrControl+Shift+Space</code>. The field is a
+            hotkey capture control: focus it and press the key combination you want. If macOS does not
+            deliver the shortcut, enable Settings -> Debug and use the diagnostics buttons.
+          </p>
+        </section>
+
+        <section id="settings" class="doc-section" data-search-text="settings main appearance plugins debug config json vault scoped">
+          <h2>Settings Reference</h2>
+          <p>Open Settings from the menu or with <strong>Cmd+,</strong>. Settings are stored per vault:</p>
+          <pre><code>&lt;vault root&gt;/.glyphary/config.json</code></pre>
+          <div class="feature-table">
+            <div><strong>Main -> Vault</strong><span>Asset directory, dotfiles, tidbit path pattern, global capture shortcut.</span></div>
+            <div><strong>Main -> Metadata</strong><span>Frontmatter pills and pill header name.</span></div>
+            <div><strong>Main -> Editor</strong><span>Vim keybindings and autosave.</span></div>
+            <div><strong>Appearance -> Window</strong><span>Glass window effect on supported macOS windows.</span></div>
+            <div><strong>Appearance -> Layout</strong><span>Status bar visibility, rounded section corners, workspace margins.</span></div>
+            <div><strong>Appearance -> Theme</strong><span>Theme templates, CSS snippets, heading treatments, callout rendering, theme tokens.</span></div>
+            <div><strong>Plugins</strong><span>Discover, refresh, and enable vault plugins.</span></div>
+            <div><strong>Debug</strong><span>Hidden diagnostics for global shortcut troubleshooting.</span></div>
+          </div>
+          <h3>Important defaults</h3>
+          <table class="reference-table">
+            <tbody>
+              <tr><th>Images</th><td><code>_assets_/images</code></td></tr>
+              <tr><th>Drawings</th><td><code>_assets_/drawings</code></td></tr>
+              <tr><th>CSS snippets</th><td><code>_snippets_</code></td></tr>
+              <tr><th>Plugins</th><td><code>.glyphary/plugins</code></td></tr>
+              <tr><th>Tidbit pattern</th><td><code>__transit__/Objects/tidbit-{{date:YYYY-mm-DD-hh-mm-ss}}.md</code></td></tr>
+              <tr><th>Dotfiles</th><td>Hidden by default.</td></tr>
+              <tr><th>Autosave</th><td>Enabled by default and writes only modified files.</td></tr>
+              <tr><th>Frontmatter pills</th><td>Enabled by default for the <code>tags</code> header.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="appearance" class="doc-section" data-search-text="appearance auto light dark theme builder snippets obsidian css variables glass layout margins">
+          <h2>Appearance And Theming</h2>
+          <p>
+            The global appearance control switches between Auto, Light, and Dark. Vault-specific
+            appearance settings live in Settings -> Appearance.
+          </p>
+          <ul>
+            <li>Apply one of the built-in theme templates.</li>
+            <li>Edit allowlisted theme tokens in the Theme Builder.</li>
+            <li>Enable colorful heading levels, heading underlines, heading anchors, and rich callout styling.</li>
+            <li>Choose callout layout: Plain, Striped, Card, Compact, or Obsidian.</li>
+            <li>Choose per-type callout icons for note, info, tip, and warning.</li>
+            <li>Approve CSS snippets from the configured snippets directory, defaulting to <code>_snippets_</code>.</li>
+          </ul>
+          <h3>Built-in templates</h3>
+          <p>
+            Templates are complete starting points. Current templates include Field Notes, Ink & Linen,
+            Harbor, Moss Glass, Nordic Dawn, Sepia Study, Graphite, Night Owl, Alpine Dark, Plum Ledger,
+            Slate Rose, and Blueprint.
+          </p>
+          <h3>Theme Builder groups</h3>
+          <p>
+            The builder exposes Canvas, Text, Accent And Borders, Blocks, Callouts, Syntax, Typography,
+            and Spacing And Shape. Token names are persisted as <code>--glyphary-*</code> CSS variables
+            and validated before saving.
+          </p>
+          <h3>CSS snippets</h3>
+          <p>
+            Put snippet files in the configured snippets directory, open Settings -> Appearance, click
+            Refresh if needed, then enable only the snippets you trust. Snippets can style documented
+            selectors for the editor body, wikilinks, tasks, tables, code, columns, callouts, collapsible
+            blocks, rich links, Excalidraw embeds, and the drawer TOC.
+          </p>
+          <p>
+            Glyphary exposes stable <code>--glyphary-*</code> CSS variables and a first-pass
+            Obsidian-compatible variable surface. See the
+            <a href="./theming.html">dedicated theming reference</a> for selector details.
+          </p>
+        </section>
+
+        <section id="plugins" class="doc-section" data-search-text="plugins wasm manifest commands styles vault scoped enable settings">
+          <h2>Plugins</h2>
+          <p>Plugins are vault-scoped and disabled by default. Install them under:</p>
+          <pre><code>&lt;vault root&gt;/.glyphary/plugins/&lt;plugin id&gt;/plugin.json</code></pre>
+          <p>Open Settings -> Plugins, click Refresh if needed, then enable the plugin.</p>
+          <ul>
+            <li>Plugins can contribute command palette actions.</li>
+            <li>Plugins can load declared stylesheets when enabled.</li>
+            <li>Plugin commands can insert literal Markdown, insert declared template files, or run WASM transforms.</li>
+            <li>WASM transform commands run off the UI thread in a Web Worker.</li>
+            <li>The current runtime is <code>glyphary-wasm-transform@1</code>.</li>
+            <li>Plugins do not get shell access, direct DOM access, arbitrary vault filesystem access, background daemons, or network access.</li>
+          </ul>
+          <h3>Minimal manifest</h3>
+          <pre><code>{
+  "id": "meeting_tools",
+  "name": "Meeting Tools",
+  "runtime": "glyphary-wasm-transform@1",
+  "version": "0.1.0",
+  "permissions": ["document:write"],
+  "commands": [
+    {
+      "id": "insert_status_callout",
+      "title": "Insert Status Callout",
+      "insertMarkdown": "::: callout info \"Status\"\\n\\n:::\\n"
+    }
+  ]
+}</code></pre>
+          <p>
+            Plugin ids must match their folder names and may use only ASCII letters, numbers, dash,
+            or underscore. Invalid plugins appear as catalog errors in Settings instead of silently failing.
+          </p>
+          <h3>WASM transforms</h3>
+          <p>
+            The current WASM runtime is not WASI and not Extism. It loads a raw WebAssembly module with
+            no imports, calls exported <code>alloc</code> and <code>transform</code> functions, and expects
+            UTF-8 output in exported memory. Rust and generated-WASM examples live under
+            <code>examples/plugins</code>.
+          </p>
+          <p>Authoring details live in the <a href="./plugins.html">plugin authoring guide</a>.</p>
+        </section>
+
+        <section id="vim" class="doc-section" data-search-text="vim mode normal insert motions yank paste undo redo">
+          <h2>Vim Mode</h2>
+          <p>
+            Enable Vim mode in <strong>Settings -> Main -> Editor</strong>. The status bar reports
+            <strong>Vim normal mode</strong> and <strong>Vim insert mode</strong>.
+          </p>
+          <p>
+            Vim mode is a practical editing layer, not an embedded Neovim instance. It keeps an internal
+            copy buffer for yank/delete/paste commands and uses the system clipboard on a best-effort basis.
+          </p>
+          <div class="shortcut-grid">
+            <article>
+              <h3>Modes</h3>
+              <table>
+                <tbody>
+                  <tr><th>Esc</th><td>Normal mode</td></tr>
+                  <tr><th>i</th><td>Insert mode</td></tr>
+                  <tr><th>Shift+A</th><td>End of line, then Insert mode</td></tr>
+                </tbody>
+              </table>
+            </article>
+            <article>
+              <h3>Motions</h3>
+              <table>
+                <tbody>
+                  <tr><th>h j k l</th><td>Move left, down, up, right</td></tr>
+                  <tr><th>Space</th><td>Move forward one character</td></tr>
+                  <tr><th>0 / $ / ^</th><td>Start, end, first non-blank of line</td></tr>
+                  <tr><th>w / b</th><td>Next or previous word start</td></tr>
+                  <tr><th>gg / G</th><td>Start or end of file</td></tr>
+                  <tr><th>%</th><td>Matching bracket on the current line</td></tr>
+                </tbody>
+              </table>
+            </article>
+            <article>
+              <h3>Edit</h3>
+              <table>
+                <tbody>
+                  <tr><th>x</th><td>Delete character into copy buffer</td></tr>
+                  <tr><th>s / S</th><td>Delete character or line, then Insert mode</td></tr>
+                  <tr><th>dw / cw</th><td>Delete word; <code>cw</code> enters Insert mode</td></tr>
+                  <tr><th>dd</th><td>Yank and delete line</td></tr>
+                </tbody>
+              </table>
+            </article>
+            <article>
+              <h3>Yank, paste, undo</h3>
+              <table>
+                <tbody>
+                  <tr><th>yy / yw</th><td>Yank line or word</td></tr>
+                  <tr><th>p / O</th><td>Paste after or before cursor</td></tr>
+                  <tr><th>u</th><td>Undo</td></tr>
+                  <tr><th>Ctrl+r</th><td>Redo</td></tr>
+                </tbody>
+              </table>
+            </article>
+          </div>
+        </section>
+
+        <section id="shortcuts" class="doc-section" data-search-text="keyboard shortcuts commands save settings esc arrow enter">
+          <h2>Shortcuts</h2>
+          <table class="reference-table">
+            <tbody>
+              <tr><th>Cmd+P</th><td>Open command palette.</td></tr>
+              <tr><th>Cmd+S</th><td>Save the active document.</td></tr>
+              <tr><th>Cmd+,</th><td>Open Settings.</td></tr>
+              <tr><th>Esc</th><td>Close dialogs, image preview, settings, or enter Vim Normal mode.</td></tr>
+              <tr><th>Arrow Up / Down</th><td>Move selection in command and page pickers.</td></tr>
+              <tr><th>Enter</th><td>Run selected command or choose selected picker result.</td></tr>
+              <tr><th>[[</th><td>Open wikilink page search inside the editor.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="about-debug" class="doc-section" data-search-text="about dialog debug diagnostics global shortcut permissions">
+          <h2>About And Debug</h2>
+          <h3>About</h3>
+          <p>
+            Use the native About menu item to see the app name, tagline, and implementation stack.
+            It is informational only and does not affect vault settings.
+          </p>
+          <h3>Debug settings</h3>
+          <p>
+            The Debug tab is hidden from normal workflows. Enable debug mode only when diagnosing global
+            tidbit capture. It reveals controls to request macOS permission, send a test capture event,
+            and check whether the configured shortcut is registered.
+          </p>
+        </section>
+
+        <section id="troubleshooting" class="doc-section" data-search-text="troubleshooting missing images calendar dots plugin errors shortcuts permissions settings">
+          <h2>Troubleshooting</h2>
+          <details open>
+            <summary>My image does not render.</summary>
+            <p>Check that the file is under <code>_assets_/images</code> and that the Markdown reference is local, for example <code>![[image.png]]</code>.</p>
+          </details>
+          <details>
+            <summary>Calendar dots are missing.</summary>
+            <p>Confirm the files are under <code>Calendar/</code> and named like <code>Sun, Jun 14th 2026.md</code>. Change months to refresh the dots.</p>
+          </details>
+          <details>
+            <summary>A plugin appears as an error.</summary>
+            <p>Open Settings -> Plugins and read the catalog error. Common causes are a missing <code>runtime</code> field, a plugin id that does not match its folder name, unsupported permissions, or paths that escape the plugin folder.</p>
+          </details>
+          <details>
+            <summary>The global tidbit shortcut does nothing outside the app.</summary>
+            <p>Enable the shortcut, save settings, grant macOS permission when prompted, and use Settings -> Debug only if you need diagnostic buttons.</p>
+          </details>
+          <details>
+            <summary>I want a full Obsidian theme.</summary>
+            <p>Glyphary supports a compatibility variable surface and approved CSS snippets, but it does not import arbitrary Obsidian themes as-is because Obsidian themes can depend on Obsidian-specific DOM structure.</p>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

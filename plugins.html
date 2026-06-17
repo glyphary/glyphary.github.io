@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Glyphary plugin authoring guide: plugin manifests, commands, WASM transform ABI, examples, styles, and security model."
+    />
+    <title>Glyphary Plugin Authoring</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="manual-topbar">
+      <a class="manual-brand" href="./index.html">Glyphary Manual</a>
+      <label class="manual-search">
+        <span>Search docs</span>
+        <input id="manual-search" type="search" placeholder="Search manifests, WASM, commands..." />
+      </label>
+      <nav class="manual-toplinks" aria-label="Related documentation">
+        <a href="./index.html">User manual</a>
+        <a href="./theming.html">Theming reference</a>
+        <a class="current" href="./plugins.html">Plugin authoring</a>
+        <a href="../docs-site/glyphary.html">Product page</a>
+      </nav>
+    </header>
+
+    <div class="manual-shell">
+      <aside class="manual-sidebar" aria-label="Plugin authoring table of contents">
+        <nav>
+          <a href="#overview">Overview</a>
+          <a href="#location">Plugin Location</a>
+          <a href="#enable">Enabling A Plugin</a>
+          <a href="#manifest">Manifest</a>
+          <a href="#commands">Command Actions</a>
+          <a href="#wasm">WASM Transform ABI</a>
+          <a href="#examples">Examples</a>
+          <a href="#styles">Plugin Styles</a>
+          <a href="#limits">Validation Limits</a>
+          <a href="#security">Security Model</a>
+        </nav>
+      </aside>
+
+      <main class="manual-content">
+        <section id="overview" class="doc-section hero-section" data-search-text="plugins authoring vault scoped manifest wasm commands styles">
+          <p class="section-kicker">Plugin authoring</p>
+          <h1>Write small, vault-scoped extensions for Glyphary.</h1>
+          <p class="lead">
+            Plugins can add command palette actions, load declared stylesheets, insert templates,
+            and run short WASM text transforms. The current system is intentionally narrow: plugins
+            do not get shell access, direct DOM access, arbitrary vault filesystem access, background
+            daemons, or network access.
+          </p>
+        </section>
+
+        <section id="location" class="doc-section" data-search-text="plugin location glyphary plugins folder plugin json directory id">
+          <h2>Plugin Location</h2>
+          <p>Each plugin has its own directory under the current vault:</p>
+          <pre><code>&lt;vault root&gt;/.glyphary/plugins/&lt;plugin id&gt;/plugin.json</code></pre>
+          <p>For example:</p>
+          <pre><code>.glyphary/plugins/meeting_tools/
+  plugin.json
+  styles.css
+  templates/agenda.md
+  plugin.wasm</code></pre>
+          <p>The plugin directory name must match the manifest <code>id</code>.</p>
+        </section>
+
+        <section id="enable" class="doc-section" data-search-text="enable plugin settings plugins refresh save command palette">
+          <h2>Enabling A Plugin</h2>
+          <ol class="task-list">
+            <li>Copy the plugin directory into <code>&lt;vault root&gt;/.glyphary/plugins</code>.</li>
+            <li>Open the vault in Glyphary.</li>
+            <li>Open Settings.</li>
+            <li>Go to the Plugins tab.</li>
+            <li>Click Refresh if the plugin was added while Settings was already open.</li>
+            <li>Enable the plugin.</li>
+            <li>Save Settings.</li>
+          </ol>
+          <p>Enabled plugin commands appear in the command palette.</p>
+        </section>
+
+        <section id="manifest" class="doc-section" data-search-text="manifest plugin json id runtime permissions styles commands fields validation">
+          <h2>Manifest</h2>
+          <p>Every plugin must have a <code>plugin.json</code> file.</p>
+          <pre><code>{
+  "id": "meeting_tools",
+  "name": "Meeting Tools",
+  "runtime": "glyphary-wasm-transform@1",
+  "version": "0.1.0",
+  "description": "Commands and styles for meeting notes.",
+  "permissions": ["document:write", "styles:load"],
+  "styles": ["styles.css"],
+  "commands": [
+    {
+      "id": "insert_agenda",
+      "title": "Insert Agenda",
+      "description": "Insert a meeting agenda template.",
+      "template": "templates/agenda.md"
+    },
+    {
+      "id": "insert_decision_callout",
+      "title": "Insert Decision Callout",
+      "insertMarkdown": "::: callout note \"Decision\"\\nDecision:\\n\\nOwner:\\n:::\\n"
+    },
+    {
+      "id": "uppercase_selection",
+      "title": "Uppercase Selection",
+      "description": "Uppercase the current selection in a Web Worker.",
+      "wasm": {
+        "module": "plugin.wasm",
+        "input": "selection",
+        "output": "replaceSelection",
+        "timeoutMs": 200
+      }
+    }
+  ]
+}</code></pre>
+
+          <h3>Top-Level Fields</h3>
+          <table class="reference-table">
+            <tbody>
+              <tr><th>id</th><td>Required. Plugin id. Must match the directory name.</td></tr>
+              <tr><th>name</th><td>Required. Display name shown in Settings.</td></tr>
+              <tr><th>runtime</th><td>Required. Currently only <code>glyphary-wasm-transform@1</code> is supported.</td></tr>
+              <tr><th>version</th><td>Optional plugin version string.</td></tr>
+              <tr><th>description</th><td>Optional short description shown in Settings.</td></tr>
+              <tr><th>permissions</th><td>Optional declared permissions. Unsupported values make the plugin invalid.</td></tr>
+              <tr><th>styles</th><td>Optional declared CSS files loaded when the plugin is enabled.</td></tr>
+              <tr><th>commands</th><td>Optional command palette actions contributed by the plugin.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Id Rules</h3>
+          <ul>
+            <li>Plugin ids and command ids may use only ASCII letters, ASCII numbers, dash, or underscore.</li>
+            <li>Ids must be 1-80 characters.</li>
+            <li>Avoid spaces and path separators.</li>
+          </ul>
+          <pre><code>meeting_tools
+daily-notes
+uppercase_selection</code></pre>
+
+          <h3>Runtime</h3>
+          <p>
+            The current runtime is <code>glyphary-wasm-transform@1</code>. It identifies Glyphary's raw
+            WASM transform ABI. It is not WASI, and it is not Extism. Runtime versioning is separate
+            from the plugin package version.
+          </p>
+
+          <h3>Permissions</h3>
+          <pre><code>document:read
+document:write
+selection:read
+selection:write
+styles:load</code></pre>
+          <p>Permissions are currently declarative and validation-oriented. They communicate intent and prevent unknown capabilities from being silently accepted.</p>
+
+          <h3>Declared File Paths</h3>
+          <p>Manifest paths must be relative to the plugin directory, normalized, and unable to escape the plugin directory.</p>
+          <table class="reference-table">
+            <tbody>
+              <tr><th>styles</th><td><code>.css</code></td></tr>
+              <tr><th>template</th><td><code>.md</code>, <code>.markdown</code>, <code>.txt</code></td></tr>
+              <tr><th>wasm.module</th><td><code>.wasm</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="commands" class="doc-section" data-search-text="command actions insert markdown template wasm selection document output">
+          <h2>Command Actions</h2>
+          <p>Each command must have an <code>id</code>, a <code>title</code>, and at least one action.</p>
+          <table class="reference-table">
+            <tbody>
+              <tr><th>insertMarkdown</th><td>Inserts literal Markdown at the current cursor or selection.</td></tr>
+              <tr><th>template</th><td>Reads a declared template file and inserts it at the current cursor or selection.</td></tr>
+              <tr><th>wasm</th><td>Runs a pure WASM transform in a Web Worker.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Insert Literal Markdown</h3>
+          <pre><code>{
+  "id": "insert_status_callout",
+  "title": "Insert Status Callout",
+  "insertMarkdown": "::: callout info \"Status\"\\n\\n:::\\n"
+}</code></pre>
+
+          <h3>Insert A Template</h3>
+          <pre><code>{
+  "id": "insert_retro",
+  "title": "Insert Retro Template",
+  "template": "templates/retro.md"
+}</code></pre>
+
+          <h3>Run A WASM Transform</h3>
+          <pre><code>{
+  "id": "uppercase_selection",
+  "title": "Uppercase Selection",
+  "wasm": {
+    "module": "plugin.wasm",
+    "input": "selection",
+    "output": "replaceSelection",
+    "timeoutMs": 200
+  }
+}</code></pre>
+          <p>
+            Supported input values are <code>selection</code> and <code>document</code>. Supported outputs
+            are <code>replaceSelection</code>, <code>insertAtCursor</code>, and <code>replaceDocument</code>.
+            <code>timeoutMs</code> is clamped between 50 and 2000 milliseconds.
+          </p>
+        </section>
+
+        <section id="wasm" class="doc-section" data-search-text="wasm transform abi memory alloc dealloc imports worker utf8 output pointer">
+          <h2>WASM Transform ABI</h2>
+          <p>Runtime <code>glyphary-wasm-transform@1</code> loads a raw WebAssembly module with no imports:</p>
+          <pre><code>WebAssembly.instantiate(bytes, {})</code></pre>
+          <p>The module must export:</p>
+          <pre><code>memory
+alloc(length) -&gt; pointer
+transform(pointer, length) -&gt; outputPointer</code></pre>
+          <p>It may also export:</p>
+          <pre><code>dealloc(pointer, length)</code></pre>
+          <h3>Input</h3>
+          <ul>
+            <li>Glyphary encodes the selected input as UTF-8.</li>
+            <li>Glyphary calls <code>alloc(inputLength)</code>.</li>
+            <li>Glyphary copies the UTF-8 bytes into exported <code>memory</code> at the returned pointer.</li>
+            <li>Glyphary calls <code>transform(inputPointer, inputLength)</code>.</li>
+          </ul>
+          <h3>Output</h3>
+          <ul>
+            <li><code>transform</code> returns a pointer into exported <code>memory</code>.</li>
+            <li>That pointer must point to a little-endian <code>u32</code> output byte length.</li>
+            <li>The UTF-8 output bytes must start immediately after that 4-byte length.</li>
+          </ul>
+          <pre><code>outputPointer
+  +0  u32 little-endian output byte length
+  +4  UTF-8 output bytes</code></pre>
+          <p>After decoding the output, Glyphary calls <code>dealloc</code> for the input and output buffers if the export exists.</p>
+        </section>
+
+        <section id="examples" class="doc-section" data-search-text="examples rust generated wasm uppercase selection install build">
+          <h2>Examples</h2>
+          <h3>Rust Example</h3>
+          <p>The sample Rust plugin lives at <code>examples/plugins/uppercase_selection_rust</code>.</p>
+          <pre><code>rustup target add wasm32-unknown-unknown
+cargo build --manifest-path examples/plugins/uppercase_selection_rust/Cargo.toml \
+  --release \
+  --target wasm32-unknown-unknown
+cp examples/plugins/uppercase_selection_rust/target/wasm32-unknown-unknown/release/glyphary_uppercase_selection_plugin.wasm \
+  examples/plugins/uppercase_selection_rust/plugin.wasm</code></pre>
+          <p>The Rust sample exports the raw ABI directly and uses a small bump allocator.</p>
+
+          <h3>Generated WASM Example</h3>
+          <p>The dependency-free generated sample lives at <code>examples/plugins/uppercase_selection</code>.</p>
+          <pre><code>node examples/plugins/uppercase_selection/build-wasm.mjs</code></pre>
+
+          <h3>Install Either Example</h3>
+          <pre><code>mkdir -p /path/to/vault/.glyphary/plugins
+cp -R examples/plugins/uppercase_selection /path/to/vault/.glyphary/plugins/</code></pre>
+        </section>
+
+        <section id="styles" class="doc-section" data-search-text="plugin styles css stylesheets theme snippets metadata">
+          <h2>Plugin Styles</h2>
+          <p>Plugins can declare stylesheets:</p>
+          <pre><code>{
+  "permissions": ["styles:load"],
+  "styles": ["styles.css"]
+}</code></pre>
+          <p>
+            Glyphary loads declared styles only when the plugin is enabled. Styles are injected after
+            built-in styles. Plugin styles should follow the same public styling contract as CSS snippets;
+            see the <a href="./theming.html">theming reference</a>.
+          </p>
+          <pre><code>&lt;style data-glyphary-plugin="plugin_id" data-glyphary-plugin-style="styles.css"&gt;</code></pre>
+          <p>That marker is for inspection and debugging. Do not rely on it as the primary way to style editor content.</p>
+        </section>
+
+        <section id="limits" class="doc-section" data-search-text="validation limits invalid runtime permissions manifest path extensions">
+          <h2>Validation Limits</h2>
+          <ul>
+            <li>Plugin manifest must be named <code>plugin.json</code>.</li>
+            <li>Manifest id must match the plugin directory name.</li>
+            <li>Manifest runtime must be <code>glyphary-wasm-transform@1</code>.</li>
+            <li>Plugin id and command ids must be 1-80 characters.</li>
+            <li>Plugin name must be 1-96 characters.</li>
+            <li>Plugin description is truncated to 240 characters.</li>
+            <li>Command descriptions are truncated to 180 characters.</li>
+            <li>Plugin version is truncated to 40 characters.</li>
+            <li>A plugin may declare at most 8 stylesheets.</li>
+            <li>Glyphary reads at most 32 commands from a manifest.</li>
+            <li>Manifest file paths must be 1-180 characters after normalization.</li>
+            <li>Unknown runtimes, permissions, input modes, output modes, and file extensions make the plugin invalid.</li>
+          </ul>
+          <p>Invalid plugins are shown as catalog errors in Settings. If an older plugin shows a missing runtime error, add this top-level field:</p>
+          <pre><code>"runtime": "glyphary-wasm-transform@1"</code></pre>
+        </section>
+
+        <section id="security" class="doc-section" data-search-text="security model sandbox worker no imports no shell no filesystem recommendations">
+          <h2>Security Model</h2>
+          <ul>
+            <li>Plugins are installed per vault.</li>
+            <li>Plugins are disabled until approved in Settings.</li>
+            <li>Plugin files are restricted to their own plugin directory.</li>
+            <li>Plugin styles and assets must be declared in the manifest.</li>
+            <li>WASM runs in a Web Worker with no imports.</li>
+            <li>WASM commands receive only the selected input mode.</li>
+            <li>WASM commands have bounded timeouts.</li>
+          </ul>
+          <h3>Practical Recommendations</h3>
+          <ul>
+            <li>Use <code>insertMarkdown</code> for tiny fixed snippets.</li>
+            <li>Use <code>template</code> for larger Markdown insertions.</li>
+            <li>Use WASM only for deterministic text transforms.</li>
+            <li>Keep WASM transforms small and fast.</li>
+            <li>Prefer <code>selection</code> input and <code>replaceSelection</code> output unless a command truly needs the whole document.</li>
+            <li>Keep plugin styles scoped to documented editor selectors.</li>
+            <li>Include a short README in each plugin directory so users know what commands are added and what permissions mean.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
