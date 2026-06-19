@@ -43,6 +43,7 @@
           <a href="#drawers">Right Drawer</a>
           <a href="#search-links">Search And Wikilinks</a>
           <a href="#markdown">Markdown Features</a>
+          <a href="#canvas-files">Canvas Files</a>
           <a href="#assets">Images And Assets</a>
           <a href="#calendar">Calendar Notes</a>
           <a href="#tidbits">Tidbits</a>
@@ -444,6 +445,59 @@ This starts expanded.
           <pre><code>&lt;div class="note-card"&gt;
   &lt;strong&gt;Hello&lt;/strong&gt;
 &lt;/div&gt;</code></pre>
+        </section>
+
+        <section id="canvas-files" class="doc-section" data-search-text="canvas obsidian json canvas react flow file nodes graph viewer pan zoom minimap card note media web page group color edge handles delete save">
+          <h2>Canvas Files</h2>
+          <p>
+            Glyphary can open Obsidian-compatible <code>.canvas</code> files from the vault. Double-click
+            a canvas file in the Files drawer and it opens in a tab as a graph editor. Canvas files use a
+            connected-node file icon in the Files and Recent drawers so they are easy to distinguish from
+            Markdown notes.
+          </p>
+          <figure>
+            <img src="./assets/screenshots/canvas.png" alt="Glyphary canvas file with connected notes and cards" />
+            <figcaption>Canvas files open as editable graphs with cards, note previews, media, groups, and edges.</figcaption>
+          </figure>
+          <h3>Open and navigate a canvas</h3>
+          <ul>
+            <li>Pan and zoom with the canvas controls, mouse wheel, or trackpad gestures.</li>
+            <li>Use the minimap to understand larger graphs.</li>
+            <li>Drag text, file, and link nodes to update the saved layout.</li>
+            <li>Group nodes act as visual regions behind other nodes; they are not moved as regular nodes.</li>
+          </ul>
+          <h3>Add nodes</h3>
+          <ul>
+            <li>Right-click empty canvas space and choose <strong>Add Card</strong> to create a text card.</li>
+            <li>Type directly inside the new card. Use <strong>Cmd+Enter</strong> or <strong>Ctrl+Enter</strong> to commit, or <strong>Esc</strong> to cancel.</li>
+            <li>Double-click an existing card to edit its text again.</li>
+            <li>Choose <strong>Add Note From Vault</strong> or <strong>Add Media From Vault</strong> to open a tree picker. Expand folders progressively, then select the note, image, video, or audio file.</li>
+            <li>Choose <strong>Add Web Page</strong> to create a web node. Some sites block embedded previews; use the fallback link when that happens.</li>
+            <li>Choose <strong>Create Group</strong> to create a labelled visual region.</li>
+          </ul>
+          <h3>Connect and edit nodes</h3>
+          <ul>
+            <li>Drag from a node handle to another node handle to create an arrowed edge.</li>
+            <li>Select an edge and press <strong>Delete</strong> or <strong>Backspace</strong> to remove it.</li>
+            <li>Right-click any node to choose an Obsidian canvas color or remove the color.</li>
+            <li>Right-click any node and choose <strong>Delete Node</strong> to remove it and its attached edges.</li>
+            <li>Right-click empty canvas space and choose <strong>Snap To Grid</strong> to align node positions.</li>
+          </ul>
+          <h3>File nodes and compatibility</h3>
+          <ul>
+            <li>Text, file, link, and group nodes are rendered through React Flow.</li>
+            <li>Obsidian numeric colors and hex colors are shown as restrained node accents.</li>
+            <li>File nodes show a bounded Markdown preview so large canvases stay responsive.</li>
+            <li>Image, video, and audio file nodes preview in place when their vault path is allowed by the asset protocol.</li>
+            <li>Double-click a file node to open that Markdown file in the active pane.</li>
+            <li>The Source drawer switches to the canvas JSON for inspection.</li>
+          </ul>
+          <p>
+            Save the tab normally to write node creation, node movement, edge edits, and node
+            deletions back to the <code>.canvas</code> file. Glyphary preserves unknown JSON Canvas
+            fields so Obsidian and plugin-specific metadata can round-trip even when Glyphary does not
+            render that metadata directly.
+          </p>
         </section>
 
         <section id="assets" class="doc-section" data-search-text="images assets paste drag drop gallery preview attachments _assets_ images pasted image markdown wiki image">
