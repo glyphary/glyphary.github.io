@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Glyphary user manual: learn vaults, editing, drawers, markdown blocks, images, tidbits, themes, plugins, and shortcuts."
+      content="Glyphary user manual: learn vaults, editing, drawers, markdown blocks, banners, canvases, images, tidbits, themes, plugins, and shortcuts."
     />
     <title>Glyphary User Manual</title>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
@@ -166,12 +166,14 @@
           </p>
         </section>
 
-        <section id="file-actions" class="doc-section" data-search-text="create note create folder rename move delete shadow note context menu right click folder tree">
+        <section id="file-actions" class="doc-section" data-search-text="create note create canvas create folder rename move delete shadow note context menu right click folder tree">
           <h2>File And Folder Actions</h2>
-          <p>Right-click entries in the Files view to create notes, create folders, rename folders, move files or folders, or delete files after confirmation.</p>
+          <p>Right-click entries in the Files view to create notes, create canvases, create folders, rename files or folders, move files or folders, or delete files after confirmation.</p>
           <div class="feature-table">
             <div><strong>Create note</strong><span>Create a Markdown file inside a folder and open it in the active pane.</span></div>
+            <div><strong>Create canvas</strong><span>Create an Obsidian-compatible <code>.canvas</code> file inside a folder and open it in the active pane.</span></div>
             <div><strong>Create folder</strong><span>Create a child directory inside the selected folder.</span></div>
+            <div><strong>Rename file or canvas</strong><span>Rename a Markdown file or canvas file from the context menu while open tabs and indexes update.</span></div>
             <div><strong>Rename folder</strong><span>Renames the folder and a matching shadow note from <code>old/old.md</code> to <code>new/new.md</code>.</span></div>
             <div><strong>Move file or folder</strong><span>Choose a destination from the folder tree rooted at the vault.</span></div>
             <div><strong>Delete file</strong><span>Requires confirmation. Deletion is destructive.</span></div>
@@ -185,6 +187,13 @@
         <section id="editor-basics" class="doc-section" data-search-text="editor toolbar save autosave title rename code block language table tasks source">
           <h2>Editor Basics</h2>
           <p>The editor is WYSIWYG, but it serializes back to Markdown.</p>
+          <h3>View and Edit chrome</h3>
+          <p>
+            Use the View/Edit icon selector beside the appearance control to choose how much editing
+            chrome is visible. View mode hides the frontmatter area and formatting toolbar while the
+            document remains editable, so a banner image or first heading can sit directly above the
+            note body.
+          </p>
           <h3>Save and autosave</h3>
           <ul>
             <li>Press <strong>Cmd+S</strong> to save the active document.</li>
@@ -330,21 +339,31 @@ Build a project brief from notes about database migrations.</code></pre>
           </div>
         </section>
 
-        <section id="metadata" class="doc-section" data-search-text="frontmatter metadata yaml toml pills tags rename page title collapsed">
+        <section id="metadata" class="doc-section" data-search-text="frontmatter metadata yaml toml pills tags banner image rename page title collapsed">
           <h2>Metadata And Frontmatter</h2>
           <p>Frontmatter is hidden from the WYSIWYG body, preserved on save, and editable in a collapsed plain-text metadata area.</p>
           <pre><code>---
 tags:
   - databases
   - devops
-feature: _assets_/Pasted image 20230102173741.png
+banner: '![[Pasted image 20230521183520.png]]'
 ---</code></pre>
           <p>Frontmatter pills default to the <code>tags</code> header and support <code>tags: [draft, project]</code> and block lists.</p>
+          <p>
+            A <code>banner</code> value can display a vault image above the metadata area. Bare image
+            names resolve through <code>_assets_/images</code>; paths such as
+            <code>Attachments/banner.png</code> resolve relative to the vault root.
+          </p>
         </section>
 
-        <section id="tabs-splits" class="doc-section" data-search-text="tabs split pane close final tab active pane dirty state independent scrolling">
+        <section id="tabs-splits" class="doc-section" data-search-text="tabs new tab split pane close final tab active pane dirty state independent scrolling">
           <h2>Tabs And Split Editing</h2>
-          <p>Glyphary can keep multiple documents open and split the editor into two independent tab groups.</p>
+          <p>Glyphary can keep multiple documents open and split the editor into two independent tab groups. The last tab can be closed, leaving a quiet center workspace with no document open.</p>
+          <p>
+            Configure <strong>New Tab</strong> in Settings to choose the vault file opened by
+            <strong>Cmd+T</strong>. When no file is configured, Cmd+T leaves the workspace unchanged
+            and the status bar invites you to choose a new-tab note.
+          </p>
           <figure>
             <img src="./assets/screenshots/split-editing.png" alt="Split editor with two panes" />
             <figcaption>Split editing with independent tab groups.</figcaption>
@@ -535,7 +554,7 @@ This starts expanded.
           </p>
         </section>
 
-        <section id="settings" class="doc-section" data-search-text="settings main appearance plugins ai debug config json vault scoped">
+        <section id="settings" class="doc-section" data-search-text="settings main new tab appearance plugins ai debug config json vault scoped">
           <h2>Settings Reference</h2>
           <p>Settings are stored per vault at <code>&lt;vault root&gt;/.glyphary/config.json</code>.</p>
           <h3>Important defaults</h3>
@@ -549,7 +568,7 @@ This starts expanded.
           </table>
           <h3>Settings tabs</h3>
           <div class="feature-table">
-            <div><strong>Main</strong><span>Asset directory, dotfile visibility, tidbit capture, metadata pills, Vim mode, and autosave.</span></div>
+            <div><strong>Main</strong><span>Asset directory, New Tab file, dotfile visibility, tidbit capture, metadata pills, Vim mode, and autosave.</span></div>
             <div><strong>Appearance</strong><span>Window glass, status bar, workspace margins, section corners, theme templates, CSS snippets, and callout rendering.</span></div>
             <div><strong>Plugins</strong><span>Enable vault plugins discovered under <code>.glyphary/plugins</code>.</span></div>
             <div><strong>AI</strong><span>Enable AI commands and configure the OpenAI-compatible backend.</span></div>
@@ -590,12 +609,15 @@ This starts expanded.
           <p>Enable Vim mode in Settings. The status bar reports Vim normal mode and Vim insert mode.</p>
         </section>
 
-        <section id="shortcuts" class="doc-section" data-search-text="keyboard shortcuts commands save settings esc arrow enter">
+        <section id="shortcuts" class="doc-section" data-search-text="keyboard shortcuts commands save settings new tab close tab plain paste esc arrow enter">
           <h2>Shortcuts</h2>
           <table class="reference-table">
             <tbody>
               <tr><th>Cmd+P</th><td>Open command palette.</td></tr>
+              <tr><th>Cmd+T</th><td>Open the configured New Tab file, or show a status prompt if none is configured.</td></tr>
+              <tr><th>Cmd+W</th><td>Close the active tab. If it is the last clean tab, the center workspace becomes empty.</td></tr>
               <tr><th>Cmd+S</th><td>Save the active document.</td></tr>
+              <tr><th>Cmd+Shift+V</th><td>Paste plain text without formatting.</td></tr>
               <tr><th>Cmd+,</th><td>Open Settings.</td></tr>
               <tr><th>Esc</th><td>Close dialogs, previews, or enter Vim Normal mode.</td></tr>
             </tbody>
