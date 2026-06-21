@@ -29,6 +29,7 @@
       <aside class="manual-sidebar" aria-label="Manual table of contents">
         <nav>
           <a href="#start">Start Here</a>
+          <a href="#install">Install Glyphary</a>
           <a href="#core-concepts">Core Concepts</a>
           <a href="#open-vault">Open A Vault</a>
           <a href="#workspace">Workspace Tour</a>
@@ -42,7 +43,7 @@
           <a href="#tabs-splits">Tabs And Splits</a>
           <a href="#drawers">Right Drawer</a>
           <a href="#search-links">Search And Wikilinks</a>
-          <a href="#markdown">Markdown Features</a>
+          <a href="#markdown">Markdown Reference</a>
           <a href="#canvas-files">Canvas Files</a>
           <a href="#assets">Images And Assets</a>
           <a href="#calendar">Calendar Notes</a>
@@ -54,6 +55,7 @@
           <a href="#shortcuts">Shortcuts</a>
           <a href="#about-debug">About And Debug</a>
           <a href="#troubleshooting">Troubleshooting</a>
+          <a href="#developers">Developers</a>
         </nav>
       </aside>
 
@@ -87,6 +89,32 @@
               </ul>
             </article>
           </div>
+        </section>
+
+        <section id="install" class="doc-section" data-search-text="install download github releases dmg macos windows installer gatekeeper application">
+          <h2>Install Glyphary</h2>
+          <p>
+            Download the latest build from
+            <a href="https://github.com/glyphary/glyphary/releases">GitHub Releases</a>. Open the
+            newest release and choose the asset for your operating system.
+          </p>
+          <h3>macOS</h3>
+          <ol class="task-list">
+            <li>Download the macOS <code>.dmg</code> from the <a href="https://github.com/glyphary/glyphary/releases">Glyphary releases page</a>.</li>
+            <li>Open the disk image and drag <strong>Glyphary.app</strong> into Applications.</li>
+            <li>If macOS warns that the app was downloaded from the internet, open it from Finder once and confirm.</li>
+          </ol>
+          <h3>Windows</h3>
+          <ol class="task-list">
+            <li>Download the Windows installer from the <a href="https://github.com/glyphary/glyphary/releases">Glyphary releases page</a>.</li>
+            <li>Run the installer and follow the prompts.</li>
+            <li>If Windows SmartScreen appears, confirm only if the installer came from the official Glyphary release.</li>
+          </ol>
+          <p>
+            Launch Glyphary, then choose <strong>File -> Open Vault...</strong> and select your notes
+            folder. Glyphary works directly on local folders; it does not require importing or
+            uploading your vault.
+          </p>
         </section>
 
         <section id="core-concepts" class="doc-section" data-search-text="concepts vault markdown local first panes drawers settings assets">
@@ -399,13 +427,53 @@ banner: '![[Pasted image 20230521183520.png]]'
           </p>
         </section>
 
-        <section id="markdown" class="doc-section" data-search-text="markdown tables tasks callouts columns collapse toc rich links code syntax highlighting html">
-          <h2>Markdown Features</h2>
+        <section id="markdown" class="doc-section" data-search-text="markdown reference tables alignment attributes wikilinks alias images frontmatter banners tasks callouts columns gallery collapse toc rich links code syntax highlighting html tiptap prosemirror">
+          <h2>Markdown Reference</h2>
+          <p>
+            Glyphary Markdown support is extension-driven: files stay plain Markdown on disk, while
+            the editor renders the syntax that Glyphary knows how to round-trip. This is the
+            Glyphary reference, not a generic TipTap or ProseMirror feature matrix.
+          </p>
+          <h3>Core Markdown</h3>
+          <ul>
+            <li>Headings: <code>#</code>, <code>##</code>, <code>###</code>.</li>
+            <li>Inline formatting: <code>**bold**</code>, <code>*italic*</code>, <code>`inline code`</code>, links, and images.</li>
+            <li>Blocks: paragraphs, lists, blockquotes, horizontal rules, and fenced code blocks with languages.</li>
+          </ul>
           <h3>Tables</h3>
           <p>Use the table icon to insert a table. When inside a table, palette commands appear for rows, columns, and table deletion.</p>
+          <pre><code>| Item | Amount |
+| :--- | -----: |
+| Rent | $1,200 |</code></pre>
+          <p>
+            Markdown alignment rows are supported: a leading colon aligns left, a trailing colon
+            aligns right, and both sides center the column. Glyphary does not currently support
+            attribute-list syntax such as <code>{align=right}</code> for table cells or columns.
+          </p>
           <h3>Task lists</h3>
           <pre><code>- [ ] Collect screenshots
 - [x] Open the vault</code></pre>
+          <h3>Wikilinks and vault assets</h3>
+          <pre><code>[[Page Name]]
+[[Folder/Page Name]]
+[[Page Name|Display text]]
+![[Pasted image 20230521183520.png]]
+![[_assets_/drawings/System sketch 20230102173741.excalidraw]]</code></pre>
+          <p>
+            Wikilink aliases render as the display text while preserving the target path in
+            Markdown. Vault images resolve relative paths and also check <code>_assets_/images</code>.
+            Excalidraw drawings are stored under <code>_assets_/drawings</code>.
+          </p>
+          <h3>Frontmatter</h3>
+          <pre><code>---
+tags:
+  - project
+banner: '![[Pasted image 20230521183520.png]]'
+---</code></pre>
+          <p>
+            Frontmatter stays editable in Edit mode. Tags render as pills, and <code>banner</code>
+            displays a page banner above the frontmatter area when the referenced image is found.
+          </p>
           <h3>Inline table of contents block</h3>
           <pre><code>```toc
 ```</code></pre>
@@ -424,6 +492,13 @@ Right content
             <img src="./assets/screenshots/columns.png" alt="Glyphary rendering columns" />
             <figcaption>Columns render side by side when there is room.</figcaption>
           </figure>
+          <h3>Gallery</h3>
+          <pre><code>::: gallery
+![[Screenshot 1.png]]
+
+![[Screenshot 2.png]]
+:::</code></pre>
+          <p>Use <strong>Gallery layout</strong> with selected images to create a responsive image grid.</p>
           <h3>Callouts</h3>
           <pre><code>::: callout warning "Database Migration"
 Back up the database first.
@@ -446,14 +521,17 @@ This starts expanded.
             <figcaption>Collapse blocks default closed; add <code>open</code> to start expanded.</figcaption>
           </figure>
           <h3>Rich links</h3>
+          <pre><code>::: rich-link
+url: https://example.com
+title: Example
+description: A saved preview card.
+siteName: Example
+:::</code></pre>
           <p>Run <strong>Insert rich link</strong>, paste a URL, and Glyphary fetches metadata. If no metadata image exists, it tries an early page image.</p>
           <figure>
             <img src="./assets/screenshots/rich-links.png" alt="Glyphary rich link cards" />
             <figcaption>Rich link cards render fetched metadata.</figcaption>
           </figure>
-          <h3>Excalidraw drawings</h3>
-          <p>Run <strong>Insert Excalidraw drawing</strong> to create a drawing under <code>_assets_/drawings</code>.</p>
-          <pre><code>![[_assets_/drawings/System sketch 20230102173741.excalidraw]]</code></pre>
           <h3>HTML blocks</h3>
           <p>
             Use <strong>Insert HTML block</strong> from the toolbar or command palette to insert an
@@ -635,6 +713,37 @@ This starts expanded.
             <summary>My image does not render.</summary>
             <p>Check that the file is under <code>_assets_/images</code> and that the Markdown reference is local.</p>
           </details>
+        </section>
+
+        <section id="developers" class="doc-section" data-search-text="developers checkout clone install dependencies npm rust tauri build test release">
+          <h2>Developers</h2>
+          <p>Glyphary is a Tauri, React, TypeScript, and Rust app. The Makefile wraps the common setup, build, and release commands.</p>
+          <h3>Checkout and install</h3>
+          <pre><code>git clone https://github.com/glyphary/glyphary.git
+cd glyphary
+make install</code></pre>
+          <p>
+            <code>make install</code> runs <code>npm install</code> and prepares the macOS Rust targets used
+            by the desktop build. You also need the Rust toolchain and Xcode Command Line Tools installed.
+          </p>
+          <h3>First development run</h3>
+          <pre><code>make dev</code></pre>
+          <p>This starts the Vite frontend and the Tauri desktop shell together.</p>
+          <h3>Build and verify</h3>
+          <pre><code>make build
+make check
+make test</code></pre>
+          <p>
+            <code>make build</code> builds the frontend, <code>make check</code> adds a Rust compile check,
+            and <code>make test</code> runs frontend and Rust tests.
+          </p>
+          <h3>Production bundles</h3>
+          <pre><code>make prod-app
+make release</code></pre>
+          <p>
+            <code>make prod-app</code> creates a macOS app bundle. <code>make release</code> creates the
+            production release bundle used for distribution.
+          </p>
         </section>
       </main>
     </div>
