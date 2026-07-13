@@ -6,33 +6,61 @@
     <meta name="description" content="Glyphary theming reference." />
     <title>Glyphary Theming Reference</title>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#overview">Skip to documentation</a>
     <header class="manual-topbar">
-      <a class="manual-brand" href="./index.html">Glyphary Manual</a>
+      <a class="manual-brand" href="./index.html" aria-label="Glyphary documentation home">
+        <img src="./assets/favicon.svg" alt="" />
+        <span>Glyphary <small>Documentation</small></span>
+      </a>
+      <button class="sidebar-toggle" type="button" aria-label="Open contents" aria-expanded="false" aria-controls="manual-sidebar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
       <label class="manual-search">
-        <span>Search docs</span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span class="sr-only">Search docs</span>
         <input id="manual-search" type="search" placeholder="Search variables, snippets, selectors..." />
+        <kbd>/</kbd>
       </label>
       <nav class="manual-toplinks" aria-label="Related documentation">
-        <a href="./index.html">User manual</a>
-        <a class="current" href="./theming.html">Theming reference</a>
-        <a href="./plugins.html">Plugin authoring</a>
-        <a href="https://github.com/glyphary/glyphary">Product page</a>
+        <a href="./index.html">Manual</a>
+        <a class="current" href="./theming.html">Theming</a>
+        <a href="./plugins.html">Plugins</a>
+        <a class="external-link" href="https://github.com/glyphary/glyphary">GitHub <span aria-hidden="true">&#8599;</span></a>
       </nav>
     </header>
 
     <div class="manual-shell">
-      <aside class="manual-sidebar" aria-label="Theming reference table of contents">
+      <aside id="manual-sidebar" class="manual-sidebar" aria-label="Theming reference table of contents">
         <nav>
-          <a href="#overview">Overview</a>
-          <a href="#loading">Loading Snippets</a>
-          <a href="#variables">Stable Variables</a>
-          <a href="#obsidian">Obsidian Compatibility</a>
-          <a href="#selectors">Supported Selectors</a>
-          <a href="#examples">Examples</a>
-          <a href="#stability">Stability Rules</a>
+          <div class="sidebar-pages" aria-label="Documentation pages">
+            <a href="./index.html">User manual</a>
+            <a class="current" href="./theming.html">Theming reference</a>
+            <a href="./plugins.html">Plugin authoring</a>
+          </div>
+          <div class="sidebar-group">
+            <p>Theming reference</p>
+            <a href="#overview">Overview</a>
+            <a href="#loading">Loading Snippets</a>
+            <a href="#variables">Stable Variables</a>
+            <a href="#obsidian">Obsidian Compatibility</a>
+            <a href="#selectors">Supported Selectors</a>
+            <a href="#examples">Examples</a>
+            <a href="#stability">Stability Rules</a>
+          </div>
         </nav>
       </aside>
 
@@ -78,28 +106,63 @@
 --glyphary-muted
 --glyphary-muted-strong
 --glyphary-mono-text</code></pre>
-          <h3>Accent, Blocks, Callouts, Syntax, Typography, Spacing And Shape</h3>
+          <h3>Accent And Borders</h3>
           <pre><code>--glyphary-accent
+--glyphary-accent-text
+--glyphary-focus
 --glyphary-border
+--glyphary-border-soft
+--glyphary-border-strong
 --glyphary-table-border
---glyphary-code-bg
+--glyphary-shadow
+--glyphary-shadow-strong</code></pre>
+          <h3>Blocks And Callouts</h3>
+          <pre><code>--glyphary-code-bg
 --glyphary-code-text
+--glyphary-quote-border
+--glyphary-quote-text
 --glyphary-callout-background
+--glyphary-callout-border-width
+--glyphary-callout-icon-size
 --glyphary-callout-note-color
 --glyphary-callout-info-color
 --glyphary-callout-tip-color
 --glyphary-callout-warning-color
---syntax-blue
+--glyphary-callout-padding
+--glyphary-callout-radius
+--glyphary-callout-title-transform
+--glyphary-callout-note-icon
+--glyphary-callout-info-icon
+--glyphary-callout-tip-icon
+--glyphary-callout-warning-icon</code></pre>
+          <h3>Syntax</h3>
+          <pre><code>--syntax-blue
 --syntax-green
 --syntax-yellow
 --syntax-red
 --syntax-purple
 --syntax-orange
---syntax-muted
+--syntax-muted</code></pre>
+          <h3>Typography</h3>
+          <pre><code>--glyphary-font-ui
 --glyphary-font-editor
+--glyphary-font-mono
 --glyphary-editor-font-size
+--glyphary-editor-line-height
 --glyphary-editor-max-width
+--glyphary-editor-padding-y
+--glyphary-editor-padding-x
+--glyphary-block-gap
+--glyphary-heading-h1-size
+--glyphary-heading-h2-size
+--glyphary-code-font-size
 --glyphary-code-tab-size</code></pre>
+          <h3>Spacing And Shape</h3>
+          <pre><code>--glyphary-column-gap
+--glyphary-radius-sm
+--glyphary-radius-md
+--glyphary-radius-lg
+--glyphary-border-width</code></pre>
         </section>
 
         <section id="obsidian" class="doc-section" data-search-text="obsidian compatibility variables background text interactive code table">
@@ -120,17 +183,23 @@
 --text-title-h2</code></pre>
         </section>
 
-        <section id="selectors" class="doc-section" data-search-text="selectors editor wikilinks tasks tables code columns callouts collapse rich links excalidraw toc">
+        <section id="selectors" class="doc-section" data-search-text="selectors editor wikilinks tasks tables code mermaid html highlight keyboard superscript subscript columns callouts collapse rich links excalidraw toc">
           <h2>Supported Editor Selectors</h2>
           <p>Use these selectors when variables are not enough. Scope snippets under <code>.editor-surface</code>.</p>
           <pre><code>.editor-surface .ProseMirror
 .editor-surface h1
+.editor-surface mark
+.editor-surface kbd
+.editor-surface sup
+.editor-surface sub
 .editor-surface .wikilink
 .editor-surface .wikilink-ambiguous
 .editor-surface .wikilink-missing
 .editor-surface ul[data-type="taskList"]
 .editor-surface .tableWrapper
 .editor-surface .code-block-node
+.editor-surface pre.mermaid-code-block
+.editor-surface .markdown-html-block
 .editor-surface .markdown-columns
 .editor-surface .markdown-callout
 .editor-surface .markdown-collapse
@@ -169,6 +238,15 @@
         </section>
       </main>
     </div>
+
+    <footer class="manual-footer">
+      <p><strong>Glyphary</strong> keeps your notes local, legible, and compatible with Obsidian.</p>
+      <nav aria-label="Footer navigation">
+        <a href="https://github.com/glyphary/glyphary">Source</a>
+        <a href="./index.html">Manual</a>
+        <a href="./plugins.html">Plugins</a>
+      </nav>
+    </footer>
 
     <script src="./script.js"></script>
   </body>
