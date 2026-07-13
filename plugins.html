@@ -6,36 +6,64 @@
     <meta name="description" content="Glyphary plugin authoring guide." />
     <title>Glyphary Plugin Authoring</title>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#overview">Skip to documentation</a>
     <header class="manual-topbar">
-      <a class="manual-brand" href="./index.html">Glyphary Manual</a>
+      <a class="manual-brand" href="./index.html" aria-label="Glyphary documentation home">
+        <img src="./assets/favicon.svg" alt="" />
+        <span>Glyphary <small>Documentation</small></span>
+      </a>
+      <button class="sidebar-toggle" type="button" aria-label="Open contents" aria-expanded="false" aria-controls="manual-sidebar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
       <label class="manual-search">
-        <span>Search docs</span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span class="sr-only">Search docs</span>
         <input id="manual-search" type="search" placeholder="Search manifests, WASM, commands..." />
+        <kbd>/</kbd>
       </label>
       <nav class="manual-toplinks" aria-label="Related documentation">
-        <a href="./index.html">User manual</a>
-        <a href="./theming.html">Theming reference</a>
-        <a class="current" href="./plugins.html">Plugin authoring</a>
-        <a href="https://github.com/glyphary/glyphary">Product page</a>
+        <a href="./index.html">Manual</a>
+        <a href="./theming.html">Theming</a>
+        <a class="current" href="./plugins.html">Plugins</a>
+        <a class="external-link" href="https://github.com/glyphary/glyphary">GitHub <span aria-hidden="true">&#8599;</span></a>
       </nav>
     </header>
 
     <div class="manual-shell">
-      <aside class="manual-sidebar" aria-label="Plugin authoring table of contents">
+      <aside id="manual-sidebar" class="manual-sidebar" aria-label="Plugin authoring table of contents">
         <nav>
-          <a href="#overview">Overview</a>
-          <a href="#location">Plugin Location</a>
-          <a href="#enable">Enabling A Plugin</a>
-          <a href="#manifest">Manifest</a>
-          <a href="#commands">Command Actions</a>
-          <a href="#wasm">WASM Transform ABI</a>
-          <a href="#examples">Examples</a>
-          <a href="#styles">Plugin Styles</a>
-          <a href="#limits">Validation Limits</a>
-          <a href="#security">Security Model</a>
+          <div class="sidebar-pages" aria-label="Documentation pages">
+            <a href="./index.html">User manual</a>
+            <a href="./theming.html">Theming reference</a>
+            <a class="current" href="./plugins.html">Plugin authoring</a>
+          </div>
+          <div class="sidebar-group">
+            <p>Plugin authoring</p>
+            <a href="#overview">Overview</a>
+            <a href="#location">Plugin Location</a>
+            <a href="#enable">Enabling A Plugin</a>
+            <a href="#manifest">Manifest</a>
+            <a href="#commands">Command Actions</a>
+            <a href="#wasm">WASM Transform ABI</a>
+            <a href="#examples">Examples</a>
+            <a href="#styles">Plugin Styles</a>
+            <a href="#limits">Validation Limits</a>
+            <a href="#security">Security Model</a>
+          </div>
         </nav>
       </aside>
 
@@ -193,6 +221,15 @@ cargo build --manifest-path examples/plugins/uppercase_selection_rust/Cargo.toml
         </section>
       </main>
     </div>
+
+    <footer class="manual-footer">
+      <p><strong>Glyphary</strong> keeps your notes local, legible, and compatible with Obsidian.</p>
+      <nav aria-label="Footer navigation">
+        <a href="https://github.com/glyphary/glyphary">Source</a>
+        <a href="./index.html">Manual</a>
+        <a href="./theming.html">Theming</a>
+      </nav>
+    </footer>
 
     <script src="./script.js"></script>
   </body>
