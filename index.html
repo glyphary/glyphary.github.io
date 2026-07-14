@@ -126,7 +126,7 @@
                 <li>Download or clone the <a href="https://github.com/glyphary/demo">demonstration vault</a>.</li>
                 <li>Open Glyphary.</li>
                 <li>Choose <strong>File -> Open Vault...</strong> and select the demo folder.</li>
-                <li>Double-click a file in the left drawer.</li>
+                <li>Click a file in the left drawer.</li>
                 <li>Type in the editor, then press <strong>Cmd+S</strong>.</li>
                 <li>Press <strong>Cmd+P</strong> and run <strong>Insert callout</strong>.</li>
               </ol>
@@ -193,8 +193,12 @@
             <li>Select <strong>Open Vault...</strong>.</li>
             <li>Choose a folder that contains Markdown notes.</li>
             <li>Wait for the status bar to finish showing <strong>Indexing...</strong>.</li>
-            <li>Double-click a Markdown file to open it.</li>
+            <li>Click a Markdown file to open it.</li>
           </ol>
+          <p>
+            Before a vault is open, Glyphary keeps the window focused on the open-vault invitation
+            and hides document, drawer, appearance, and status controls.
+          </p>
           <h3>Switch between vaults</h3>
           <p>
             Every opened folder is added to the Vaults switcher in the left rail. Open the switcher
@@ -211,11 +215,11 @@
           </figure>
         </section>
 
-        <section id="workspace" class="doc-section" data-search-text="workspace toolbar panes title save split theme status bar drawers layout resizing">
+        <section id="workspace" class="doc-section" data-search-text="workspace toolbar panes title save command palette back new note new folder split theme status bar drawers layout resizing">
           <h2>Workspace Tour</h2>
           <p>The app window is split into stable regions so scrolling one area does not move the rest.</p>
           <div class="feature-table">
-            <div><strong>Top controls</strong><span>Save, split/unsplit, theme mode, tabs, and active document title.</span></div>
+            <div><strong>Top controls</strong><span>Back, New Note, and New Folder above Files; Save and the command palette above the document; plus split/unsplit, display mode, theme mode, tabs, and the active document title.</span></div>
             <div><strong>Left rail and drawer</strong><span>Vault switching, files, search, recent files, starred files, and tasks.</span></div>
             <div><strong>Center editor</strong><span>The active tab group or split pane. Each editor scrolls independently.</span></div>
             <div><strong>Right drawer</strong><span>Source/Export, document table of contents, and Calendar.</span></div>
@@ -241,11 +245,17 @@
           <ul>
             <li>Single-click a directory to enter it as the current top-level view.</li>
             <li>Use Back to move up until you reach the vault root.</li>
-            <li>Double-click a file to open it in the active editor pane.</li>
+            <li>Click a file to open it in the active editor pane. In Settings, you can require a double-click instead.</li>
             <li>Double-click a directory to open its shadow note.</li>
             <li>The path shown under Files is relative to the vault root and omits the Markdown extension.</li>
             <li>Dotfiles and dot folders are hidden by default.</li>
           </ul>
+          <p>
+            When Files is active, the titlebar shows Back, New Note, and New Folder. Interface
+            settings can hide either creation button without removing the same command from the
+            folder context menu.
+          </p>
+          <p>The document-opening setting also applies to Search, Recent, Starred, and Tasks.</p>
           <h3>File tree and previews</h3>
           <p>
             Settings can show files inside the folder tree, add a background behind that tree, and
@@ -337,9 +347,9 @@
           </p>
         </section>
 
-        <section id="command-palette" class="doc-section" data-search-text="command palette cmd p commands table contextual plugin arrows enter escape">
+        <section id="command-palette" class="doc-section" data-search-text="command palette cmd p save button commands table contextual plugin arrows enter escape">
           <h2>Command Palette</h2>
-          <p>Press <strong>Cmd+P</strong>, type to filter, use arrow keys to move, Enter to run, and Esc to close.</p>
+          <p>Press <strong>Cmd+P</strong> or use the command button beside Save. Type to filter, use arrow keys to move, Enter to run, and Esc to close.</p>
           <div class="feature-table">
             <div><strong>Create Tidbit</strong><span>Create a note from the vault tidbit path pattern.</span></div>
             <div><strong>Insert rich link</strong><span>Fetch URL metadata and insert a rich link block.</span></div>
@@ -673,8 +683,8 @@ siteName: Example
         <section id="canvas-files" class="doc-section" data-search-text="canvas obsidian json canvas react flow file nodes graph viewer pan zoom minimap card note media web page group color edge handles delete save">
           <h2>Canvas Files</h2>
           <p>
-            Glyphary can open Obsidian-compatible <code>.canvas</code> files from the vault. Double-click
-            a canvas file in the Files drawer and it opens in a tab as a graph editor. Canvas files use a
+            Glyphary can open Obsidian-compatible <code>.canvas</code> files from the vault. Click a
+            canvas file in the Files drawer and it opens in a tab as a graph editor. Canvas files use a
             connected-node file icon in the Files and Recent drawers so they are easy to distinguish from
             Markdown notes.
           </p>
@@ -800,12 +810,14 @@ siteName: Example
               <tr><th>Drawings</th><td><code>_assets_/drawings</code></td></tr>
               <tr><th>CSS snippets</th><td><code>_snippets_</code></td></tr>
               <tr><th>Plugins</th><td><code>.glyphary/plugins</code></td></tr>
+              <tr><th>Document opening</th><td>One click</td></tr>
+              <tr><th>Files titlebar actions</th><td>New Note and New Folder shown</td></tr>
             </tbody>
           </table>
           <h3>Settings tabs</h3>
           <div class="feature-table">
-            <div><strong>Main</strong><span>Asset directory, New Tab file, dotfiles, folder-tree files and background, file and image previews, Base card layout, tidbits, frontmatter pills, calendar preview delay, Vim mode, and autosave.</span></div>
-            <div><strong>Appearance</strong><span>Window glass, title-bar document proxy, status bar, workspace margins, UI text weight, section corners, theme templates, CSS snippets, and callout rendering.</span></div>
+            <div><strong>Main</strong><span>Vault paths and previews, an Interface group for New Note, New Folder, the document proxy, the status bar, and document click behavior, plus tidbits, frontmatter, calendar previews, Vim mode, and autosave.</span></div>
+            <div><strong>Appearance</strong><span>Window glass, workspace margins, UI text weight, section corners, theme templates, CSS snippets, and callout rendering.</span></div>
             <div><strong>Canvas</strong><span>Node and edge thickness, edge style, grid visibility and snapping, and the preview/navigation box.</span></div>
             <div><strong>Plugins</strong><span>Enable vault plugins discovered under <code>.glyphary/plugins</code>.</span></div>
             <div><strong>AI</strong><span>Enable AI commands and configure the OpenAI-compatible backend.</span></div>
@@ -813,13 +825,13 @@ siteName: Example
           </div>
         </section>
 
-        <section id="appearance" class="doc-section" data-search-text="appearance auto light dark theme builder snippets obsidian css variables glass document proxy title bar layout margins">
+        <section id="appearance" class="doc-section" data-search-text="appearance auto light dark theme builder snippets obsidian css variables glass title bar layout margins interface document proxy status bar">
           <h2>Appearance And Theming</h2>
           <p>
-            Appearance settings include Auto/Light/Dark, glass effect and opacity, an optional
-            title-bar document proxy, status bar visibility, UI text weight, rounded corners,
-            margins, theme templates, and CSS snippets. The document proxy shows the active filename
-            and opens native Reveal, Open in Default App, and Copy Path actions.
+            Appearance settings include Auto/Light/Dark, glass effect and opacity, UI text weight,
+            rounded corners, margins, theme templates, and CSS snippets. The Interface group under
+            Main controls the title-bar document proxy and status bar. The document proxy shows the
+            active filename and opens native Reveal, Open in Default App, and Copy Path actions.
           </p>
           <h3>Theme Builder groups</h3>
           <p>The builder exposes Canvas, Text, Accent And Borders, Blocks, Callouts, Syntax, Typography, and Spacing And Shape.</p>
