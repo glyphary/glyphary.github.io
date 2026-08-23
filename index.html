@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Glyphary user manual: learn vaults, editing, drawers, markdown blocks, banners, canvases, images, tidbits, themes, plugins, and shortcuts."
+      content="Glyphary user manual: learn vaults, editing, slash commands, focus mode, drawers, Markdown blocks, deep links, drag and drop, images, themes, plugins, and shortcuts."
     />
     <title>Glyphary Documentation</title>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
@@ -66,6 +66,8 @@
             <p>Writing</p>
             <a href="#editor-basics">Editor Basics</a>
             <a href="#command-palette">Command Palette</a>
+            <a href="#slash-commands">Slash Commands And Hints</a>
+            <a href="#focus-mode">Focus Mode</a>
             <a href="#ai-actions">AI Actions</a>
             <a href="#ai-builder">AI Builder</a>
             <a href="#metadata">Metadata And Frontmatter</a>
@@ -309,6 +311,24 @@
             Moving or renaming files updates open tabs, recent files, and the in-memory wikilink
             index immediately so the workspace keeps pointing at the new path.
           </p>
+          <p>
+            When a file is opened from Search, Recent, Starred, Tasks, a calendar day, or a deep
+            link, Glyphary switches to Files, expands the relevant directory view, and keeps the
+            selected file visible in the tree.
+          </p>
+          <h3>Deep links</h3>
+          <p>
+            Right-click a note, canvas, or Base and choose <strong>Copy Deep Link</strong> to place
+            a Glyphary URL on the clipboard. The URL identifies the vault by name and the file by
+            its vault-relative path, so it can be pasted into another app or used with the system
+            <code>open</code> command.
+          </p>
+          <pre><code>glyphary://open?vault=Demo&amp;file=Home.md</code></pre>
+          <p>
+            Opening a <code>glyphary://open</code> URL switches to the matching remembered vault
+            and opens the requested file. The vault must already be in Glyphary's Vaults switcher;
+            unknown vault names are reported instead of changing the current workspace.
+          </p>
         </section>
 
         <section id="editor-basics" class="doc-section" data-search-text="editor toolbar save autosave title rename find page search code block language table tasks source">
@@ -330,14 +350,48 @@
           </ul>
           <h3>Code blocks</h3>
           <p>
-            Supported highlighted languages are Plain text, Python, Shell, JavaScript, TypeScript,
-            JSON, Rust, SQL, HTML, CSS, and Markdown. Common aliases such as <code>bash</code>,
-            <code>js</code>, <code>ts</code>, <code>rs</code>, and <code>md</code> are recognized.
+            Syntax highlighting covers 40 languages: Plain text, Python, Shell, JavaScript,
+            TypeScript, JSON, Rust, SQL, HTML, CSS, Markdown, C, C++, C#, CMake, Dart, Diff,
+            Dockerfile, Elixir, Go, GraphQL, Haskell, INI, Java, Kotlin, LaTeX, Lua, Makefile,
+            Nginx, Objective-C, Perl, PHP, PowerShell, Protobuf, R, Ruby, Scala, Swift, TOML, and
+            YAML. Common fence aliases such as <code>bash</code>, <code>js</code>, <code>ts</code>,
+            <code>rs</code>, <code>md</code>, <code>golang</code>, <code>yml</code>,
+            <code>c++</code>, <code>cs</code>, <code>objc</code>, and <code>ps1</code> are
+            recognized, and the language picker on each block lists every supported name.
+          </p>
+          <p>
+            A <code>mermaid</code> fence renders as a diagram. If the diagram source has a syntax
+            error, the parse message appears inside the block in place of the diagram so you can
+            fix the source without leaving the note.
           </p>
           <p>
             When the cursor is inside a code block, the language picker appears on that block.
             Pressing Tab inside a code block inserts indentation instead of moving focus away from
             the editor, and the editor uses four-space tab sizing.
+          </p>
+          <h3>Typing shortcuts</h3>
+          <p>
+            Inline formatting expands as you type: <code>**bold**</code>, <code>*italic*</code>,
+            <code>~~strikethrough~~</code>, and <code>==highlight==</code> all convert to their
+            rendered form the moment you close the pair, anywhere in a sentence. Superscript
+            (<code>^</code>) and subscript (<code>~</code>) render when a note is loaded rather than
+            while typing, because their single-character delimiters appear too often in ordinary
+            prose.
+          </p>
+          <h3>Insert between blocks</h3>
+          <p>
+            Some blocks are edited as a unit and have no natural caret position between them:
+            tables, callouts, columns, collapsible sections, rich links, galleries, drawings, and HTML
+            blocks. When the caret is inside one of these blocks, small <strong>+</strong> controls
+            appear in the gutter above and below it. Click one to insert an empty paragraph at that
+            boundary, which is how you add text between two adjacent callouts or after a table
+            that ends the note.
+          </p>
+          <p>
+            The arrow keys respect the same boundaries. Pressing Down from the last row of a table
+            or the last line of a code block that is followed by another block places a thin
+            insertion cursor between the two blocks; press Enter there to create a paragraph. At
+            the very end of a note, Down out of a code block creates the paragraph directly.
           </p>
           <h3>Find in page</h3>
           <p>
@@ -349,8 +403,9 @@
 
         <section id="command-palette" class="doc-section" data-search-text="command palette cmd p save button commands table contextual plugin arrows enter escape">
           <h2>Command Palette</h2>
-          <p>Press <strong>Cmd+P</strong> or use the command button beside Save. Type to filter, use arrow keys to move, Enter to run, and Esc to close.</p>
+          <p>Press <strong>Cmd+P</strong> or use the command button beside Save. Type to filter, use arrow keys to move, Enter to run, and Esc to close. Inside a note, typing <code>/</code> opens the flat <a href="#slash-commands">slash menu</a> with the same Insert and AI commands.</p>
           <div class="feature-table">
+            <div><strong>Enter / Exit Focus Mode</strong><span>Hide every panel and toolbar except the note. See <a href="#focus-mode">Focus Mode</a>.</span></div>
             <div><strong>Create Tidbit</strong><span>Create a note from the vault tidbit path pattern.</span></div>
             <div><strong>Insert rich link</strong><span>Fetch URL metadata and insert a rich link block.</span></div>
             <div><strong>Insert Excalidraw drawing</strong><span>Create and embed an editable vault drawing.</span></div>
@@ -361,6 +416,48 @@
             <div><strong>Insert table of contents</strong><span>Insert a rendered <code>```toc</code> block.</span></div>
             <div><strong>Format commands</strong><span>Wrap selected text as keyboard keys, strikethrough, highlight, superscript, or subscript Markdown.</span></div>
           </div>
+        </section>
+
+        <section id="slash-commands" class="doc-section" data-search-text="slash commands slash menu type slash insert ai commands caret filter escape hints onboarding tips first use reset disable">
+          <h2>Slash Commands And Hints</h2>
+          <p>
+            Type <code>/</code> at the start of a line or after a space to open a menu anchored to the
+            caret. It lists the Insert and AI commands as one flat, filterable list: keep typing to
+            filter, use the arrow keys to move, press Enter to run, or press Esc to dismiss it.
+          </p>
+          <ul>
+            <li>The typed <code>/</code> stays in the note when you dismiss the menu, so writing a literal slash never fights the editor.</li>
+            <li>Running a command removes the slash and applies the command at that spot.</li>
+            <li>The menu never opens inside code blocks or in the middle of a word.</li>
+            <li>Turn it off or back on per vault with <strong>Settings -> Editor -> Slash command menu</strong>.</li>
+          </ul>
+          <h3>First-use hints</h3>
+          <p>
+            Glyphary shows a short hint the first time you use a feature that deserves an
+            explanation, such as the slash menu or the Source drawer. Each hint appears once; press
+            <strong>Got it</strong> to continue with what you were doing. The <strong>Hints</strong>
+            section under Settings -> Main can disable hints entirely or reset them so every hint
+            shows again.
+          </p>
+        </section>
+
+        <section id="focus-mode" class="doc-section" data-search-text="focus mode distraction free writing hide drawers tabs toolbar frontmatter titlebar view menu command palette">
+          <h2>Focus Mode</h2>
+          <p>
+            Focus Mode leaves only the note on screen. Enter or exit it from the command palette
+            (<strong>Enter Focus Mode</strong> / <strong>Exit Focus Mode</strong>) or from
+            <strong>View -> Focus Mode</strong> in the native menu, which shows a checkmark while it
+            is active.
+          </p>
+          <p>
+            While focused, the Files drawer, inspector, tab strip, formatting toolbar, frontmatter
+            area, and every title-bar control except Save and the command palette button are
+            hidden. Split panes stay visible because both halves are part of the editing area.
+            Nothing is closed or reset: drawer widths, open tabs, and scroll positions return
+            exactly as they were when you exit. Keyboard shortcuts, Markdown syntax, and the
+            command palette keep working, so formatting and switching notes remain one keystroke
+            away.
+          </p>
         </section>
 
         <section id="ai-actions" class="doc-section" data-search-text="ai actions openai compatible backend api key model refresh test improve writing grammar tone summarize outline title continue explain review replace insert">
@@ -399,6 +496,8 @@
             <div><strong>Generate title</strong><span>Suggest a page title from the current note or selection.</span></div>
             <div><strong>Continue writing</strong><span>Continue from the cursor using nearby page context.</span></div>
             <div><strong>Explain selection</strong><span>Explain the selected concept in simpler terms.</span></div>
+            <div><strong>Diagram from selection or note</strong><span>Draw the selection, or the whole note when nothing is selected, as a Mermaid flowchart, sequence, or state diagram inserted below the text. The diagram is an editable <code>mermaid</code> block, not an image.</span></div>
+            <div><strong>Humanize selection</strong><span>Rewrite AI-sounding prose (stock phrases, inflated claims, vague attributions, formulaic lists) while keeping every claim and inventing nothing. Based on Wikipedia's "Signs of AI writing".</span></div>
           </div>
           <h3>Review before editing</h3>
           <p>
@@ -500,7 +599,7 @@ banner: '![[Pasted image 20230521183520.png]]'
           </p>
         </section>
 
-        <section id="tabs-splits" class="doc-section" data-search-text="tabs new tab split pane close final tab active pane dirty state independent scrolling">
+        <section id="tabs-splits" class="doc-section" data-search-text="tabs new tab split pane close final tab close other tabs context menu active pane dirty state independent scrolling drag drop file split preview">
           <h2>Tabs And Split Editing</h2>
           <p>Glyphary can keep multiple documents open and split the editor into two independent tab groups. The last tab can be closed, leaving a quiet center workspace with no document open.</p>
           <p>
@@ -512,6 +611,20 @@ banner: '![[Pasted image 20230521183520.png]]'
             <img src="./assets/screenshots/split-editing.png" alt="Split editor with two panes" />
             <figcaption>Split editing with independent tab groups.</figcaption>
           </figure>
+          <h3>Drag files into the editor</h3>
+          <p>
+            Drag a Markdown, canvas, or Base file from the Files tree into the editor area. When
+            the editor is already split, the file opens as a new tab in the pane under the pointer.
+            When it is not split, moving over the left or right half shows a split preview; drop to
+            create the split, or leave the editor area to cancel.
+          </p>
+          <h3>Tab context menu</h3>
+          <p>
+            Right-click a tab to <strong>Close Tab</strong>, <strong>Close Other Tabs</strong>, or
+            <strong>Star File</strong>/<strong>Unstar File</strong>. Closing other tabs keeps the
+            selected tab and refuses to close while another tab has unsaved changes, telling you to
+            save it first.
+          </p>
         </section>
 
         <section id="drawers" class="doc-section" data-search-text="right drawer source export table of contents calendar drawer closed default resize headings jump">
@@ -520,7 +633,7 @@ banner: '![[Pasted image 20230521183520.png]]'
           <div class="feature-table">
             <div><strong>Source/Export</strong><span>Inspect the Markdown source and export-oriented output for the active tab.</span></div>
             <div><strong>Table of Contents</strong><span>Lists headings from the active document; click an entry to jump to that heading.</span></div>
-            <div><strong>Calendar</strong><span>Browse months and double-click a day to open or create the matching calendar note.</span></div>
+            <div><strong>Calendar</strong><span>Browse months and click a day to open or create its note. The document-opening setting can require a double-click instead.</span></div>
           </div>
         </section>
 
@@ -531,6 +644,12 @@ banner: '![[Pasted image 20230521183520.png]]'
             in-process grep-style matching across visible vault files. The results list shows one
             row per file, reports how many matches were found in that file, and keeps newer pages
             above older ones.
+          </p>
+          <p>
+            A query with several words finds notes that contain every word, in any order and on any
+            lines, so <code>netbird github</code> lists only the notes mentioning both. Each word is
+            still matched as a regular expression, and results are sorted newest-first before the
+            result limit applies, so a recently edited note is never pushed out by older matches.
           </p>
           <figure>
             <img src="./assets/screenshots/vault-search.png" alt="Vault search view" />
@@ -559,7 +678,7 @@ banner: '![[Pasted image 20230521183520.png]]'
           <ul>
             <li>Headings: <code>#</code>, <code>##</code>, <code>###</code>.</li>
             <li>Inline formatting: <code>**bold**</code>, <code>*italic*</code>, <code>`inline code`</code>, <code>~~strikethrough~~</code>, <code>==highlight==</code>, <code>^superscript^</code>, <code>~subscript~</code>, <code>&lt;kbd&gt;Cmd&lt;/kbd&gt;</code>, links, and images.</li>
-            <li>Blocks: paragraphs, lists, blockquotes, horizontal rules, fenced code blocks with languages, and rendered Mermaid diagrams from <code>mermaid</code> fences.</li>
+            <li>Blocks: paragraphs, lists, blockquotes, horizontal rules, fenced code blocks with languages, and rendered Mermaid diagrams from <code>mermaid</code> fences (a syntax error shows its parse message inside the block).</li>
           </ul>
           <h3>Tables</h3>
           <p>
@@ -762,7 +881,11 @@ siteName: Example
 
         <section id="assets" class="doc-section" data-search-text="images assets paste drag drop gallery preview attachments _assets_ images pasted image markdown wiki image">
           <h2>Images And Assets</h2>
-          <p>Glyphary-managed images live in <code>_assets_/images</code>. Dragging or pasting an image saves it there and inserts a reference.</p>
+          <p>
+            Glyphary-managed images live in <code>_assets_/images</code>. Dragging or pasting an
+            image into a Markdown editor copies it into that directory and inserts a local
+            reference, so the note remains portable with the vault.
+          </p>
           <pre><code>![[Pasted image 20260613133301.png]]
 ![Local image](folder/Pasted%20image%2020220413143858.png)</code></pre>
           <p>
@@ -771,6 +894,17 @@ siteName: Example
             size, then press Esc to close the preview. YouTube URLs used as Markdown image sources
             display a thumbnail in the page; click the thumbnail to open the video.
           </p>
+          <h3>Drop text and files</h3>
+          <p>
+            Drop plain text from another application directly into the editor to insert it at the
+            cursor. Dropping a text file inserts its contents. Dropping an image file imports the
+            file into <code>_assets_/images</code> and inserts the corresponding Markdown image
+            reference; the original file is not left as an external path.
+          </p>
+          <p>
+            These editor drops target the pane under the pointer, including the secondary pane in a
+            split. Image paste follows the same import path and supports PNG, JPEG, GIF, and WebP.
+          </p>
         </section>
 
         <section id="calendar" class="doc-section" data-search-text="calendar daily notes month drawer dots filename date hover preview delay Calendar folder">
@@ -778,7 +912,8 @@ siteName: Example
           <p>
             Calendar notes live under <code>Calendar/</code>. Existing files display dots. Hover a
             day to preview its rendered note, or see that no note exists yet; the preview delay is
-            configurable in Settings. Double-click a day to open or create its note.
+            configurable in Settings. Click a day to open or create its note; the document-opening
+            setting can require a double-click instead.
           </p>
           <pre><code>Calendar/Sun, Jun 14th 2026.md</code></pre>
         </section>
@@ -816,7 +951,7 @@ siteName: Example
           </table>
           <h3>Settings tabs</h3>
           <div class="feature-table">
-            <div><strong>Main</strong><span>Vault paths and previews, an Interface group for New Note, New Folder, the document proxy, the status bar, and document click behavior, plus tidbits, frontmatter, calendar previews, Vim mode, and autosave.</span></div>
+            <div><strong>Main</strong><span>Vault paths and previews, an Interface group for New Note, New Folder, the document proxy, the status bar, and document click behavior, plus tidbits, frontmatter, calendar previews, an Editor group with Vim mode and the slash command menu, autosave, and a Hints group to disable or reset first-use hints.</span></div>
             <div><strong>Appearance</strong><span>Window glass, workspace margins, UI text weight, section corners, theme templates, CSS snippets, and callout rendering.</span></div>
             <div><strong>Canvas</strong><span>Node and edge thickness, edge style, grid visibility and snapping, and the preview/navigation box.</span></div>
             <div><strong>Plugins</strong><span>Enable vault plugins discovered under <code>.glyphary/plugins</code>.</span></div>
@@ -833,15 +968,26 @@ siteName: Example
             Main controls the title-bar document proxy and status bar. The document proxy shows the
             active filename and opens native Reveal, Open in Default App, and Copy Path actions.
           </p>
+          <h3>Theme templates</h3>
+          <p>
+            Templates are complete themes. Picking one also switches the app to the light or dark
+            mode it was designed for, and the change previews live in the main window; closing
+            Settings without saving reverts both the colors and the mode. The
+            <strong>Cupertino</strong> and <strong>Cupertino Dark</strong> pair uses white or
+            graphite surfaces, a single vivid blue accent for selection and list bullets, system
+            fonts, soft shadows, and a chartreuse highlight.
+          </p>
           <h3>Theme Builder groups</h3>
-          <p>The builder exposes Canvas, Text, Accent And Borders, Blocks, Callouts, Syntax, Typography, and Spacing And Shape.</p>
+          <p>The builder exposes Canvas (including the two shadow colors), Text, Accent And Borders, Blocks (including the highlight background and list-marker color), Callouts, Syntax, Typography, and Spacing And Shape. Editor max width is <code>none</code> in every template; set a value such as <code>860px</code> for a centered column.</p>
           <h3>CSS snippets</h3>
           <p>Approve CSS snippets from <code>_snippets_</code>. See the <a href="./theming.html">dedicated theming reference</a>.</p>
           <h3>Optional editor treatments</h3>
           <p>
             Appearance can add colorful heading levels, heading underlines, heading anchor markers,
             rich callout styling, structured callout layouts, and per-callout icons on top of the
-            selected theme template.
+            selected theme template. Two further options change the workspace chrome: hide the
+            accent border around the active note pane, and cast a soft shadow from the Files drawer
+            onto the editor.
           </p>
         </section>
 
@@ -868,6 +1014,7 @@ siteName: Example
           <table class="reference-table">
             <tbody>
               <tr><th>Cmd+P</th><td>Open command palette.</td></tr>
+              <tr><th>/</th><td>At the start of a line or after a space: open the slash menu of Insert and AI commands.</td></tr>
               <tr><th>Cmd+F</th><td>Find text in the active Markdown page.</td></tr>
               <tr><th>Cmd+N</th><td>Create a new note.</td></tr>
               <tr><th>Cmd+O</th><td>Open a vault folder.</td></tr>
