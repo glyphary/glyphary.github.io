@@ -835,3 +835,9 @@ details p {
     transition-duration: 0.01ms !important;
   }
 }
+
+.release-date {
+  margin: -0.35rem 0 1rem;
+  color: var(--manual-muted);
+  font-size: 0.9rem;
+}

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Glyphary release notes: what changed in each beta, from 1.0.0-beta.2 to the current release." />
+    <title>Glyphary Release Notes</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#beta-7">Skip to release notes</a>
+    <header class="manual-topbar">
+      <a class="manual-brand" href="./index.html" aria-label="Glyphary documentation home">
+        <img src="./assets/favicon.svg" alt="" />
+        <span>Glyphary <small>Documentation</small></span>
+      </a>
+      <button class="sidebar-toggle" type="button" aria-label="Open contents" aria-expanded="false" aria-controls="manual-sidebar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <label class="manual-search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span class="sr-only">Search docs</span>
+        <input id="manual-search" type="search" placeholder="Search release notes..." />
+        <kbd>/</kbd>
+      </label>
+      <nav class="manual-toplinks" aria-label="Related documentation">
+        <a href="./index.html">Manual</a>
+        <a href="./theming.html">Theming</a>
+        <a href="./plugins.html">Plugins</a>
+        <a class="current" href="./releases.html">Releases</a>
+        <a class="external-link" href="https://github.com/glyphary/glyphary">GitHub <span aria-hidden="true">&#8599;</span></a>
+      </nav>
+    </header>
+
+    <div class="manual-shell">
+      <aside id="manual-sidebar" class="manual-sidebar" aria-label="Release notes table of contents">
+        <nav>
+          <div class="sidebar-pages" aria-label="Documentation pages">
+            <a href="./index.html">User manual</a>
+            <a href="./theming.html">Theming reference</a>
+            <a href="./plugins.html">Plugin authoring</a>
+            <a class="current" href="./releases.html">Release notes</a>
+          </div>
+          <div class="sidebar-group">
+            <p>Releases</p>
+            <a href="#beta-7">1.0.0-beta.7</a>
+            <a href="#beta-6">1.0.0-beta.6</a>
+            <a href="#beta-5">1.0.0-beta.5</a>
+            <a href="#beta-4">1.0.0-beta.3 and beta.4</a>
+            <a href="#beta-2">1.0.0-beta.2</a>
+          </div>
+        </nav>
+      </aside>
+
+            <main class="manual-content">
+        <section id="beta-7" class="doc-section hero-section" data-search-text="beta 7 slash commands hints focus mode cupertino themes theme options highlight strike languages mermaid search ai diagram humanize excalidraw fonts offline">
+          <p class="section-kicker">Release notes</p>
+          <h1>1.0.0-beta.7</h1>
+          <p class="release-date">23 August 2026</p>
+          <p class="lead">
+            This release is about writing flow: a slash command menu, a focus mode, a new theme
+            pair, better search, and fixes for Excalidraw and the editor. It also restructures a
+            large part of the app shell, which does not change what you see but makes the next
+            releases safer to build.
+          </p>
+          <h3>Slash commands and first-use hints</h3>
+          <ul>
+            <li>Type <code>/</code> at the start of a line or after a space to open a menu of the Insert and AI commands at the caret. Type to filter, press Enter to run, or press Esc to keep the plain slash.</li>
+            <li>The slash menu is on by default and can be turned off per vault in Settings, under Editor.</li>
+            <li>The first time you use the slash menu or the Source drawer, a short hint explains it. Hints can be disabled or reset from the new Hints section in Settings.</li>
+          </ul>
+          <h3>Focus mode</h3>
+          <ul>
+            <li>Enter Focus Mode from the command palette or from View in the menu bar. It hides the file drawer, inspector, tabs, formatting toolbar, frontmatter, and every title-bar icon except Save and the command palette. Drawer widths, open tabs, and scroll positions come back unchanged when you exit.</li>
+          </ul>
+          <h3>Themes and appearance</h3>
+          <ul>
+            <li>Two new theme templates, Cupertino and Cupertino Dark: white or graphite surfaces, one blue accent, system fonts, soft shadows, and dark code colors in the light variant.</li>
+            <li>Picking a template now switches light or dark mode to match it. Closing Settings without saving reverts both the preview and the mode.</li>
+            <li>The Theme Builder can now set shadow, highlight, and list-marker colors. Two new theme options hide the accent border around the active note and cast a shadow from the file drawer.</li>
+            <li>The selected file in the drawer uses the theme accent, and every template ships with a full-width editor.</li>
+            <li>Saving Settings closes the dialog. If a save is rejected, the reason appears inside the dialog instead of vanishing.</li>
+          </ul>
+          <h3>Editing</h3>
+          <ul>
+            <li><code>==text==</code> becomes a highlight as you type, and <code>~~text~~</code> strikes through without needing a leading space.</li>
+            <li>Syntax highlighting and the code block picker now cover 40 languages, including Go, C, C++, Java, C#, Swift, Kotlin, PHP, Ruby, YAML, TOML, Dockerfile, diff, Makefile, Lua, Perl, R, Scala, Haskell, PowerShell, GraphQL, LaTeX, Protobuf, Dart, and Elixir, with the usual fence aliases.</li>
+            <li>A Mermaid syntax error stays inside its block instead of pushing a full-width error banner into the page.</li>
+            <li>The insertion <code>+</code> controls now appear between adjacent callouts, columns, and collapsible blocks, and the caret lands in the editor as soon as a note opens.</li>
+            <li>Dialogs and popovers were reworked, and files can be dragged into the editor from the system and between split panes.</li>
+            <li>Obsidian-style <code>glyphary://open</code> links open a vault file from other apps.</li>
+          </ul>
+          <h3>Search</h3>
+          <ul>
+            <li>A query with several words finds notes that contain every word, in any order. Each word is still a regular expression.</li>
+            <li>Results are sorted newest first before the result limit applies, so a recently edited note is never pushed out of a large result set.</li>
+          </ul>
+          <h3>AI</h3>
+          <ul>
+            <li>AI: Diagram from selection or note draws the text as an editable Mermaid flowchart, sequence diagram, or state diagram and inserts it below the source after review.</li>
+            <li>AI: Humanize selection rewrites AI-sounding prose using the patterns from Wikipedia's "Signs of AI writing" while keeping every claim.</li>
+          </ul>
+          <h3>Excalidraw</h3>
+          <ul>
+            <li>Saving a drawing no longer leaves it marked unsaved. The dialog shows a Saved confirmation and disables Save until the next edit.</li>
+            <li>Notes with embedded drawings no longer flicker when you return to them, and a preview that cannot load now says why.</li>
+            <li>Previews render offline because the Excalidraw fonts now ship with the app instead of loading from a CDN.</li>
+          </ul>
+          <h3>Known limitations</h3>
+          <ul>
+            <li>Obsidian Sync skips <code>.excalidraw</code> files unless "Sync all other types" is enabled on every device. Otherwise a drawing made on one machine shows as a missing preview on another.</li>
+            <li>The Windows installer is unsigned, so SmartScreen shows an "unrecognized app" prompt on first launch.</li>
+          </ul>
+          <h3>Under the hood</h3>
+          <ul>
+            <li>The main app file lost about 1,850 lines. Excalidraw sessions, AI commands, the command palette catalog, and vault file operations now live in their own modules with explicit dependencies.</li>
+            <li>The frontend contract tests are split into nine files by area, and a new test checks that every Theme Builder token is accepted by the Rust settings allowlist.</li>
+            <li>Theme options and code block languages are each defined in one table that drives both the interface and the behavior.</li>
+          </ul>
+        </section>
+
+        <section id="beta-6" class="doc-section" data-search-text="beta 6 one click open documents double click titlebar new note new folder command palette button interface settings welcome screen">
+          <h2>1.0.0-beta.6</h2>
+          <p class="release-date">14 July 2026</p>
+          <p>This release makes everyday navigation faster and moves the most common workspace actions into a quieter, configurable title bar.</p>
+          <h3>Faster document opening</h3>
+          <ul>
+            <li>Document rows in Files, nested folder trees, Search, Recent, Starred, and Tasks open with one click by default.</li>
+            <li>A per-vault setting, Open documents with a double click, restores selection before opening for people who prefer it. Keyboard activation works in either mode.</li>
+          </ul>
+          <h3>Native workspace controls</h3>
+          <ul>
+            <li>Back moved onto the title-bar row above the active Files drawer.</li>
+            <li>New Note and New Folder title-bar actions are visible by default, can be hidden independently, and keep their folder context-menu equivalents.</li>
+            <li>A command palette button sits beside Save; <code>Cmd+P</code> still works.</li>
+            <li>The welcome screen hides drawer, document, appearance, and status controls until a vault is open.</li>
+          </ul>
+          <h3>Interface settings</h3>
+          <ul>
+            <li>A new Interface settings group covers the New Note and New Folder buttons, the title-bar document proxy, the status bar, and document click behavior.</li>
+            <li>Existing vault settings pick up the new one-click and visible-button defaults without rewriting hand-edited configuration values.</li>
+          </ul>
+          <h3>Under the hood</h3>
+          <ul>
+            <li>Document activation is centralized, so Files, Search, Recent, Starred, Tasks, and folder trees share one click policy.</li>
+            <li>Settings checkboxes and title-bar vault actions were extracted for reuse, display settings are normalized once per render, and the Rust migration defaults were consolidated.</li>
+            <li>The README and user manual were updated, with regression tests for click and keyboard activation, interface defaults, older vault settings, title-bar controls, and the welcome screen.</li>
+          </ul>
+          <p>This is still a beta because it changes persisted per-vault interface settings and document-opening behavior. Existing settings files receive the new defaults automatically.</p>
+        </section>
+
+        <section id="beta-5" class="doc-section" data-search-text="beta 5 vault library starred files base views frontmatter rows pills native macos menus context menus settings window file associations document proxy calendar previews">
+          <h2>1.0.0-beta.5</h2>
+          <p class="release-date">13 July 2026</p>
+          <p>This release turns Glyphary from a single-vault Markdown editor into a fuller desktop workspace. The main additions are remembered vaults, starred files, Base views, structured frontmatter editing, and native macOS integration.</p>
+          <h3>Vaults, files, and navigation</h3>
+          <ul>
+            <li>A vault library remembers opened folders and switches between them without the system picker. Each vault restores its own current folder, open and recent files, active page, drawer state, and split layout. Entries can use custom cover images and can be forgotten without deleting the vault on disk.</li>
+            <li>A Starred view lists notes, canvases, and Base files. Starred items can be reordered by dragging, follow renamed or moved files and folders, and drop off the list when a file is deleted.</li>
+            <li>Optional file-tree previews show note excerpts and first-image thumbnails, with settings for files inside folder trees, preview images, and the folder-tree background.</li>
+            <li>Calendar notes render a preview on hover, including an empty-state preview for days without a note, with a configurable delay.</li>
+          </ul>
+          <h3>Frontmatter and Markdown editing</h3>
+          <ul>
+            <li>The freeform frontmatter textarea is replaced by one single-line row per property. Properties can be added, renamed, edited, and removed without exposing the raw metadata block. Tags and other multi-value properties are edited as pills, with support for inline arrays and YAML block lists. YAML and TOML delimiters and unrelated source lines are preserved during row edits.</li>
+            <li>The pipe in a wikilink alias such as <code>[[Page|Display text]]</code> now stays inside its Markdown table cell.</li>
+            <li>Cursor movement around rendered block widgets was fixed, so you can enter and leave surrounding text without getting trapped or skipping an insertion point.</li>
+            <li>Rendering in the standalone Tidbit capture window was fixed.</li>
+          </ul>
+          <h3>Base files and canvas</h3>
+          <ul>
+            <li>Obsidian-compatible <code>.base</code> files open as local database-style views over Markdown frontmatter, with multiple named table or gallery views per file.</li>
+            <li>Gallery cards can render local or remote note images with side or top image layouts.</li>
+            <li>Base views show result counts, title search, ascending and descending property sorting, and controls for choosing visible properties. Clicking a table row or gallery card opens its source note.</li>
+            <li>Base and canvas files take part in recent files, starring, reordering, native file actions, and tab restoration like Markdown notes.</li>
+          </ul>
+          <h3>Native macOS integration</h3>
+          <ul>
+            <li>Native File, Edit, Insert, Format, View, Window, and Help menus reflect the current enabled and checked states, including Open Recent, tab navigation, drawer toggles, appearance choices, table commands, and active-file actions.</li>
+            <li>Vault entries, tables, Base controls, and vault-library items use native context menus when available.</li>
+            <li>Settings opens in its own window on macOS.</li>
+            <li>Markdown, Canvas, and Base files inside the current vault have native file associations and Open With handling.</li>
+            <li>Files and folders gained Open in Default App, Reveal in Finder, and Copy Path actions.</li>
+            <li>An optional title-bar document proxy shows active-file actions and dirty state. The title-bar layout, traffic-light placement, drag regions, native window material, window restoration, and single-instance file opening were reworked.</li>
+          </ul>
+          <h3>Appearance and settings</h3>
+          <ul>
+            <li>New controls for the title-bar document proxy and the folder-tree background.</li>
+            <li>Glass overlays are lighter, so native material stays visible without washing out the editor. Settings, command palettes, and other decision surfaces stay opaque for readability.</li>
+          </ul>
+          <h3>Under the hood</h3>
+          <ul>
+            <li>Editor, search, vault state, tasks, command palette, and Excalidraw code moved out of the main app shell into focused modules, and Settings, theme controls, vault context menus, and file-action helpers were split out as well.</li>
+            <li>The startup update check now compares the running version with GitHub's latest published release.</li>
+            <li>A real-app Tauri smoke-test harness has a self-test mode and an owned scratch-note workflow.</li>
+            <li>Regression tests cover per-vault sessions, vault-library persistence, Base queries, file previews, native menus, frontmatter rows and pills, and wikilink aliases inside tables.</li>
+            <li>Patched DOMPurify and Lodash ES releases are pinned in the Markdown and diagram dependency tree.</li>
+          </ul>
+          <p>This is still a beta because it changes workspace persistence, frontmatter serialization, Markdown table parsing, Base queries, and native window behavior. Test it against a real vault and keep a normal backup before replacing a daily build.</p>
+        </section>
+
+        <section id="beta-4" class="doc-section" data-search-text="beta 3 beta 4 mermaid diagrams in-page search cmd f kbd format commands highlight superscript subscript update check startup">
+          <h2>1.0.0-beta.3 and 1.0.0-beta.4</h2>
+          <p class="release-date">27 and 28 June 2026</p>
+          <p>
+            beta.4 is beta.3 with a working update check; the beta.3 build could not detect newer
+            releases, so install beta.4 and ignore beta.3. Both add pieces that were missing from
+            the earlier releases, and some of them were must-haves (oops): Mermaid diagrams,
+            in-page search, startup update checks, and more complete inline Markdown formatting,
+            while files stay plain Markdown on disk.
+          </p>
+          <h3>Markdown and formatting</h3>
+          <ul>
+            <li>Fenced <code>mermaid</code> code blocks render as diagrams, with an Edit control to return to the Markdown source, and the command palette gained Insert Mermaid Diagram.</li>
+            <li><code>&lt;kbd&gt;...&lt;/kbd&gt;</code> renders as keyboard-style inline text.</li>
+            <li>Format commands wrap text as keyboard keys, strikethrough, highlight, superscript, or subscript, and <code>==highlight==</code>, <code>^superscript^</code>, and <code>~subscript~</code> render inline.</li>
+            <li>Keyboard formatting wraps the current selection inline instead of adding line breaks.</li>
+          </ul>
+          <h3>Search and navigation</h3>
+          <ul>
+            <li>In-page search with <code>Cmd+F</code> highlights matches, counts them, and supports previous and next navigation. Matches are selected without hiding the editor cursor.</li>
+            <li>Editor selections survive opening and closing the command palette.</li>
+            <li>Clicking a search result keeps the left drawer on the Search tab instead of switching back to Files.</li>
+            <li>Vault search shows one row per file with the number of matches in that file, sorted from the newest modified page to the oldest.</li>
+          </ul>
+          <h3>Updates</h3>
+          <ul>
+            <li>Glyphary checks GitHub Releases on startup and shows an update dialog when the newest published release differs from the running version. The dialog shows the release notes with Later and Open Release actions.</li>
+          </ul>
+          <p>These are still betas because they touch Markdown rendering, search selection, command palette selection, startup networking, and release packaging. Test with a real vault before replacing your daily build.</p>
+        </section>
+
+        <section id="beta-2" class="doc-section" data-search-text="beta 2 view edit chrome page banners wikilink aliases plain paste new tab file context menu rename tables align column notarization packaging">
+          <h2>1.0.0-beta.2</h2>
+          <p class="release-date">21 June 2026</p>
+          <p>This release makes Glyphary feel more natural as a local-first Markdown editor: cleaner reading, better Obsidian compatibility, richer table controls, and release packaging that is ready for notarization.</p>
+          <h3>Reading and editing</h3>
+          <ul>
+            <li>View and Edit chrome modes. View mode hides frontmatter and the formatting toolbar while the document stays editable.</li>
+            <li>Frontmatter-driven page banners with <code>banner: '![[image.png]]'</code>, rendered above the frontmatter area.</li>
+            <li>Wikilink aliases such as <code>[[Actual Page|Display Name]]</code>. Outside the active line, wikilinks render as clean links that hide the <code>[[...]]</code> syntax and alias targets while the Markdown on disk stays intact.</li>
+            <li>Plain paste with <code>Cmd+Shift+V</code>.</li>
+            <li>New columns insert at the cursor instead of at the end of the file, and a document wrapped in <code>---</code> is no longer treated as one giant metadata block.</li>
+          </ul>
+          <h3>Tabs and navigation</h3>
+          <ul>
+            <li>The last tab can be closed, leaving the editor center empty, and the command palette keeps document commands out of the way when no note or canvas is open.</li>
+            <li>A configurable New Tab file: when set, <code>Cmd+T</code> opens that vault note; when unset, Glyphary prompts from the status bar instead of opening a blank tab.</li>
+            <li>Opening a daily note from the calendar moves the file drawer selection to that note.</li>
+          </ul>
+          <h3>File tree actions</h3>
+          <ul>
+            <li>Right-clicking empty space in a folder offers New Note, New Canvas, and New Folder for that folder.</li>
+            <li>Markdown files, canvas files, and folders can be renamed from the right-click menu, and canvas files can be created from folder context menus.</li>
+          </ul>
+          <h3>Tables</h3>
+          <ul>
+            <li>A table context menu in the editor offers the same row and column operations as the command palette, plus Align Column with left, center, and right alignment based on Markdown table alignment syntax.</li>
+            <li>The table menu is opaque, the Align Column submenu no longer has a hover gap, and aligning a column no longer leaves the document selected after applying or undoing the change.</li>
+          </ul>
+          <h3>Documentation and packaging</h3>
+          <ul>
+            <li>Installation instructions for the macOS DMG and Windows installer, a developer setup section, and a Markdown reference page covering table alignment and wikilink aliases.</li>
+            <li>The Windows bundle icon configuration was fixed, the release Makefile builds the universal macOS DMG directly, and the universal app binary is signed with the Developer ID Application identity, hardened runtime, and secure timestamp before notarization.</li>
+          </ul>
+          <p>This is still a beta because it touches editing behavior, Markdown rendering, table mutation, file-tree actions, and platform packaging. Test with a real vault before replacing your daily build.</p>
+        </section>
+      </main>
+    </div>
+
+    <footer class="manual-footer">
+      <p><strong>Glyphary</strong> keeps your notes local, legible, and compatible with Obsidian.</p>
+      <nav aria-label="Footer navigation">
+        <a href="https://github.com/glyphary/glyphary">Source</a>
+        <a href="./index.html">Manual</a>
+        <a href="./theming.html">Theming</a>
+        <a href="./plugins.html">Plugins</a>
+      </nav>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
