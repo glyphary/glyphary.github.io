@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <a class="skip-link" href="#beta-7">Skip to release notes</a>
+    <a class="skip-link" href="#beta-8">Skip to release notes</a>
     <header class="manual-topbar">
       <a class="manual-brand" href="./index.html" aria-label="Glyphary documentation home">
         <img src="./assets/favicon.svg" alt="" />
@@ -55,6 +55,7 @@
           </div>
           <div class="sidebar-group">
             <p>Releases</p>
+            <a href="#beta-8">1.0.0-beta.8</a>
             <a href="#beta-7">1.0.0-beta.7</a>
             <a href="#beta-6">1.0.0-beta.6</a>
             <a href="#beta-5">1.0.0-beta.5</a>
@@ -65,9 +66,86 @@
       </aside>
 
             <main class="manual-content">
-        <section id="beta-7" class="doc-section hero-section" data-search-text="beta 7 slash commands hints focus mode cupertino themes theme options highlight strike languages mermaid search ai diagram humanize excalidraw fonts offline">
+        <section id="beta-8" class="doc-section hero-section" data-search-text="beta 8 graph view bases formulas filters task board kanban archive priorities due dates tags people completion tag colours web clipper chrome extension serializer wikilinks escaped table widths pandoc settings window">
           <p class="section-kicker">Release notes</p>
-          <h1>1.0.0-beta.7</h1>
+          <h1>1.0.0-beta.8</h1>
+          <p class="release-date">27 September 2026</p>
+          <p class="lead">
+            This release looks at the vault as a whole instead of one note at a time. It adds a
+            link graph, Bases you can build inside the app, a task board that reads Obsidian Tasks
+            metadata, completion for tags and people, tag colours, and a web clipper with a Chrome
+            extension. It also fixes a serializer bug that was damaging notes on save.
+          </p>
+          <h3>Graph view</h3>
+          <ul>
+            <li>Press <code>Cmd+G</code> for a graph of every note and its links, or <code>Cmd+Shift+G</code> for the notes around the current one. Both are also in the command palette and the View menu.</li>
+            <li>Nodes are coloured by cluster, tags can filter the graph, and a globe mode wraps the same layout onto a sphere.</li>
+            <li>There is no index to keep fresh. Each open rescans the vault, which takes well under a second even for very large vaults.</li>
+          </ul>
+          <h3>Bases</h3>
+          <ul>
+            <li>Create a <code>.base</code> file from a folder's context menu and edit it in a form: views, filters, <code>order:</code>, <code>sort:</code>, <code>limit:</code>, and the card image property. Edits mark the tab dirty and are written on save, like any other document.</li>
+            <li>Filters can nest <code>and</code>, <code>or</code>, and <code>not</code> groups at the base level and per view. They are evaluated in order and support <code>==</code>, <code>!=</code>, comparisons, and <code>contains</code>.</li>
+            <li>Formulas follow the Obsidian Bases syntax and function set, with typed values, dates, and durations. A formula that loops or fails shows up in the editor's "Base problems" list instead of breaking the view.</li>
+            <li>The editor pane follows macOS conventions, and filter rows are readable in dark mode.</li>
+          </ul>
+          <h3>Tasks</h3>
+          <ul>
+            <li>The Task Board is a Kanban window with To Do, In Progress, and Done columns over every task in the vault. Drag a card or use its arrows to change the checkbox in the note. A note with unsaved edits refuses the move until you save it, and a clean open tab reloads on its own. Clicking a card opens the note in the main window.</li>
+            <li>Cards read the Obsidian Tasks emoji format. Priority and due date show on the card, overdue in red, and each column can be sorted by priority, due date, or recent update.</li>
+            <li>The archive button on a Done card cuts the task and its sub-bullets out of the note and appends them to an archive note, stamped with the source note and the date. The archive note is set in Settings and is left out of the board. Done shows the newest 25 finished tasks, with a Show All button at the foot of the column.</li>
+            <li>On a task line, <code>+</code> at the start of a word opens a menu of priorities and due shortcuts: pick a day from a calendar, or choose today, tomorrow, or next week. <code>/due</code>, <code>/scheduled</code>, and <code>/start</code> in the slash menu, or typing a date emoji, open the same calendar at the caret and write <code>📅 2026-09-27</code>.</li>
+            <li>Obsidian status markers such as <code>[/]</code>, <code>[-]</code>, <code>[>]</code>, and <code>[?]</code> render as status boxes and survive editing.</li>
+            <li>The Tasks drawer remembers its sort order per vault.</li>
+          </ul>
+          <h3>Tags and people</h3>
+          <ul>
+            <li>Type <code>#</code> at the start of a word and a list of the vault's tags drops under the caret, most used first, filtering as you type. Enter, Tab, or a click completes it. Enter on a tag nobody has used yet keeps what you typed.</li>
+            <li>Notes under <code>People/</code> are people. Type <code>@</code> to complete one the same way; the result is a plain <code>[[Name]]</code> link.</li>
+            <li>Inline <code>#tags</code> in note text render as pills, the same as frontmatter tags.</li>
+            <li>Pick a colour for a tag from the Tags drawer. Nested tags inherit it, and it shows on inline tags, frontmatter pills, and in the drawer. Tags without a pick stay neutral. Settings, then Export, writes the picks as an Obsidian CSS snippet so the vault looks the same in both apps.</li>
+            <li>A Tags drawer lists every tag with its notes, and the Recent drawer has an activity heatmap with hover tooltips.</li>
+          </ul>
+          <h3>Web clipper</h3>
+          <ul>
+            <li>Clip a web page by URL from the command palette, through a <code>glyphary://clip</code> link, or with a bookmarklet you can copy from the palette. Pages land in <code>Clippings/</code> as Markdown with the same frontmatter Obsidian's clipper writes. A selection clips as a quote.</li>
+            <li>A Chrome extension, in the repository's <code>browser-extension/</code> folder, clips the current tab straight to disk using Defuddle. It supports categories mapped to vault folders, tags, and an optional hand-off that opens the note in Glyphary.</li>
+          </ul>
+          <h3>Editing</h3>
+          <ul>
+            <li>Fixed: saving no longer damages notes. The Markdown serializer used to backslash-escape <code>[[links]]</code>, <code>#tags</code>, <code>a_b</code>, and <code>*</code>, and HTML-encode <code>&lt;</code> and <code>&amp;</code>, on every save. Text now comes back exactly as typed. A note that an earlier build saved as <code>\[\[Note\]\]</code> reads back as <code>[[Note]]</code> and is repaired the next time you save it.</li>
+            <li>Table column widths follow the Pandoc convention: the number of dashes in the separator row sets each column's share of the width. Dragging a column border in the visual editor works.</li>
+            <li>Typing <code>- [ ] </code> turns a bullet into a task, and typing through the slash menu keeps the keystroke.</li>
+            <li>Image properties accept bare wikilinks, as in <code>photo: "[[file.jpg]]"</code>, the way Obsidian writes them.</li>
+          </ul>
+          <h3>Windows and drawers</h3>
+          <ul>
+            <li>Settings and the Task Board open in their own windows and stay in sync with the main window. Closing the main window now quits the app even while they are open.</li>
+            <li>A gear at the foot of the vault rail opens Settings.</li>
+            <li>The inspector drawer can be pinned open, or left unpinned so it shows on hover.</li>
+            <li>The folder tree refreshes after you delete a file in a nested folder.</li>
+            <li>The Settings checkboxes for Vim mode and the slash menu no longer throw when toggled.</li>
+          </ul>
+          <h3>Known limitations</h3>
+          <ul>
+            <li>Base support is a documented subset of Obsidian Bases, not the full engine. Only simple filter conditions are edited as fields; anything else is edited as expression text.</li>
+            <li>The graph counts <code>#tags</code> inside fenced code, and its legend matches tags exactly rather than by hierarchy.</li>
+            <li>The web clipper fetches pages without a browser session, so pages behind logins or rendered by JavaScript clip poorly from the app. Use the extension for those.</li>
+            <li>Obsidian's live preview only exposes a tag's root segment, so an exported colour for a nested tag shows its root's colour there.</li>
+            <li>Obsidian Sync skips <code>.excalidraw</code> files unless "Sync all other types" is enabled on every device.</li>
+            <li>The Windows installer is unsigned, so SmartScreen shows an "unrecognized app" prompt on first launch.</li>
+          </ul>
+          <h3>Under the hood</h3>
+          <ul>
+            <li>The Bases engine (reader, writer, expression parser, and evaluator) lives in its own Rust modules with their own test suites.</li>
+            <li>The task board, inline completion, task field pickers, window opening, and cross-window notices are modules with explicit dependencies. The main app file only wires them together.</li>
+            <li>Card dragging uses pointer events because HTML5 drag and drop snaps back inside the WebKit webview.</li>
+            <li>Frontend contract tests grew to 131 and Rust tests to 83. The Markdown round trip was checked in headless Chromium.</li>
+          </ul>
+        </section>
+
+        <section id="beta-7" class="doc-section" data-search-text="beta 7 slash commands hints focus mode cupertino themes theme options highlight strike languages mermaid search ai diagram humanize excalidraw fonts offline">
+          <h2>1.0.0-beta.7</h2>
           <p class="release-date">23 August 2026</p>
           <p class="lead">
             This release is about writing flow: a slash command menu, a focus mode, a new theme

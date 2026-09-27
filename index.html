@@ -82,6 +82,10 @@
             <a href="#tabs-splits">Tabs And Splits</a>
             <a href="#drawers">Right Drawer</a>
             <a href="#search-links">Search And Wikilinks</a>
+            <a href="#tags-people">Tags And People</a>
+            <a href="#task-board">Task Board</a>
+            <a href="#graph-view">Graph View</a>
+            <a href="#web-clipper">Web Clipper</a>
             <a href="#canvas-files">Canvas Files</a>
             <a href="#base-files">Base Files</a>
             <a href="#assets">Images And Assets</a>
@@ -224,112 +228,24 @@
           <p>The app window is split into stable regions so scrolling one area does not move the rest.</p>
           <div class="feature-table">
             <div><strong>Top controls</strong><span>Back, New Note, and New Folder above Files; Save and the command palette above the document; plus split/unsplit, display mode, theme mode, tabs, and the active document title.</span></div>
-            <div><strong>Left rail and drawer</strong><span>Vault switching, files, search, recent files, starred files, and tasks.</span></div>
+            <div><strong>Left rail and drawer</strong><span>Vault switching, files, search, recent files, starred files, tasks, and tags, with a gear at the foot of the rail that opens Settings.</span></div>
             <div><strong>Center editor</strong><span>The active tab group or split pane. Each editor scrolls independently.</span></div>
-            <div><strong>Right drawer</strong><span>Source/Export, document table of contents, and Calendar.</span></div>
+            <div><strong>Right drawer</strong><span>Source/Export, document table of contents, and Calendar. Pin it open, or leave it unpinned so it shows on hover.</span></div>
             <div><strong>Status bar</strong><span>Save status, index status, Vim mode transitions, and diagnostic messages.</span></div>
           </div>
           <h3>Native menus</h3>
           <p>
             On macOS, the system menu bar provides File, Edit, Insert, Format, View, Window, and Help
             commands. It includes Open Recent, active-file actions, table formatting, appearance and
-            drawer toggles, and tab navigation. Settings opens in its own window, and file, table,
-            Base, and vault-library context menus use native menus when available.
+            drawer toggles, and tab navigation. Settings and the Task Board each open in their own
+            window and stay in step with the main one; closing the main window quits the app even
+            while they are open. File, table, Base, and vault-library context menus use native
+            menus when available.
           </p>
           <p>
             Opening a supported <code>.md</code>, <code>.canvas</code>, or <code>.base</code> file
             from Finder opens it when it belongs to the current vault. Files outside that vault are
             ignored rather than silently changing the workspace root.
-          </p>
-        </section>
-
-        <section id="vault-drawer" class="doc-section" data-search-text="left drawer files search recent starred tasks folders preview images background back current top level collapse resize complete incomplete sort filter">
-          <h2>Use The Left Drawer</h2>
-          <p>The left drawer opens expanded by default and has Files, Search, Recent, Starred, and Tasks views.</p>
-          <ul>
-            <li>Single-click a directory to enter it as the current top-level view.</li>
-            <li>Use Back to move up until you reach the vault root.</li>
-            <li>Click a file to open it in the active editor pane. In Settings, you can require a double-click instead.</li>
-            <li>Double-click a directory to open its shadow note.</li>
-            <li>The path shown under Files is relative to the vault root and omits the Markdown extension.</li>
-            <li>Dotfiles and dot folders are hidden by default.</li>
-          </ul>
-          <p>
-            When Files is active, the titlebar shows Back, New Note, and New Folder. Interface
-            settings can hide either creation button without removing the same command from the
-            folder context menu.
-          </p>
-          <p>The document-opening setting also applies to Search, Recent, Starred, and Tasks.</p>
-          <h3>File tree and previews</h3>
-          <p>
-            Settings can show files inside the folder tree, add a background behind that tree, and
-            display a text excerpt under each file. Image previews use the first resolvable image in
-            the note and can be disabled independently.
-          </p>
-          <h3>Search</h3>
-          <p>
-            Search can match filenames or Markdown file contents. Content search runs inside
-            Glyphary using the same grep crates that power ripgrep-style matching, so no external
-            <code>rg</code> binary is required. Search results are grouped by file, show a match
-            count, and are sorted from the most recently modified page down to older notes.
-          </p>
-          <h3>Recent</h3>
-          <p>
-            Recent shows the newest files you opened in this vault. Opening a recent item activates
-            it in the current editor pane and updates the left-drawer selection when the file is
-            available in the current vault.
-          </p>
-          <h3>Starred</h3>
-          <p>
-            Run <strong>Star File</strong> from the Format menu or command palette to keep any note,
-            canvas, or Base in the Starred view. Drag starred rows to reorder them. Renaming or
-            moving a starred item updates its saved path; deleting it removes the stale star.
-          </p>
-          <h3>Tasks</h3>
-          <p>
-            Tasks scans visible Markdown files for task-list items such as <code>- [ ]</code> and
-            <code>- [x]</code>. Dotfiles and dot folders are excluded. Use the filters to show
-            incomplete, complete, or all tasks; use the search field to narrow the displayed list;
-            and sort by task text or file date.
-          </p>
-        </section>
-
-        <section id="file-actions" class="doc-section" data-search-text="create note create canvas create folder rename move delete reveal finder open default app copy path shadow note context menu right click folder tree">
-          <h2>File And Folder Actions</h2>
-          <p>Right-click entries in the Files view to use the native file actions available for that item.</p>
-          <div class="feature-table">
-            <div><strong>Create note</strong><span>Create a Markdown file inside a folder and open it in the active pane.</span></div>
-            <div><strong>Create canvas</strong><span>Create an Obsidian-compatible <code>.canvas</code> file inside a folder and open it in the active pane.</span></div>
-            <div><strong>Create folder</strong><span>Create a child directory inside the selected folder.</span></div>
-            <div><strong>Rename file or canvas</strong><span>Rename a Markdown file or canvas file from the context menu while open tabs and indexes update.</span></div>
-            <div><strong>Rename folder</strong><span>Renames the folder and a matching shadow note from <code>old/old.md</code> to <code>new/new.md</code>.</span></div>
-            <div><strong>Move file or folder</strong><span>Choose a destination from the folder tree rooted at the vault.</span></div>
-            <div><strong>Open in Default App</strong><span>Open the selected file or folder with its system default application.</span></div>
-            <div><strong>Reveal in Finder</strong><span>Open the native file manager with the selected file or folder highlighted.</span></div>
-            <div><strong>Copy Path</strong><span>Copy the full host filesystem path to the clipboard.</span></div>
-            <div><strong>Delete file</strong><span>Requires confirmation. Deletion is destructive.</span></div>
-          </div>
-          <p>
-            Moving or renaming files updates open tabs, recent files, and the in-memory wikilink
-            index immediately so the workspace keeps pointing at the new path.
-          </p>
-          <p>
-            When a file is opened from Search, Recent, Starred, Tasks, a calendar day, or a deep
-            link, Glyphary switches to Files, expands the relevant directory view, and keeps the
-            selected file visible in the tree.
-          </p>
-          <h3>Deep links</h3>
-          <p>
-            Right-click a note, canvas, or Base and choose <strong>Copy Deep Link</strong> to place
-            a Glyphary URL on the clipboard. The URL identifies the vault by name and the file by
-            its vault-relative path, so it can be pasted into another app or used with the system
-            <code>open</code> command.
-          </p>
-          <pre><code>glyphary://open?vault=Demo&amp;file=Home.md</code></pre>
-          <p>
-            Opening a <code>glyphary://open</code> URL switches to the matching remembered vault
-            and opens the requested file. The vault must already be in Glyphary's Vaults switcher;
-            unknown vault names are reported instead of changing the current workspace.
           </p>
         </section>
 
@@ -601,74 +517,6 @@ banner: '![[Pasted image 20230521183520.png]]'
           </p>
         </section>
 
-        <section id="tabs-splits" class="doc-section" data-search-text="tabs new tab split pane close final tab close other tabs context menu active pane dirty state independent scrolling drag drop file split preview">
-          <h2>Tabs And Split Editing</h2>
-          <p>Glyphary can keep multiple documents open and split the editor into two independent tab groups. The last tab can be closed, leaving a quiet center workspace with no document open.</p>
-          <p>
-            Configure <strong>New Tab</strong> in Settings to choose the vault file opened by
-            <strong>Cmd+T</strong>. When no file is configured, Cmd+T leaves the workspace unchanged
-            and the status bar invites you to choose a new-tab note.
-          </p>
-          <figure>
-            <img src="./assets/screenshots/split-editing.png" alt="Split editor with two panes" />
-            <figcaption>Split editing with independent tab groups.</figcaption>
-          </figure>
-          <h3>Drag files into the editor</h3>
-          <p>
-            Drag a Markdown, canvas, or Base file from the Files tree into the editor area. When
-            the editor is already split, the file opens as a new tab in the pane under the pointer.
-            When it is not split, moving over the left or right half shows a split preview; drop to
-            create the split, or leave the editor area to cancel.
-          </p>
-          <h3>Tab context menu</h3>
-          <p>
-            Right-click a tab to <strong>Close Tab</strong>, <strong>Close Other Tabs</strong>, or
-            <strong>Star File</strong>/<strong>Unstar File</strong>. Closing other tabs keeps the
-            selected tab and refuses to close while another tab has unsaved changes, telling you to
-            save it first.
-          </p>
-        </section>
-
-        <section id="drawers" class="doc-section" data-search-text="right drawer source export table of contents calendar drawer closed default resize headings jump">
-          <h2>Use The Right Drawer</h2>
-          <p>The right drawer is closed by default and includes Source/Export, Table of Contents, and Calendar.</p>
-          <div class="feature-table">
-            <div><strong>Source/Export</strong><span>Inspect the Markdown source and export-oriented output for the active tab.</span></div>
-            <div><strong>Table of Contents</strong><span>Lists headings from the active document; click an entry to jump to that heading.</span></div>
-            <div><strong>Calendar</strong><span>Browse months and click a day to open or create its note. The document-opening setting can require a double-click instead.</span></div>
-          </div>
-        </section>
-
-        <section id="search-links" class="doc-section" data-search-text="search internal grep wikilink alias table pipe index page name chooser duplicate filenames internal links">
-          <h2>Search And Wikilinks</h2>
-          <p>
-            Search by filename or content. Content search is built into Glyphary and uses bounded
-            in-process grep-style matching across visible vault files. The results list shows one
-            row per file, reports how many matches were found in that file, and keeps newer pages
-            above older ones.
-          </p>
-          <p>
-            A query with several words finds notes that contain every word, in any order and on any
-            lines, so <code>netbird github</code> lists only the notes mentioning both. Each word is
-            still matched as a regular expression, and results are sorted newest-first before the
-            result limit applies, so a recently edited note is never pushed out by older matches.
-          </p>
-          <figure>
-            <img src="./assets/screenshots/vault-search.png" alt="Vault search view" />
-            <figcaption>Vault search with results in the left drawer.</figcaption>
-          </figure>
-          <pre><code>[[Dad Jokes]]
-[[Calendar/Mon, Dec 22nd 2025]]
-[[Dad Jokes|A better label]]</code></pre>
-          <p>
-            Typing <code>[[</code> opens page search. Exact vault-relative matches win first;
-            duplicate basename matches show a chooser. The chooser supports arrow-key navigation
-            and Enter selection. Aliases preserve their target while rendering the text after the
-            pipe. Inside a Markdown table, that alias pipe remains part of the wikilink instead of
-            splitting the cell.
-          </p>
-        </section>
-
         <section id="markdown" class="doc-section" data-search-text="markdown reference tables alignment attributes wikilinks alias images youtube thumbnail frontmatter banners tasks callouts columns gallery collapse toc rich links code mermaid diagrams syntax highlighting html tiptap prosemirror">
           <h2>Markdown Reference</h2>
           <p>
@@ -701,9 +549,25 @@ banner: '![[Pasted image 20230521183520.png]]'
             Wikilink aliases work inside table cells without escaping the pipe:
             <code>| [[Databases|Database notes]] |</code> parses and saves as one cell.
           </p>
+          <p>
+            Column widths follow the Pandoc convention. The number of dashes in the separator row
+            sets each column's share of the table width, so <code>|---|---------|</code> gives the
+            second column three times the first. When every column has the same number of dashes,
+            or the dashes only pad the longest cell, the columns share the width evenly. You can
+            also drag a column border in the visual editor; a dragged width is written back as
+            dash counts, so the table reads the same in Obsidian.
+          </p>
           <h3>Task lists</h3>
           <pre><code>- [ ] Collect screenshots
-- [x] Open the vault</code></pre>
+- [/] Draft the announcement ⏫ 📅 2026-10-01
+- [x] Open the vault ✅ 2026-09-27</code></pre>
+          <p>
+            Obsidian status markers such as <code>[/]</code>, <code>[-]</code>, <code>[&gt;]</code>,
+            and <code>[?]</code> render as status boxes, and the Obsidian Tasks emoji format for
+            priorities and dates is understood by the Task Board. See
+            <a href="#task-board">Task Board</a> for the full vocabulary and the <code>+</code>
+            menu that writes it for you.
+          </p>
           <h3>Wikilinks and vault assets</h3>
           <pre><code>[[Page Name]]
 [[Folder/Page Name]]
@@ -729,7 +593,9 @@ banner: '![[Pasted image 20230521183520.png]]'
             values can be changed in place, properties can be added or removed, and tags or any
             detected multi-value property use editable pills. YAML <code>---</code> and TOML
             <code>+++</code> delimiters are preserved. A <code>banner</code> displays a page banner
-            above the frontmatter area when the referenced image is found.
+            above the frontmatter area when the referenced image is found. Image properties accept
+            a bare wikilink such as <code>photo: "[[jane.jpg]]"</code>, a vault path, or a URL, and
+            Bases can show them on cards.
           </p>
           <h3>Inline table of contents block</h3>
           <pre><code>```toc
@@ -801,6 +667,342 @@ siteName: Example
 &lt;/div&gt;</code></pre>
         </section>
 
+        <section id="vault-drawer" class="doc-section" data-search-text="left drawer files search recent starred tasks folders preview images background back current top level collapse resize complete incomplete sort filter">
+          <h2>Use The Left Drawer</h2>
+          <p>The left drawer opens expanded by default and has Files, Search, Recent, Starred, Tasks, and Tags views.</p>
+          <ul>
+            <li>Single-click a directory to enter it as the current top-level view.</li>
+            <li>Use Back to move up until you reach the vault root.</li>
+            <li>Click a file to open it in the active editor pane. In Settings, you can require a double-click instead.</li>
+            <li>Double-click a directory to open its shadow note.</li>
+            <li>The path shown under Files is relative to the vault root and omits the Markdown extension.</li>
+            <li>Dotfiles and dot folders are hidden by default.</li>
+          </ul>
+          <p>
+            When Files is active, the titlebar shows Back, New Note, and New Folder. Interface
+            settings can hide either creation button without removing the same command from the
+            folder context menu.
+          </p>
+          <p>The document-opening setting also applies to Search, Recent, Starred, and Tasks.</p>
+          <h3>File tree and previews</h3>
+          <p>
+            Settings can show files inside the folder tree, add a background behind that tree, and
+            display a text excerpt under each file. Image previews use the first resolvable image in
+            the note and can be disabled independently.
+          </p>
+          <h3>Search</h3>
+          <p>
+            Search can match filenames or Markdown file contents. Content search runs inside
+            Glyphary using the same grep crates that power ripgrep-style matching, so no external
+            <code>rg</code> binary is required. Search results are grouped by file, show a match
+            count, and are sorted from the most recently modified page down to older notes.
+          </p>
+          <h3>Recent</h3>
+          <p>
+            Recent shows the newest files you opened in this vault. Opening a recent item activates
+            it in the current editor pane and updates the left-drawer selection when the file is
+            available in the current vault. Above the list, a heatmap shows how many notes changed
+            on each day of the past year; hover a square for the date and count.
+          </p>
+          <h3>Starred</h3>
+          <p>
+            Run <strong>Star File</strong> from the Format menu or command palette to keep any note,
+            canvas, or Base in the Starred view. Drag starred rows to reorder them. Renaming or
+            moving a starred item updates its saved path; deleting it removes the stale star.
+          </p>
+          <h3>Tasks</h3>
+          <p>
+            Tasks scans visible Markdown files for task-list items such as <code>- [ ]</code> and
+            <code>- [x]</code>. Dotfiles and dot folders are excluded. Use the filters to show
+            incomplete, complete, or all tasks; use the search field to narrow the displayed list;
+            and sort by task text or file date. The sort is remembered per vault. In-progress
+            tasks written as <code>- [/]</code> count as incomplete. The board view of the same
+            tasks is described under <a href="#task-board">Task Board</a>.
+          </p>
+          <h3>Tags</h3>
+          <p>
+            Tags lists every tag in the vault with the number of notes that use it. Click a tag to
+            see those notes and open one. The circle before each tag picks its colour, described
+            under <a href="#tags-people">Tags And People</a>.
+          </p>
+        </section>
+
+        <section id="file-actions" class="doc-section" data-search-text="create note create canvas create folder rename move delete reveal finder open default app copy path shadow note context menu right click folder tree">
+          <h2>File And Folder Actions</h2>
+          <p>Right-click entries in the Files view to use the native file actions available for that item.</p>
+          <div class="feature-table">
+            <div><strong>Create note</strong><span>Create a Markdown file inside a folder and open it in the active pane.</span></div>
+            <div><strong>Create canvas</strong><span>Create an Obsidian-compatible <code>.canvas</code> file inside a folder and open it in the active pane.</span></div>
+            <div><strong>Create folder</strong><span>Create a child directory inside the selected folder.</span></div>
+            <div><strong>Rename file or canvas</strong><span>Rename a Markdown file or canvas file from the context menu while open tabs and indexes update.</span></div>
+            <div><strong>Rename folder</strong><span>Renames the folder and a matching shadow note from <code>old/old.md</code> to <code>new/new.md</code>.</span></div>
+            <div><strong>Move file or folder</strong><span>Choose a destination from the folder tree rooted at the vault.</span></div>
+            <div><strong>Open in Default App</strong><span>Open the selected file or folder with its system default application.</span></div>
+            <div><strong>Reveal in Finder</strong><span>Open the native file manager with the selected file or folder highlighted.</span></div>
+            <div><strong>Copy Path</strong><span>Copy the full host filesystem path to the clipboard.</span></div>
+            <div><strong>Delete file</strong><span>Requires confirmation. Deletion is destructive.</span></div>
+          </div>
+          <p>
+            Moving or renaming files updates open tabs, recent files, and the in-memory wikilink
+            index immediately so the workspace keeps pointing at the new path.
+          </p>
+          <p>
+            When a file is opened from Search, Recent, Starred, Tasks, a calendar day, or a deep
+            link, Glyphary switches to Files, expands the relevant directory view, and keeps the
+            selected file visible in the tree.
+          </p>
+          <h3>Deep links</h3>
+          <p>
+            Right-click a note, canvas, or Base and choose <strong>Copy Deep Link</strong> to place
+            a Glyphary URL on the clipboard. The URL identifies the vault by name and the file by
+            its vault-relative path, so it can be pasted into another app or used with the system
+            <code>open</code> command.
+          </p>
+          <pre><code>glyphary://open?vault=Demo&amp;file=Home.md</code></pre>
+          <p>
+            Opening a <code>glyphary://open</code> URL switches to the matching remembered vault
+            and opens the requested file. The vault must already be in Glyphary's Vaults switcher;
+            unknown vault names are reported instead of changing the current workspace.
+          </p>
+        </section>
+
+        <section id="tabs-splits" class="doc-section" data-search-text="tabs new tab split pane close final tab close other tabs context menu active pane dirty state independent scrolling drag drop file split preview">
+          <h2>Tabs And Split Editing</h2>
+          <p>Glyphary can keep multiple documents open and split the editor into two independent tab groups. The last tab can be closed, leaving a quiet center workspace with no document open.</p>
+          <p>
+            Configure <strong>New Tab</strong> in Settings to choose the vault file opened by
+            <strong>Cmd+T</strong>. When no file is configured, Cmd+T leaves the workspace unchanged
+            and the status bar invites you to choose a new-tab note.
+          </p>
+          <figure>
+            <img src="./assets/screenshots/split-editing.png" alt="Split editor with two panes" />
+            <figcaption>Split editing with independent tab groups.</figcaption>
+          </figure>
+          <h3>Drag files into the editor</h3>
+          <p>
+            Drag a Markdown, canvas, or Base file from the Files tree into the editor area. When
+            the editor is already split, the file opens as a new tab in the pane under the pointer.
+            When it is not split, moving over the left or right half shows a split preview; drop to
+            create the split, or leave the editor area to cancel.
+          </p>
+          <h3>Tab context menu</h3>
+          <p>
+            Right-click a tab to <strong>Close Tab</strong>, <strong>Close Other Tabs</strong>, or
+            <strong>Star File</strong>/<strong>Unstar File</strong>. Closing other tabs keeps the
+            selected tab and refuses to close while another tab has unsaved changes, telling you to
+            save it first.
+          </p>
+        </section>
+
+        <section id="drawers" class="doc-section" data-search-text="right drawer source export table of contents calendar drawer closed default resize headings jump">
+          <h2>Use The Right Drawer</h2>
+          <p>
+            The right drawer is closed by default and includes Source/Export, Table of Contents,
+            and Calendar. Pin it to keep it open beside the editor, or leave it unpinned and it
+            shows while the pointer is over its rail.
+          </p>
+          <div class="feature-table">
+            <div><strong>Source/Export</strong><span>Inspect the Markdown source and export-oriented output for the active tab.</span></div>
+            <div><strong>Table of Contents</strong><span>Lists headings from the active document; click an entry to jump to that heading.</span></div>
+            <div><strong>Calendar</strong><span>Browse months and click a day to open or create its note. The document-opening setting can require a double-click instead.</span></div>
+          </div>
+        </section>
+
+        <section id="search-links" class="doc-section" data-search-text="search internal grep wikilink alias table pipe index page name chooser duplicate filenames internal links">
+          <h2>Search And Wikilinks</h2>
+          <p>
+            Search by filename or content. Content search is built into Glyphary and uses bounded
+            in-process grep-style matching across visible vault files. The results list shows one
+            row per file, reports how many matches were found in that file, and keeps newer pages
+            above older ones.
+          </p>
+          <p>
+            A query with several words finds notes that contain every word, in any order and on any
+            lines, so <code>netbird github</code> lists only the notes mentioning both. Each word is
+            still matched as a regular expression, and results are sorted newest-first before the
+            result limit applies, so a recently edited note is never pushed out by older matches.
+          </p>
+          <figure>
+            <img src="./assets/screenshots/vault-search.png" alt="Vault search view" />
+            <figcaption>Vault search with results in the left drawer.</figcaption>
+          </figure>
+          <pre><code>[[Dad Jokes]]
+[[Calendar/Mon, Dec 22nd 2025]]
+[[Dad Jokes|A better label]]</code></pre>
+          <p>
+            Typing <code>[[</code> opens page search. Exact vault-relative matches win first;
+            duplicate basename matches show a chooser. The chooser supports arrow-key navigation
+            and Enter selection. Aliases preserve their target while rendering the text after the
+            pipe. Inside a Markdown table, that alias pipe remains part of the wikilink instead of
+            splitting the cell.
+          </p>
+        </section>
+
+        <section id="tags-people" class="doc-section" data-search-text="tags people completion hash at wikilink pills tag colours colors swatch tags drawer export obsidian css snippet people folder photo frontmatter">
+          <h2>Tags And People</h2>
+          <p>
+            Type <code>#</code> at the start of a word and a list of the vault's tags drops under
+            the caret, most used first, with the number of notes beside each. Keep typing to
+            filter it. Press Enter, Tab, or click an entry to complete the tag. If nothing matches,
+            Enter keeps what you typed as a new tag. A <code>#</code> glued to a word, such as
+            <code>C#</code>, or one inside code, does nothing. At the very start of a paragraph
+            <code>#</code> still makes a heading, except inside a list item, where a heading cannot
+            form.
+          </p>
+          <p>
+            Inline <code>#tags</code> in note text render as pills, the same as tags in
+            frontmatter. The Markdown on disk is unchanged.
+          </p>
+          <h3>People</h3>
+          <p>
+            Any note under <code>People/</code>, at any depth, is a person. Type <code>@</code> at
+            the start of a word to pick one from the same kind of list, filtered as you type. The
+            result is an ordinary <code>[[Name]]</code> wikilink, so Obsidian sees the same link
+            and backlinks show every note that mentions the person.
+          </p>
+          <p>
+            A person's frontmatter is free-form. To give a person a photo, put the image in the
+            vault and add a property that names it:
+          </p>
+          <pre><code>---
+photo: "[[jane-doe.jpg]]"
+email: jane@example.com
+---</code></pre>
+          <p>
+            The value can be a bare wikilink, a vault path, or a URL. A Base with a cards view and
+            <code>image: note.photo</code> becomes a people directory.
+          </p>
+          <h3>Tag colours</h3>
+          <p>
+            Open the Tags drawer and click the small circle before a tag to pick a colour for it.
+            The colour shows on inline tags, frontmatter pills, and in the drawer, and nested tags
+            such as <code>#project/trr</code> inherit the colour of <code>#project</code> unless
+            they have their own. Tags without a pick keep the neutral look. Click the
+            <code>×</code> beside a coloured tag to clear it. Picks are stored in the vault's
+            <code>.glyphary/config.json</code>.
+          </p>
+          <p>
+            To see the same colours in Obsidian, open Settings, choose Export, and click Export
+            Obsidian CSS Snippet. Glyphary writes
+            <code>.obsidian/snippets/glyphary-tag-colors.css</code> into the vault. Enable it once
+            in Obsidian under Appearance, CSS snippets, and export again after changing colours.
+            Obsidian's live preview only exposes a tag's first segment, so a nested tag shows its
+            parent's colour there.
+          </p>
+        </section>
+
+        <section id="task-board" class="doc-section" data-search-text="task board kanban to do in progress done drag cards move archive archive note priorities due date scheduled start calendar plus menu status markers tasks emoji format sort">
+          <h2>Task Board</h2>
+          <p>
+            Run <strong>Open Task Board</strong> from the command palette, or click the board
+            button at the top of the Tasks drawer, to open a board over every task in the vault. It opens in its own
+            window, with To Do, In Progress, and Done columns, and stays in step with the main
+            window: a save or a file change in one refreshes the other.
+          </p>
+          <ul>
+            <li>Drag a card to another column, or use the arrows on the card, to change the checkbox in the note. <code>[ ]</code> is To Do, <code>[/]</code> is In Progress, and <code>[x]</code> is Done.</li>
+            <li>A note with unsaved edits refuses the move until you save it. A clean open tab reloads on its own after a move.</li>
+            <li>Click a card to open its note in the main window.</li>
+            <li>Done shows the newest 25 finished tasks. A Show All button at the foot of the column reveals the rest.</li>
+            <li>The sort menu orders every column by note order, priority, due date, or most recent update. The choice is remembered.</li>
+          </ul>
+          <h3>Priorities and dates</h3>
+          <p>
+            Cards read the Obsidian Tasks emoji format, so the same notes work with the Tasks and
+            Task Board plugins in Obsidian. Priority and due date show on the card, and an open
+            task past its due date is marked overdue in red.
+          </p>
+          <pre><code>- [ ] Renew the certificate ⏫ 📅 2026-10-01
+- [ ] Write the report 🔽 ⏳ 2026-10-05 🛫 2026-09-28
+- [x] Ship beta.8 ✅ 2026-09-27</code></pre>
+          <table class="reference-table">
+            <tbody>
+              <tr><th>🔺 ⏫ 🔼 🔽 ⏬</th><td>Highest, high, medium, low, and lowest priority.</td></tr>
+              <tr><th>📅 ⏳ 🛫</th><td>Due, scheduled, and start dates, each followed by <code>YYYY-MM-DD</code>.</td></tr>
+              <tr><th>➕ ✅ ❌</th><td>Created, done, and cancelled dates.</td></tr>
+            </tbody>
+          </table>
+          <p>
+            You rarely need to type the emoji. On a task line, type <code>+</code> at the start of
+            a word to open a menu of the five priorities and the due shortcuts: pick a day from a
+            calendar, or choose today, tomorrow, or next week. The choice replaces the
+            <code>+</code>. In the slash menu, <code>/due</code>, <code>/scheduled</code>, and
+            <code>/start</code> write the emoji and open the calendar at the caret. Typing a date
+            emoji directly opens the calendar too. Press Esc to keep just the emoji.
+          </p>
+          <h3>Status markers</h3>
+          <p>
+            Obsidian-style markers render as status boxes and survive editing: <code>[/]</code>
+            in progress, <code>[-]</code> cancelled, <code>[&gt;]</code> forwarded,
+            <code>[?]</code> question, and any other single character. Ticking a box writes
+            <code>[x]</code>; unticking restores the marker.
+          </p>
+          <h3>Archiving</h3>
+          <p>
+            Each Done card has an archive button. It cuts the task, with its indented
+            sub-bullets, out of the note and appends it to the archive note, stamped like
+            <code>(from [[Notes/Plan]], archived 2026-09-27)</code>. The archive note is
+            <code>Archive/Tasks.md</code> by default and can be changed in Settings under Task
+            archive. It is created on first use and is left out of the board and the Tasks
+            drawer, so archived tasks do not come back. Archiving is refused while any affected
+            note has unsaved edits. Everything stays plain Markdown, so the archive reads the same
+            in Obsidian.
+          </p>
+        </section>
+
+        <section id="graph-view" class="doc-section" data-search-text="graph view global graph local graph globe links clusters tags filter cmd g nodes">
+          <h2>Graph View</h2>
+          <p>
+            Press <code>Cmd+G</code>, or run <strong>Open Global Graph</strong>, to see every note
+            in the vault as a node with its links as edges. <code>Cmd+Shift+G</code>, or
+            <strong>Open Local Graph</strong>, shows only the notes around the current one and
+            follows you as you open other notes. Both are also under View in the menu bar.
+          </p>
+          <ul>
+            <li>Nodes are coloured by cluster, so groups of notes that link among themselves stand out.</li>
+            <li>Use the tag legend to show only the notes carrying a tag.</li>
+            <li>Globe mode wraps the same layout onto a sphere you can spin.</li>
+            <li>Click a node to open the note. In local mode the graph stays open and moves to the new note.</li>
+          </ul>
+          <p>
+            The graph keeps no index. Each time it opens it rescans the vault, which takes a
+            fraction of a second even for tens of thousands of notes, so it is always current. Tags
+            inside fenced code are counted, and the legend matches tags exactly rather than by
+            hierarchy.
+          </p>
+        </section>
+
+        <section id="web-clipper" class="doc-section" data-search-text="web clipper clip web page url bookmarklet deep link glyphary clip chrome extension defuddle clippings folder categories tags markdown frontmatter">
+          <h2>Web Clipper</h2>
+          <p>
+            Run <strong>Clip Web Page</strong> from the command palette and paste a URL. Glyphary
+            fetches the page, extracts the article, and saves it under <code>Clippings/</code> as
+            Markdown with the same frontmatter Obsidian's web clipper writes: title, source,
+            author, published date, site, description, the clip date, and a
+            <code>clippings</code> tag. If you pass a selection along with the URL, the selection is
+            saved as a quote instead of the whole article.
+          </p>
+          <p>
+            Other apps can clip through a <code>glyphary://clip</code> link. <strong>Copy Web Clipper
+            Bookmarklet</strong> in the command palette puts a bookmarklet on the clipboard; add it to
+            your browser's bookmarks bar and click it on any page to clip it into the running app.
+          </p>
+          <p>
+            Pages behind a login, or pages built by JavaScript, clip poorly this way because
+            Glyphary fetches them without your browser session. Use the extension for those.
+          </p>
+          <h3>Chrome extension</h3>
+          <p>
+            The repository's <code>browser-extension/</code> folder holds a Chrome extension that
+            clips the current tab straight to disk, using Defuddle for extraction, with the same
+            frontmatter as the app. The first clip asks you to choose the vault folder. After that
+            you can define categories, each a name plus a folder inside the vault, add tags, and
+            choose whether the clipped note opens in Glyphary afterwards. Build it with
+            <code>npm run build</code> in that folder and load the <code>dist/</code> directory as an
+            unpacked extension.
+          </p>
+        </section>
+
         <section id="canvas-files" class="doc-section" data-search-text="canvas obsidian json canvas react flow file nodes graph viewer pan zoom minimap card note media web page group color edge handles delete save">
           <h2>Canvas Files</h2>
           <p>
@@ -854,31 +1056,70 @@ siteName: Example
           </p>
         </section>
 
-        <section id="base-files" class="doc-section" data-search-text="base files database views tabs properties frontmatter table gallery cards images search sort fields count local vault">
+        <section id="base-files" class="doc-section" data-search-text="base files database views tabs properties frontmatter table gallery cards images search sort fields count local vault create base edit filters and or not formulas order limit expressions problems">
           <h2>Base Files</h2>
           <p>
             Glyphary opens <code>.base</code> files as local database-style views over Markdown notes.
             Base definitions query note properties from frontmatter and render matching files as
             tables or gallery cards without moving data out of the vault.
           </p>
-          <pre><code>views:
+          <pre><code>filters:
+  and:
+    - file.hasTag("book")
+    - not:
+        - status == "abandoned"
+formulas:
+  pages_left: pages - pages_read
+views:
   - type: table
-    name: Sources
-    filters:
-      - property: source
-        exists: true</code></pre>
+    name: Reading
+    order:
+      - file.name
+      - formula.pages_left
+    sort:
+      - property: formula.pages_left
+        direction: DESC
+    limit: 50
+  - type: cards
+    name: Covers
+    image: note.cover</code></pre>
           <p>
-            Gallery cards can show the first image found in a note, including vault images and remote
-            image URLs. The card image layout can be set to side-by-side or image-on-top in Settings.
+            Filters can nest <code>and</code>, <code>or</code>, and <code>not</code> groups, at the
+            base level and again inside a view, and are evaluated in that order. Conditions use the
+            Obsidian Bases expression syntax with <code>==</code>, <code>!=</code>, comparisons,
+            <code>contains</code>, and the documented function set, including dates and
+            durations. Formulas are computed once per note and can refer to each other; a loop or
+            a bad expression is listed under "Base problems" in the editor pane instead of breaking
+            the view.
+          </p>
+          <h3>Create and edit a Base</h3>
+          <p>
+            Right-click a folder in the Files drawer and choose <strong>Create Base</strong>. A Base
+            opens in a tab with the results on one side and an editor pane on the other. The pane
+            edits views, their type and name, filters, <code>order</code>, <code>sort</code>,
+            <code>limit</code>, and the card image property as fields. A simple condition is shown
+            as property, operator, and value; anything more involved is edited as expression text.
+            Changes mark the tab dirty and are written when you save, like any other document, and
+            Discard Changes reverts them.
+          </p>
+          <p>
+            Gallery cards can show the first image found in a note, or the property named by
+            <code>image</code>, including vault images, bare wikilinks, and remote image URLs. The
+            card image layout can be set to side-by-side or image-on-top in Settings.
           </p>
           <ul>
             <li>Named views appear as tabs and can render as a table or gallery.</li>
             <li>The result counter shows visible notes against the full query result.</li>
             <li>Search narrows rows by filename or frontmatter title.</li>
-            <li>Sort by any discovered property in ascending or descending order.</li>
+            <li>Sort by any discovered property in ascending or descending order; the pane's sort control overrides the first <code>sort:</code> key for the session.</li>
             <li>Choose which properties are visible; at least one column remains selected.</li>
             <li>Click a table row or gallery card to open the source note.</li>
           </ul>
+          <p>
+            Base support is a documented subset of Obsidian Bases rather than the full engine. A
+            saved file is re-indented and expressions are single-quoted, so the first edit marks the
+            tab dirty even if you later revert it by hand.
+          </p>
         </section>
 
         <section id="assets" class="doc-section" data-search-text="images assets paste drag drop gallery preview attachments _assets_ images pasted image markdown wiki image">
@@ -949,15 +1190,17 @@ siteName: Example
               <tr><th>Plugins</th><td><code>.glyphary/plugins</code></td></tr>
               <tr><th>Document opening</th><td>One click</td></tr>
               <tr><th>Files titlebar actions</th><td>New Note and New Folder shown</td></tr>
+              <tr><th>Task archive</th><td><code>Archive/Tasks.md</code></td></tr>
             </tbody>
           </table>
           <h3>Settings tabs</h3>
           <div class="feature-table">
-            <div><strong>Main</strong><span>Vault paths and previews, an Interface group for New Note, New Folder, the document proxy, the status bar, and document click behavior, plus tidbits, frontmatter, calendar previews, an Editor group with Vim mode and the slash command menu, autosave, and a Hints group to disable or reset first-use hints.</span></div>
+            <div><strong>Main</strong><span>Vault paths, the New Tab file, and the task archive note; previews; an Interface group for New Note, New Folder, the document proxy, the status bar, and document click behavior; plus tidbits, frontmatter, calendar previews, an Editor group with Vim mode and the slash command menu, autosave, and a Hints group to disable or reset first-use hints.</span></div>
             <div><strong>Appearance</strong><span>Window glass, workspace margins, UI text weight, section corners, theme templates, CSS snippets, and callout rendering.</span></div>
             <div><strong>Canvas</strong><span>Node and edge thickness, edge style, grid visibility and snapping, and the preview/navigation box.</span></div>
             <div><strong>Plugins</strong><span>Enable vault plugins discovered under <code>.glyphary/plugins</code>.</span></div>
             <div><strong>AI</strong><span>Enable AI commands and configure the OpenAI-compatible backend.</span></div>
+            <div><strong>Export</strong><span>Write the tag colours picked in the Tags drawer as an Obsidian CSS snippet inside the vault.</span></div>
             <div><strong>Debug</strong><span>Reveal diagnostic controls, including global tidbit shortcut checks.</span></div>
           </div>
         </section>
@@ -1028,6 +1271,10 @@ siteName: Example
               <tr><th>Cmd+Alt+I</th><td>Toggle the inspector.</td></tr>
               <tr><th>Cmd+S</th><td>Save the active document.</td></tr>
               <tr><th>Cmd+Shift+V</th><td>Paste plain text without formatting.</td></tr>
+              <tr><th>Cmd+G</th><td>Open the global graph; add Shift for the local graph around the current note.</td></tr>
+              <tr><th>#</th><td>At the start of a word: complete a tag from the vault's tags.</td></tr>
+              <tr><th>@</th><td>At the start of a word: link a person from <code>People/</code>.</td></tr>
+              <tr><th>+</th><td>On a task line, at the start of a word: pick a priority or a due date.</td></tr>
               <tr><th>Cmd+,</th><td>Open Settings.</td></tr>
               <tr><th>Esc</th><td>Close dialogs, previews, or enter Vim Normal mode.</td></tr>
             </tbody>
