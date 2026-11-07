@@ -249,7 +249,7 @@
           </p>
         </section>
 
-        <section id="editor-basics" class="doc-section" data-search-text="editor toolbar save autosave title rename find page search code block language table tasks source">
+        <section id="editor-basics" class="doc-section" data-search-text="editor toolbar save autosave title rename find page search code block language table tasks source lock locked read-only unlock">
           <h2>Editor Basics</h2>
           <p>The editor is WYSIWYG, but it serializes back to Markdown.</p>
           <h3>View and Edit chrome</h3>
@@ -316,6 +316,15 @@
             Press <strong>Cmd+F</strong> to search the active Markdown page. Glyphary highlights all
             matches, reports the current match count, and supports Enter/Shift+Enter or the Up/Down
             buttons for navigation. Press Esc to close the search bar.
+          </p>
+          <h3>Locked notes</h3>
+          <p>
+            Run <strong>Lock Note</strong> from the command palette to make the open note
+            read-only. Glyphary writes <code>locked: true</code> to its frontmatter and refuses
+            every change while it is set: typing, the margin <code>+</code> button, the Insert
+            menu, slash commands, drops, and AI rewrites. A banner above the note offers Unlock,
+            which removes the property. Because the lock is a property in the file, it travels
+            with the vault and Obsidian shows it too.
           </p>
         </section>
 
@@ -490,7 +499,7 @@ Build a project brief from notes about database migrations.</code></pre>
           </div>
         </section>
 
-        <section id="metadata" class="doc-section" data-search-text="frontmatter metadata yaml toml pills tags banner image rename page title collapsed">
+        <section id="metadata" class="doc-section" data-search-text="frontmatter metadata yaml toml pills tags banner image rename page title collapsed photo avatar cover picture thumbnail choose drop finder switch boolean true false">
           <h2>Metadata And Frontmatter</h2>
           <p>
             Frontmatter is hidden from the WYSIWYG body, preserved on save, and available from the
@@ -514,6 +523,20 @@ banner: '![[Pasted image 20230521183520.png]]'
             A <code>banner</code> value can display a vault image above the metadata area. Bare image
             names resolve through <code>_assets_/images</code>; paths such as
             <code>Attachments/banner.png</code> resolve relative to the vault root.
+          </p>
+          <h3>Picture properties</h3>
+          <p>
+            A property named <code>photo</code>, <code>image</code>, <code>avatar</code>,
+            <code>cover</code>, <code>picture</code>, or <code>thumbnail</code>, or any property
+            whose value names an image file or URL, gets a picture control: a thumbnail, the
+            editable value, and a Choose... button that copies a picture from disk into the
+            vault's image folder. You can also drop a picture from Finder onto the row. The value is
+            written as <code>"[[file.jpg]]"</code>, the form Obsidian uses.
+          </p>
+          <h3>Switches</h3>
+          <p>
+            A property whose value is <code>true</code> or <code>false</code> is edited with a
+            switch instead of a text field. The file keeps the plain word.
           </p>
         </section>
 
@@ -872,6 +895,12 @@ email: jane@example.com
             The value can be a bare wikilink, a vault path, or a URL. A Base with a cards view and
             <code>image: note.photo</code> becomes a people directory.
           </p>
+          <p>
+            Once a person has a <code>photo</code>, <code>image</code>, or <code>avatar</code>,
+            every <code>[[Name]]</code> link to that note shows the picture beside it. The
+            Markdown is untouched. A link that could mean more than one note shows no picture.
+            Wikilinks show their brackets only while the caret is inside them.
+          </p>
           <h3>Tag colours</h3>
           <p>
             Open the Tags drawer and click the small circle before a tag to pick a colour for it.
@@ -891,7 +920,7 @@ email: jane@example.com
           </p>
         </section>
 
-        <section id="task-board" class="doc-section" data-search-text="task board kanban to do in progress done drag cards move archive archive note priorities due date scheduled start calendar plus menu status markers tasks emoji format sort">
+        <section id="task-board" class="doc-section" data-search-text="task board kanban to do in progress done drag cards move archive archive note priorities due date scheduled start calendar plus menu status markers tasks emoji format sort today dashboard due today overdue slipped">
           <h2>Task Board</h2>
           <p>
             Run <strong>Open Task Board</strong> from the command palette, or click the board
@@ -948,6 +977,14 @@ email: jane@example.com
             note has unsaved edits. Everything stays plain Markdown, so the archive reads the same
             in Obsidian.
           </p>
+          <h3>Today's dashboard</h3>
+          <p>
+            Run <strong>Today's Dashboard</strong> from the command palette for a shorter view: the
+            open tasks due today, and the ones that slipped, oldest first with priority as the
+            tie-break. Tick a row to complete the task in its note, the same way the board does, or
+            click it to open the note. Only tasks with a <code>📅</code> due date appear, and the
+            archive note is left out. A Refresh button rescans the vault.
+          </p>
         </section>
 
         <section id="graph-view" class="doc-section" data-search-text="graph view global graph local graph globe links clusters tags filter cmd g nodes">
@@ -972,14 +1009,18 @@ email: jane@example.com
           </p>
         </section>
 
-        <section id="web-clipper" class="doc-section" data-search-text="web clipper clip web page url bookmarklet deep link glyphary clip chrome extension defuddle clippings folder categories tags markdown frontmatter">
+        <section id="web-clipper" class="doc-section" data-search-text="web clipper clip web page url bookmarklet deep link glyphary clip chrome extension defuddle clippings folder categories tags markdown frontmatter sourcetype reviewed cover permalink featured image thumbnail chrome web store">
           <h2>Web Clipper</h2>
           <p>
             Run <strong>Clip Web Page</strong> from the command palette and paste a URL. Glyphary
             fetches the page, extracts the article, and saves it under <code>Clippings/</code> as
-            Markdown with the same frontmatter Obsidian's web clipper writes: title, source,
-            author, published date, site, description, the clip date, and a
-            <code>clippings</code> tag. If you pass a selection along with the URL, the selection is
+            Markdown with the frontmatter the Obsidian Web Clipper's default template writes, so one
+            vault can hold clips from both: <code>title</code>, <code>source</code>,
+            <code>author</code> as a list of wikilinks, <code>published</code> and
+            <code>created</code> dates, <code>site</code>, <code>description</code>, a
+            <code>clippings</code> tag, <code>sourcetype: default</code>,
+            <code>reviewed: false</code>, <code>cover</code> with the page's share image, and
+            <code>permalink</code>. If you pass a selection along with the URL, the selection is
             saved as a quote instead of the whole article.
           </p>
           <p>
@@ -993,12 +1034,22 @@ email: jane@example.com
           </p>
           <h3>Chrome extension</h3>
           <p>
-            The repository's <code>browser-extension/</code> folder holds a Chrome extension that
-            clips the current tab straight to disk, using Defuddle for extraction, with the same
-            frontmatter as the app. The first clip asks you to choose the vault folder. After that
-            you can define categories, each a name plus a folder inside the vault, add tags, and
-            choose whether the clipped note opens in Glyphary afterwards. Build it with
-            <code>npm run build</code> in that folder and load the <code>dist/</code> directory as an
+            <a href="https://github.com/glyphary/glyphary-web-clipper">glyphary-web-clipper</a> is
+            a Chrome extension that clips the current tab straight to disk, using Defuddle for
+            extraction, with the same frontmatter as the app. The first clip asks you to choose the
+            vault folder. After that you can define categories, each a name plus a folder inside the
+            vault, add tags, and choose whether the clipped note opens in Glyphary afterwards.
+          </p>
+          <p>
+            The popup also picks a source type for the <code>sourcetype</code> property:
+            <code>article</code>, <code>default</code>, <code>github</code>, <code>link</code>,
+            <code>video</code>, or a word of your own. GitHub pages start as <code>github</code> and
+            YouTube or Vimeo pages as <code>video</code>; otherwise the type last used with the
+            category is picked. When the page has a share image, the extension saves it the way the
+            Obsidian Featured Image plugin does: the original under <code>thumbnails/external/</code>,
+            a 256x144 WebP under <code>thumbnails/resized/</code>, referenced from
+            <code>feature</code> and <code>thumbnail</code>. Install it from the Chrome Web Store, or
+            build it with <code>npm run build</code> and load the <code>dist/</code> directory as an
             unpacked extension.
           </p>
         </section>
@@ -1156,7 +1207,8 @@ views:
             Calendar notes live under <code>Calendar/</code>. Existing files display dots. Hover a
             day to preview its rendered note, or see that no note exists yet; the preview delay is
             configurable in Settings. Click a day to open or create its note; the document-opening
-            setting can require a double-click instead.
+            setting can require a double-click instead. The day whose note is open is highlighted,
+            and the Today button opens today's note.
           </p>
           <pre><code>Calendar/Sun, Jun 14th 2026.md</code></pre>
         </section>
@@ -1196,7 +1248,7 @@ views:
           <h3>Settings tabs</h3>
           <div class="feature-table">
             <div><strong>Main</strong><span>Vault paths, the New Tab file, and the task archive note; previews; an Interface group for New Note, New Folder, the document proxy, the status bar, and document click behavior; plus tidbits, frontmatter, calendar previews, an Editor group with Vim mode and the slash command menu, autosave, and a Hints group to disable or reset first-use hints.</span></div>
-            <div><strong>Appearance</strong><span>Window glass, workspace margins, UI text weight, section corners, theme templates, CSS snippets, and callout rendering.</span></div>
+            <div><strong>Appearance</strong><span>Window glass, workspace margins, UI text weight, section corners, the light and dark themes, the Theme Builder, CSS snippets, and callout rendering.</span></div>
             <div><strong>Canvas</strong><span>Node and edge thickness, edge style, grid visibility and snapping, and the preview/navigation box.</span></div>
             <div><strong>Plugins</strong><span>Enable vault plugins discovered under <code>.glyphary/plugins</code>.</span></div>
             <div><strong>AI</strong><span>Enable AI commands and configure the OpenAI-compatible backend.</span></div>
@@ -1205,7 +1257,7 @@ views:
           </div>
         </section>
 
-        <section id="appearance" class="doc-section" data-search-text="appearance auto light dark theme builder snippets obsidian css variables glass title bar layout margins interface document proxy status bar">
+        <section id="appearance" class="doc-section" data-search-text="appearance auto light dark theme builder custom themes save theme new theme edit theme delete theme snippets obsidian css variables glass title bar layout margins interface document proxy status bar">
           <h2>Appearance And Theming</h2>
           <p>
             Appearance settings include Auto/Light/Dark, glass effect and opacity, UI text weight,
@@ -1213,17 +1265,28 @@ views:
             Main controls the title-bar document proxy and status bar. The document proxy shows the
             active filename and opens native Reveal, Open in Default App, and Copy Path actions.
           </p>
-          <h3>Theme templates</h3>
+          <h3>Light and dark themes</h3>
           <p>
-            Templates are complete themes. Picking one also switches the app to the light or dark
-            mode it was designed for, and the change previews live in the main window; closing
-            Settings without saving reverts both the colors and the mode. The
-            <strong>Cupertino</strong> and <strong>Cupertino Dark</strong> pair uses white or
-            graphite surfaces, a single vivid blue accent for selection and list bullets, system
-            fonts, soft shadows, and a chartreuse highlight.
+            Each vault picks one light theme and one dark theme from two grids, and the appearance
+            mode decides which applies. Picking a theme switches the app to its mode and previews
+            it live in the main window; closing Settings without saving reverts both the colors
+            and the mode. The <strong>Cupertino</strong> and <strong>Cupertino Dark</strong> pair
+            uses white or graphite surfaces, a single vivid blue accent for selection and list
+            bullets, system fonts, soft shadows, and a chartreuse highlight.
           </p>
-          <h3>Theme Builder groups</h3>
-          <p>The builder exposes Canvas (including the two shadow colors), Text, Accent And Borders, Blocks (including the highlight background and list-marker color), Callouts, Syntax, Typography, and Spacing And Shape. Editor max width is <code>none</code> in every template; set a value such as <code>860px</code> for a centered column.</p>
+          <h3>Theme Builder</h3>
+          <p>
+            Choose a theme under Start from and click New Theme to build a copy of it, or Edit
+            Theme for a custom theme. Give it a name, adjust the tokens, and click Save Theme. The
+            new theme appears in the light or dark grid beside the built-ins and can be deleted
+            from the same place. Custom themes are shared by every vault on the machine; a vault
+            stores only the theme's id, and on a machine without that theme the Cupertino theme of
+            the same base is shown. The builder exposes Canvas (including the two shadow colors),
+            Text, Accent And Borders, Blocks (including the highlight background and list-marker
+            color), Callouts, Syntax, Typography, and Spacing And Shape. Editor max width is
+            <code>none</code> in every built-in theme; set a value such as <code>860px</code> for a
+            centered column.
+          </p>
           <h3>CSS snippets</h3>
           <p>Approve CSS snippets from <code>_snippets_</code>. See the <a href="./theming.html">dedicated theming reference</a>.</p>
           <h3>Optional editor treatments</h3>
@@ -1272,6 +1335,7 @@ views:
               <tr><th>Cmd+S</th><td>Save the active document.</td></tr>
               <tr><th>Cmd+Shift+V</th><td>Paste plain text without formatting.</td></tr>
               <tr><th>Cmd+G</th><td>Open the global graph; add Shift for the local graph around the current note.</td></tr>
+              <tr><th>Shift+Up / Down</th><td>With a block selected (a rich link, table, or drawing): extend the selection across the block into the text beyond it.</td></tr>
               <tr><th>#</th><td>At the start of a word: complete a tag from the vault's tags.</td></tr>
               <tr><th>@</th><td>At the start of a word: link a person from <code>People/</code>.</td></tr>
               <tr><th>+</th><td>On a task line, at the start of a word: pick a priority or a due date.</td></tr>
