@@ -841,3 +841,14 @@ details p {
   color: var(--manual-muted);
   font-size: 0.9rem;
 }
+
+.theme-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 12px 0 24px;
+}
+.theme-strip figure { margin: 0; }
+.theme-strip img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border, #ddd); }
+.theme-strip figcaption { text-align: center; }
+@media (max-width: 720px) { .theme-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
