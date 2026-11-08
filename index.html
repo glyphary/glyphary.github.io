@@ -124,7 +124,7 @@
             that folder in Glyphary. It lets you explore the app before opening your own notes.
           </div>
           <figure class="hero-figure">
-            <img src="./assets/screenshots/main-workspace.png" alt="Glyphary open on a Markdown note with its file drawer, tabs, editor, and contextual tools" />
+            <img src="./assets/screenshots/main-workspace.png" alt="Glyphary workspace with the file drawer, tabs, and a note with rich link cards" />
             <figcaption>The Glyphary workspace: local files, live Markdown, and focused tools in one native window.</figcaption>
           </figure>
           <div class="quickstart-grid">
@@ -449,7 +449,7 @@
             current editor, then shows a review dialog before anything is inserted or replaced.
           </p>
           <figure>
-            <img src="./assets/screenshots/ai-builder.png" alt="Glyphary AI Builder dialog with prompt and history controls" />
+            <img src="./assets/screenshots/ai-builder.png" alt="AI Builder dialog with a prompt, history, and a generated table in the note" />
             <figcaption>AI Builder keeps page-building prompts, replacement history, and review steps together.</figcaption>
           </figure>
           <h3>Use the current page</h3>
@@ -635,7 +635,7 @@ Right content
 :::
 :::</code></pre>
           <figure>
-            <img src="./assets/screenshots/columns.png" alt="Glyphary rendering columns" />
+            <img src="./assets/screenshots/columns.png" alt="Two Markdown columns, Build and Review, rendered side by side in the editor" />
             <figcaption>Columns render side by side when there is room.</figcaption>
           </figure>
           <h3>Gallery</h3>
@@ -651,7 +651,7 @@ Back up the database first.
 :::</code></pre>
           <p>Supported visual types include <code>note</code>, <code>info</code>, <code>tip</code>, and <code>warning</code>.</p>
           <figure>
-            <img src="./assets/screenshots/callouts.png" alt="Glyphary callouts" />
+            <img src="./assets/screenshots/callouts.png" alt="Info, tip, warning, and success callouts rendered in the editor" />
             <figcaption>Callout type controls the visual treatment.</figcaption>
           </figure>
           <h3>Collapse blocks</h3>
@@ -663,7 +663,7 @@ Hidden content starts collapsed.
 This starts expanded.
 :::</code></pre>
           <figure>
-            <img src="./assets/screenshots/collapse.png" alt="Glyphary collapse blocks" />
+            <img src="./assets/screenshots/collapse.png" alt="An expanded collapse block showing its Markdown body" />
             <figcaption>Collapse blocks default closed; add <code>open</code> to start expanded.</figcaption>
           </figure>
           <h3>Rich links</h3>
@@ -675,7 +675,7 @@ siteName: Example
 :::</code></pre>
           <p>Run <strong>Insert rich link</strong>, paste a URL, and Glyphary fetches metadata. If no metadata image exists, it tries an early page image.</p>
           <figure>
-            <img src="./assets/screenshots/rich-links.png" alt="Glyphary rich link cards" />
+            <img src="./assets/screenshots/rich-links.png" alt="Rich link cards with title, description, and image" />
             <figcaption>Rich link cards render fetched metadata.</figcaption>
           </figure>
           <h3>HTML blocks</h3>
@@ -798,7 +798,7 @@ siteName: Example
             and the status bar invites you to choose a new-tab note.
           </p>
           <figure>
-            <img src="./assets/screenshots/split-editing.png" alt="Split editor with two panes" />
+            <img src="./assets/screenshots/split-editing.png" alt="Two editor panes side by side, each with its own tabs" />
             <figcaption>Split editing with independent tab groups.</figcaption>
           </figure>
           <h3>Drag files into the editor</h3>
@@ -846,8 +846,8 @@ siteName: Example
             result limit applies, so a recently edited note is never pushed out by older matches.
           </p>
           <figure>
-            <img src="./assets/screenshots/vault-search.png" alt="Vault search view" />
-            <figcaption>Vault search with results in the left drawer.</figcaption>
+            <img src="./assets/screenshots/vault-search.png" alt="Search drawer listing notes that match a query, grouped by file with match counts" />
+            <figcaption>Vault search with results grouped by file in the left drawer.</figcaption>
           </figure>
           <pre><code>[[Dad Jokes]]
 [[Calendar/Mon, Dec 22nd 2025]]
@@ -995,6 +995,10 @@ email: jane@example.com
             <strong>Open Local Graph</strong>, shows only the notes around the current one and
             follows you as you open other notes. Both are also under View in the menu bar.
           </p>
+          <figure>
+            <img src="./assets/screenshots/graph.png" alt="Global graph of a vault with notes as coloured nodes and links as edges" />
+            <figcaption>The global graph shows every note and link, coloured by cluster.</figcaption>
+          </figure>
           <ul>
             <li>Nodes are coloured by cluster, so groups of notes that link among themselves stand out.</li>
             <li>Use the tag legend to show only the notes carrying a tag.</li>
@@ -1063,7 +1067,7 @@ email: jane@example.com
             Markdown notes.
           </p>
           <figure>
-            <img src="./assets/screenshots/canvas.png" alt="Glyphary canvas file with connected notes and cards" />
+            <img src="./assets/screenshots/canvas.png" alt="A canvas with coloured note cards connected by edges" />
             <figcaption>Canvas files open as editable graphs with cards, note previews, media, groups, and edges.</figcaption>
           </figure>
           <h3>Open and navigate a canvas</h3>
@@ -1114,6 +1118,10 @@ email: jane@example.com
             Base definitions query note properties from frontmatter and render matching files as
             tables or gallery cards without moving data out of the vault.
           </p>
+          <figure>
+            <img src="./assets/screenshots/base-view.png" alt="Sources.base open as a card gallery of notes with cover images and properties" />
+            <figcaption>Base files render frontmatter queries as tables or cards.</figcaption>
+          </figure>
           <pre><code>filters:
   and:
     - file.hasTag("book")
